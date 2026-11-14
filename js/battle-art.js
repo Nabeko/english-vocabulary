@@ -12,6 +12,18 @@ window.BattleArt = (function(){
              ground:'#5b7a4f', groundD:'#4a6741', path:'#b7a079', pathD:'#8f7a56', stone:'#9aa09f', stoneL:'#aab0ae', stoneD:'#626a6b',
              gate:'#4a3a2f', win:'#2b3134', banner:'#c9932e', ink:'#1c2428', tunic:'#3f6a5a', hood:'#2f4f44',
              enemy:['#5a4a6e','#6e4c4a','#4a5a70'], eye:'#1c2428' },
+    ocean:{ sky:['#9fc9d6','#e8e4c9'], glow:'rgba(210,240,255,.55)', far:'#7fa8ad', mid:'#5c8f93', near:'#3f6e72',
+             ground:'#4f7a7a', groundD:'#3e6262', path:'#c9bb8e', pathD:'#a89968', stone:'#9aa6a6', stoneL:'#aebab8', stoneD:'#5e6c6c',
+             gate:'#3a3933', win:'#223034', banner:'#3e86a0', ink:'#1c2428', tunic:'#2f6a7a', hood:'#244f58',
+             enemy:['#3f6e7e', '#2e5a6e', '#4a7a86'], eye:'#1c2428' },
+    space:{ sky:['#1c1f3d','#3a2f5c'], glow:'rgba(180,170,255,.45)', far:'#2b2a52', mid:'#3a3468', near:'#2a2650',
+             ground:'#3a3550', groundD:'#2a2640', path:'#5c5680', pathD:'#443f66', stone:'#595a78', stoneL:'#6c6d8c', stoneD:'#333449',
+             gate:'#201d33', win:'#120f24', banner:'#8463c9', ink:'#0f0d1f', tunic:'#4f4a82', hood:'#36305a',
+             enemy:['#6a4a8e', '#4a5a9e', '#8e4a7a'], eye:'#0f0d1f' },
+    autumn:{ sky:['#e0b088','#f2dcb0'], glow:'rgba(255,220,170,.55)', far:'#c08a5c', mid:'#a86a3f', near:'#8a4f2e',
+             ground:'#9a6a3a', groundD:'#7a4e28', path:'#c9a06a', pathD:'#a67e4a', stone:'#a99486', stoneL:'#bba895', stoneD:'#6b5848',
+             gate:'#4a3324', win:'#2b2120', banner:'#c96a2e', ink:'#241a14', tunic:'#8a4a2f', hood:'#5c3522',
+             enemy:['#8a5a3a', '#a04a3a', '#6e4a30'], eye:'#241a14' },
   };
   const T = THEMES.forest;
 

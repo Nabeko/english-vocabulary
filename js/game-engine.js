@@ -156,7 +156,10 @@ window.GameEngine = (function(){
     `;
     const cv = container.querySelector('#ge-cv');
     const g = cv.getContext('2d');
-    const bg = Art.makeBg('forest');
+    const themeKeys = Object.keys(Art.THEMES);
+    const theme = themeKeys[Math.floor(Math.random()*themeKeys.length)];
+    const T = Art.THEMES[theme];
+    const bg = Art.makeBg(theme);
 
     function hud(){
       const hpEl = container.querySelector('#ge-hp');
@@ -239,12 +242,12 @@ window.GameEngine = (function(){
         g.translate((Math.random()*2-1)*6*k, (Math.random()*2-1)*4*k);
       }
       g.drawImage(bg,0,0,W,H);
-      Art.drawFlag(g,Art.T,G.time);
+      Art.drawFlag(g,T,G.time);
       const crack = Math.min(1, (MAX_HP - G.hp) / (MAX_HP - 1));
-      if(crack > 0) Art.drawCrack(g, Art.T, crack);
-      Art.drawArcher(g,Art.T,0);
+      if(crack > 0) Art.drawCrack(g, T, crack);
+      Art.drawArcher(g,T,0);
       const tgt = G.cur && G.cur.enemy;
-      [...G.enemies].sort((a,b) => b.x - a.x).forEach(e => Art.drawEnemy(g,e,Art.T,e === tgt && e.state === 'walk'));
+      [...G.enemies].sort((a,b) => b.x - a.x).forEach(e => Art.drawEnemy(g,e,T,e === tgt && e.state === 'walk'));
       if(G.banner){
         g.fillStyle = 'rgba(28,36,40,.8)'; g.fillRect(W/2-120,14,240,32);
         g.fillStyle = '#efe9dc'; g.font = 'bold 16px sans-serif'; g.textAlign = 'center';
