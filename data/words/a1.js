@@ -187,7 +187,6 @@ const WORDS_A1 = [
   { w: 'square', unit: 10, unitName: 'Travel & Places', ipa: '/skweər/', pos: 'n.', zh: '廣場', ex: 'People gather in the square.', exZh: '人們聚集在廣場上。' },
   { w: 'station', unit: 10, unitName: 'Travel & Places', ipa: '/ˈsteɪʃən/', pos: 'n.', zh: '車站', ex: 'We meet at the train station.', exZh: '我們在火車站見面。' },
   { w: 'town', unit: 10, unitName: 'Travel & Places', ipa: '/taʊn/', pos: 'n.', zh: '城鎮', ex: 'My town is small and quiet.', exZh: '我的城鎮小而安靜。' },
-  { w: 'town/city centre', unit: 10, unitName: 'Travel & Places', ipa: '/taʊn ˈsɪti ˈsɛntər/', pos: 'n.', zh: '市中心', ex: 'We walk around the town centre.', exZh: '我們在市中心走走。' },
   { w: 'tractor', unit: 10, unitName: 'Travel & Places', ipa: '/ˈtræktər/', pos: 'n.', zh: '拖拉機', ex: 'The farmer drives a tractor.', exZh: '農夫開拖拉機。' },
   { w: 'travel', unit: 10, unitName: 'Travel & Places', ipa: '/ˈtrævəl/', pos: 'v.', zh: '旅行', ex: 'We travel to new places every year.', exZh: '我們每年都去新的地方旅行。' },
   { w: 'trip', unit: 10, unitName: 'Travel & Places', ipa: '/trɪp/', pos: 'n.', zh: '旅程', ex: 'We went on a school trip.', exZh: '我們去了一趟校外旅行。' },
