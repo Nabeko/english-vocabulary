@@ -21,9 +21,9 @@ window.GameEngine = (function(){
   // spawnInterval=補怪間隔秒數、maxWalkers=場上同時最多幾隻在走、
   // runnerProb/shieldProb=出怪機率、bossSpdMul=魔王移動速度倍率
   const DIFFICULTY = {
-    easy:   { label:'簡單', speedMul:0.6, runnerSpd:1.15, spawnInterval:3.2, maxWalkers:2, runnerProb:0,    shieldProb:0.05, bossSpdMul:0.6 },
-    normal: { label:'適中', speedMul:1.0, runnerSpd:1.6,  spawnInterval:2.2, maxWalkers:3, runnerProb:0.15, shieldProb:0.15, bossSpdMul:1.0 },
-    hard:   { label:'困難', speedMul:1.3, runnerSpd:1.8,  spawnInterval:1.8, maxWalkers:3, runnerProb:0.20, shieldProb:0.20, bossSpdMul:1.0 },
+    easy:   { label:'簡單', speedMul:0.5,  runnerSpd:1.05, spawnInterval:3.6, maxWalkers:2, runnerProb:0,    shieldProb:0.03, bossSpdMul:0.5 },
+    normal: { label:'適中', speedMul:0.85, runnerSpd:1.4,  spawnInterval:2.6, maxWalkers:3, runnerProb:0.12, shieldProb:0.12, bossSpdMul:0.85 },
+    hard:   { label:'困難', speedMul:1.1,  runnerSpd:1.6,  spawnInterval:2.1, maxWalkers:3, runnerProb:0.16, shieldProb:0.16, bossSpdMul:0.9 },
   };
   const DEFAULT_DIFFICULTY = 'normal';
 
