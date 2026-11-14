@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>英文單字王</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="wrap" id="app-root">
+  <header class="brand">
+    <div>
+      <span class="en">ENGLISH VOCABULARY</span>
+      <h1>英文單字王</h1>
+      <p>劍橋 YLE / KET 分級單字守城遊戲</p>
+    </div>
+  </header>
+
+  <main id="view"></main>
+
+  <footer class="foot">僅供個人學習使用</footer>
+</div>
+
+<!-- 資料檔（依等級載入，之後可改為動態載入） -->
+<script src="data/words/pre-a1.js"></script>
+<script src="data/words/a1.js"></script>
+<script src="data/words/a2.js"></script>
+<script src="data/words/ket.js"></script>
+
+<!-- 程式邏輯 -->
+<script src="js/battle-art.js"></script>
+<script src="js/game-engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  window.onAuthed = function(){
+    if(window.App && window.App.init) window.App.init();
+  };
+  EVAuth.init();
+</script>
+</body>
+</html>

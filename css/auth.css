@@ -1,0 +1,26 @@
+/* 密碼鎖畫面樣式，與主站深色石板風格一致 */
+html.locked body > *:not(#auth-gate){ display:none !important; }
+
+#auth-gate{
+  position:fixed; inset:0; z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--page,#1f2a30);
+  padding:16px;
+}
+#auth-gate .auth-box{
+  background:var(--panel,#eef0ea); color:var(--ink,#1c2428);
+  border-radius:12px; padding:28px 24px; width:100%; max-width:320px;
+  box-shadow:0 10px 24px #0000004d;
+  display:grid; gap:12px; text-align:center;
+}
+#auth-gate h1{
+  font-family:var(--display,"Noto Serif TC",serif); font-weight:900;
+  font-size:24px; margin:0; letter-spacing:.08em;
+}
+#auth-gate p{ margin:0; color:var(--muted,#5d686b); font-size:14px; }
+#auth-gate input{
+  font-size:20px; text-align:center; letter-spacing:.2em;
+  padding:10px; border-radius:8px; border:1.5px solid var(--line,#c3cbc2);
+  min-height:46px;
+}
+#auth-gate .auth-err{ color:var(--brick,#a8463a); font-weight:700; }
