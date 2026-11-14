@@ -1,20 +1,27 @@
 # 英語單字守城遊戲網站 — PRD
 
-版本：v0.4（實作中）
-日期：2026-11-14（第四次更新：守城戰鬥美術已從簡化幾何圖形改為移植原站canvas手繪美術，程式完成，瀏覽器自動化驗證因工具卡死尚未完成）
+版本：v0.5（已部署上線）
+日期：2026-11-14（第五次更新：網站已正式部署到 GitHub Pages，並新增難度分級/星級紀錄/Unit列表橫列排版/攻城音效震動裂痕等功能）
 參考範本：https://lexilereadingrex.github.io （下稱「原站」）
 
 ---
 
 ## 0. 目前實作進度摘要（最新，供下個session快速掌握狀態）
 
+- **網站已正式部署上線**：https://nabeko.github.io/english-vocabulary/ （repo：https://github.com/Nabeko/english-vocabulary ，public）。push用token存於 `/home/sw/.hermes/credentials/github_english_vocabulary.yaml`，之後程式碼更新只需說「幫我push」即可同步（細節見 `memo.md`「已部署上線」章節）。
 - 四級單字資料檔已建立結構（`w`/`unit`/`unitName`已全部填完）：pre-A1(487)、A1(397)、A2(508)、KET(1695)，合計3,087字。
 - **todo 3（AI生成 ipa/pos/zh/ex/exZh）進度**：
   - pre-A1（487字）：✅ 全部完成
   - A1（397字）：✅ 全部完成
-  - A2（508字）、KET（1695字）：⏸ 尚未開始
+  - A2（508字）：✅ 全部完成
+    - KET（1695字）：⏸ 尚未開始（下一優先待辦）
 - **todo 4（守城戰鬥引擎）**：✅ 玩法邏輯完成並測試通過（城牆耐久/連擊/三種怪物+魔王/三種題型/星級結算）。
-- **守城戰鬥美術**：原簡化幾何圖形（圓形代表敵人）已被使用者認為太醜，**已完成移植原站canvas手繪美術**（城堡/弓箭手/4種怪物/背景漸層，新檔 `js/battle-art.js`），`js/game-engine.js` 的 `draw()` 已改呼叫新美術模組。程式碼無JS錯誤，但**瀏覽器自動化工具目前卡死**，尚未完成視覺驗收，下一步見 `memo.md`「守城戰鬥美術移植」章節。
+- **守城戰鬥美術**：已完成移植原站canvas手繪美術（城堡/弓箭手/4種怪物/背景漸層），`js/battle-art.js`，已通過瀏覽器實測驗證。
+- **難度分級系統**：✅ 已完成並驗證。獨立三檔（簡單/適中/困難），不與CEFR等級綁定，守城前跳難度選單並顯示各難度歷史最高星級。
+- **星級紀錄機制**：✅ 已完成並驗證。按「等級:Unit:難度」三維度獨立記錄，只升不降，優先序困難>適中>簡單。
+- **Unit列表橫列式排版**：✅ 已完成並驗證，星級顯示於最右側。
+- **攻城音效+城門震動+裂痕視覺回饋**：✅ 已完成並驗證。Web Audio API合成音效（無外部素材）、canvas transform隨機偏移做震動、`drawCrack`依損傷比例動態繪製裂痕。
+- 以上所有功能的程式碼均已包含在目前GitHub上的線上版本中（git working tree為clean狀態，無待push變更）。
 - 詳細操作方式、暫存檔案、撇號處理注意事項見 `memo.md`（該檔不納入commit，僅供session間交接）。
 
 ---
@@ -106,7 +113,7 @@
 
 ## 5. 技術架構
 
-- **部署方式**：GitHub Pages（純靜態）。沿用原站模式可行；若 repo 名稱為 `<username>.github.io` 則直接用根網址，否則需設定 base path。**已確認加入前端簡易密碼鎖**（見第8.6節），部署後仍是公開可存取網址，但一般訪客需輸入密碼才能看到內容。
+- **部署方式**：GitHub Pages（純靜態）。**已正式部署上線**：repo `https://github.com/Nabeko/english-vocabulary`（public），網址 `https://nabeko.github.io/english-vocabulary/`。已確認加入前端簡易密碼鎖（見第8.6節），部署後仍是公開可存取網址，但一般訪客需輸入密碼才能看到內容。程式碼更新流程：本機修改 → commit → 用 `/home/sw/.hermes/credentials/github_english_vocabulary.yaml` 內的 fine-grained token push → GitHub Pages 約1分鐘內自動重新建置生效，無需手動觸發。
 - **技術架構：已確認採用模組化方案**，檔案結構如下（相較原站的單一HTML檔的調整）：
   ```
   /index.html              -- 版面骨架、掛載點
