@@ -7,6 +7,7 @@ window.App = (function(){
     { id: 'a1',    name: 'A1',     examName: 'Movers',   words: (window.WORDS_A1 || []) },
     { id: 'a2',    name: 'A2',     examName: 'Flyers',   words: (window.WORDS_A2 || []) },
     { id: 'ket',   name: 'A2–B1',  examName: 'KET',      words: (window.WORDS_KET || []) },
+    { id: 'pet',   name: 'B1–B2',  examName: 'PET',      words: (window.WORDS_PET || []) },
   ];
 
   let view;

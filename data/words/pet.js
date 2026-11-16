@@ -2489,3 +2489,4 @@ const WORDS_PET = [
   { w: 'yourself', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/jɔːrˈself/', pos: 'pron.', zh: '你自己', ex: 'Did you paint this picture yourself?', exZh: '這幅畫是你自己畫的嗎?' },
   { w: 'zero', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/ˈzɪərəʊ/', pos: 'n.', zh: '零', ex: 'The temperature dropped to zero last night.', exZh: '昨晚氣溫降到零度。' },
 ];
+window.WORDS_PET = WORDS_PET;
