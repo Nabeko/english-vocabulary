@@ -92,10 +92,14 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 
 /* ===== todo4 守城戰鬥畫面 ===== */
 .battle-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.battle-topbar-right{display:flex;align-items:center;gap:8px}
 .tbtn{padding:8px 14px;border-radius:8px;background:var(--panel2);color:var(--ink);font-weight:700;font-size:14px}
 .tbtn:active{transform:translateY(1px)}
 .battle-title{font-family:var(--display);font-size:16px}
 .battle-diff-tag{font-size:12px;font-weight:700;color:var(--ochreD);background:var(--panel2);padding:4px 10px;border-radius:999px}
+.battle-field{position:relative}
+.battle-pause-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,16,24,.55);border-radius:10px}
+.pause-box{color:#efe9dc;font-weight:700;font-size:22px;padding:10px 24px;border-radius:10px;background:rgba(28,36,40,.8)}
 
 /* ===== 難度選擇畫面 ===== */
 .diff-grid{display:flex;flex-direction:column;gap:10px;margin:14px 0}

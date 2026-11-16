@@ -44,9 +44,15 @@ window.GameEngine = (function(){
   const blankRe = w => { try{ return new RegExp('\\b' + headWord(w).replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b'); }catch(e){ return null; } };
   const canFill = x => !!(x.ex && blankRe(x.w) && blankRe(x.w).test(x.ex));
 
+  let muted = (function(){ try{ return localStorage.getItem('ev_muted_v1') === '1'; }catch(e){ return false; } })();
+  function setMuted(v){
+    muted = v;
+    try{ localStorage.setItem('ev_muted_v1', v ? '1' : '0'); }catch(e){}
+  }
+
   const canSpeak = 'speechSynthesis' in window;
   function speak(text){
-    if(!canSpeak || !text) return;
+    if(muted || !canSpeak || !text) return;
     try{
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(headWord(text));
@@ -63,6 +69,7 @@ window.GameEngine = (function(){
     return actx;
   }
   function beep({freq=440, dur=0.12, type='sine', vol=0.2, slideTo=null, delay=0}={}){
+    if(muted) return;
     const a = ac(); if(!a) return;
     const t0 = a.currentTime + delay;
     const osc = a.createOscillator(), gn = a.createGain();
@@ -74,6 +81,7 @@ window.GameEngine = (function(){
     osc.start(t0); osc.stop(t0+dur+0.02);
   }
   function noiseThud(dur=0.25, vol=0.5){
+    if(muted) return;
     const a = ac(); if(!a) return;
     const n = a.sampleRate*dur;
     const buf = a.createBuffer(1, n, a.sampleRate);
@@ -144,9 +152,15 @@ window.GameEngine = (function(){
       <div class="battle-topbar">
         <button class="tbtn" id="ge-back">← 撤退</button>
         <b class="battle-title">${esc(title || '守城')}</b>
-        <span class="battle-diff-tag">${esc(diff.label)}</span>
+        <div class="battle-topbar-right">
+          <span class="battle-diff-tag">${esc(diff.label)}</span>
+          <button class="tbtn" id="ge-pause">⏸ 暫停</button>
+          <button class="tbtn" id="ge-mute">${muted ? '🔇 靜音' : '🔊 音效'}</button>
+        </div>
       </div>
-      <div class="battle-field"><canvas id="ge-cv" width="${W*Art.DPR}" height="${H*Art.DPR}" style="width:100%;max-width:${W}px;aspect-ratio:${W}/${H}"></canvas></div>
+      <div class="battle-field"><canvas id="ge-cv" width="${W*Art.DPR}" height="${H*Art.DPR}" style="width:100%;max-width:${W}px;aspect-ratio:${W}/${H}"></canvas>
+        <div class="battle-pause-overlay" id="ge-pause-overlay" style="display:none"><div class="pause-box">已暫停</div></div>
+      </div>
       <div class="battle-hud">
         <div class="hud-grp">城牆 <span id="ge-hp"></span></div>
         <div class="hud-grp">連擊 <span id="ge-cb"></span></div>
@@ -308,7 +322,7 @@ window.GameEngine = (function(){
     }
 
     function answer(j){
-      if(!G.cur || G.over || G.cur.answered || G.time < G.lock) return;
+      if(!G.cur || G.over || G.paused || G.cur.answered || G.time < G.lock) return;
       const { enemy: e, q } = G.cur, x = q.word;
       G.cur.answered = true;
       const ok = q.opts[j].w === q.answer;
@@ -332,7 +346,7 @@ window.GameEngine = (function(){
           e.hp--;
           if(e.hp <= 0){ e.doomed = true; e.state = 'die'; e.dt = 0; G.killed++; sfx.kill(); }
           else { e.idx++; if(e.words[e.idx]) e.w = e.words[e.idx].w; }
-          fb.innerHTML = `<span class="qp-good">命中！</span> <b>${esc(x.w)}</b> ${esc(x.pos||'')} ${esc(x.zh||'')}`;
+          fb.innerHTML = `<span class="qp-good">命中！</span> <b>${esc(x.w)}</b> ${esc(x.ipa||'')} ${esc(x.pos||'')} ${esc(x.zh||'')}`;
         }
         G.lock = G.time + 0.9;
         if(e.hp > 0 && e.state !== 'die') G.cur.stale = true;
@@ -341,7 +355,7 @@ window.GameEngine = (function(){
         G.streak = 0;
         sfx.wrong();
         e.x = Math.max(STOP_X, e.x - 20);
-        fb.innerHTML = `<span class="qp-bad">射偏了！</span> 正確答案是 <b>${esc(x.w)}</b> ${esc(x.pos||'')} ${esc(x.zh||'')}`;
+        fb.innerHTML = `<span class="qp-bad">射偏了！</span> 正確答案是 <b>${esc(x.w)}</b> ${esc(x.ipa||'')} ${esc(x.pos||'')} ${esc(x.zh||'')}`;
         G.lock = G.time + 1.6;
         G.cur.stale = true;
       }
@@ -369,6 +383,19 @@ window.GameEngine = (function(){
     container.querySelector('#ge-back').onclick = () => {
       G.dead = true; cancelAnimationFrame(G.raf);
       if(onExit) onExit();
+    };
+    container.querySelector('#ge-pause').onclick = () => {
+      G.paused = !G.paused;
+      const btn = container.querySelector('#ge-pause');
+      const overlay = container.querySelector('#ge-pause-overlay');
+      if(btn) btn.textContent = G.paused ? '▶ 繼續' : '⏸ 暫停';
+      if(overlay) overlay.style.display = G.paused ? 'flex' : 'none';
+    };
+    container.querySelector('#ge-mute').onclick = () => {
+      setMuted(!muted);
+      const btn = container.querySelector('#ge-mute');
+      if(btn) btn.textContent = muted ? '🔇 靜音' : '🔊 音效';
+      if(muted) try{ window.speechSynthesis.cancel(); }catch(e){}
     };
 
     hud(); renderWait();
