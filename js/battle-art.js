@@ -302,5 +302,63 @@ window.BattleArt = (function(){
     g.restore();
   }
 
-  return { W, H, GROUND, WALL_X, STOP_X, DPR, T, THEMES, makeBg, drawFlag, drawArcher, drawEnemy, drawArrow, drawCrack, circle, ell };
+  // ---- 粒子特效（魔王蓄力／必殺一擊演出用，純幾何繪製，無外部素材）----
+  // 產生 n 顆噴散粒子推進 parts 陣列：confetti=true 時畫旋轉小方塊（彩帶），否則畫淡出圓點（墨花/火花）
+  // nograv=true 時不受重力牽引（用於往弓箭手聚集的蓄力光點）
+  function spark(parts, x, y, col, n=14, spd=120){
+    for(let i=0;i<n;i++){
+      const a = Math.random()*Math.PI*2, v = spd*(.3+Math.random()*.8);
+      parts.push({ x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v - 60, life:.6+Math.random()*.4, max:1, r:1.5+Math.random()*3, col });
+    }
+  }
+  function confettiBurst(parts, xMin, xMax){
+    const cols = ['#f2c45a','#a8463a','#3f7a6a','#efe9dc','#4f6f86'];
+    for(let k=0;k<70;k++) parts.push({ x: xMin + Math.random()*(xMax-xMin), y: -10 - Math.random()*80, vx:(Math.random()-.5)*40, vy: 30+Math.random()*50,
+      life: 1.8+Math.random()*.8, r: 2+Math.random()*2, col: cols[k%cols.length], confetti:true, rot: Math.random()*6, vr:(Math.random()-.5)*10, delay: .25+Math.random()*.5 });
+  }
+  function stepParticles(parts, dt, groundY){
+    for(const p of parts){
+      if(p.delay > 0){ p.delay -= dt; continue; }
+      p.life -= dt; p.rot = (p.rot||0) + (p.vr||0)*dt;
+      p.x += p.vx*dt; p.y += p.vy*dt;
+      if(!p.nograv) p.vy += 60*dt;
+      if(!p.nograv && !p.confetti && groundY && p.y > groundY){ p.y = groundY; p.vy *= -.3; p.vx *= .6; }
+    }
+    return parts.filter(p => p.life > 0);
+  }
+  function drawParticles(g, parts){
+    for(const p of parts){
+      if(p.delay > 0) continue;
+      const a = Math.max(0, Math.min(1, p.life / p.max));
+      g.globalAlpha = a;
+      if(p.confetti){
+        g.save(); g.translate(p.x,p.y); g.rotate(p.rot||0);
+        g.fillStyle = p.col; g.fillRect(-p.r,-p.r*.6,p.r*2,p.r*1.2);
+        g.restore();
+      }else{
+        g.fillStyle = p.col; circle(g,p.x,p.y,p.r); g.fill();
+      }
+    }
+    g.globalAlpha = 1;
+  }
+  // 蓄力集氣演出：畫面變暗＋光環往弓箭手收縮＋放射光芒，t=0~1 代表集氣進度
+  function drawUltCharge(g, x, y, t){
+    const p = Math.min(1, t/.75);
+    g.fillStyle = `rgba(10,14,22,${.58*p})`; g.fillRect(-20,-20,W+40,H+40);
+    for(let k=0;k<3;k++){ const q = (t*1.8 + k/3) % 1, r = (1-q)*90 + 6;
+      g.strokeStyle = `rgba(242,196,90,${.85*q})`; g.lineWidth = 2+3*q; circle(g,x,y,r); g.stroke(); }
+    const rays = 10;
+    for(let k=0;k<rays;k++){ const a = k/rays*Math.PI*2 + t*2.5, len = 30+40*p;
+      g.strokeStyle = `rgba(255,243,196,${.35*p})`; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(x+Math.cos(a)*10, y+Math.sin(a)*10); g.lineTo(x+Math.cos(a)*len, y+Math.sin(a)*len); g.stroke(); }
+  }
+  // 魔王身上的蓄力光暈：charge 越高光暈越大越亮
+  function drawBossGlow(g, x, y, r){
+    const gl = g.createRadialGradient(x,y,1,x,y,r*2.4);
+    gl.addColorStop(0,'rgba(255,236,170,.95)'); gl.addColorStop(.45,'rgba(242,196,90,.6)'); gl.addColorStop(1,'rgba(242,196,90,0)');
+    g.fillStyle = gl; circle(g,x,y,r*2.4); g.fill();
+  }
+
+  return { W, H, GROUND, WALL_X, STOP_X, DPR, T, THEMES, makeBg, drawFlag, drawArcher, drawEnemy, drawArrow, drawCrack, circle, ell,
+    spark, confettiBurst, stepParticles, drawParticles, drawUltCharge, drawBossGlow };
 })();

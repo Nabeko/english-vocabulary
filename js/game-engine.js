@@ -15,6 +15,7 @@ window.GameEngine = (function(){
   // 戰場畫布邏輯尺寸：沿用原站 BattleArt 座標系，確保美術不跑版
   const Art = window.BattleArt;
   const W = Art.W, H = Art.H, GROUND = Art.GROUND, STOP_X = Art.STOP_X;
+  const ARCHER_X = 132, ARCHER_Y = 100; // 弓箭手頭部大概位置（對齊 battle-art.js drawArcher 的 x,y-30 一帶），供蓄力光暈/集氣特效對齊
   const BASE_SPEED = 40;   // 一般敵人移動速度基準值（px/s），實際速度會依難度檔位縮放
 
   // 難度檔位：speedMul=整體移動速度倍率、runnerSpd=快跑鬼速度倍率、
@@ -144,7 +145,7 @@ window.GameEngine = (function(){
     const G = {
       diff, queue: buildQueue(words, diff), enemies: [], hp: MAX_HP, streak: 0, right: 0, killed: 0, breached: 0,
       total: 0, time: 0, spawnT: 0.6, lock: 0, cur: null, over: false, won: false, paused: false, raf: null, dead: false,
-      banner: null, shake: 0,
+      banner: null, shake: 0, parts: [], ult: null, freezeUntil: 0,
     };
     G.total = G.queue.length;
 
@@ -220,11 +221,15 @@ window.GameEngine = (function(){
       if(G.queue.length && (nextBoss ? walkers.length === 0 : (walkers.length < G.diff.maxWalkers && G.spawnT <= 0))){
         spawn(); G.spawnT = G.diff.spawnInterval;
       }
+      const frozen = G.time < (G.freezeUntil || 0);
       for(const e of G.enemies){
         e.t += dt; if(e.flash > 0) e.flash -= dt;
         if(e.state === 'walk'){
-          e.x -= BASE_SPEED * G.diff.speedMul * e.spd * dt;
-          if(e.x <= STOP_X){ e.x = STOP_X; e.state = 'attack'; e.dt = 0; e.hitDone = false; }
+          if(frozen){ /* 大招演出中，敵人停住 */ }
+          else{
+            e.x -= BASE_SPEED * G.diff.speedMul * e.spd * dt;
+            if(e.x <= STOP_X){ e.x = STOP_X; e.state = 'attack'; e.dt = 0; e.hitDone = false; }
+          }
         }else if(e.state === 'attack'){
           e.dt += dt;
           if(e.dt > 0.5 && !e.hitDone){
@@ -240,12 +245,37 @@ window.GameEngine = (function(){
         }
       }
       G.enemies = G.enemies.filter(e => e.state !== 'gone');
+      // 魔王必殺一擊演出：蓄滿後先集氣 0.75 秒，再觸發爆炸震屏＋碎紙特效
+      if(G.ult){
+        const u = G.ult; u.t += dt;
+        if(u.phase === 'charge'){
+          if(Math.random() < .9) for(let k=0;k<3;k++){
+            const a = Math.random()*Math.PI*2, r = 60 + Math.random()*50;
+            G.parts.push({ x:ARCHER_X + Math.cos(a)*r, y:ARCHER_Y + Math.sin(a)*r, vx:-Math.cos(a)*r*2.6, vy:-Math.sin(a)*r*2.6, life:.36, max:.36, r:1.2+Math.random()*1.8, col: Math.random()<.5 ? '#fff3c4' : '#f2c45a', nograv:true });
+          }
+          if(u.t >= .75){
+            const e = u.e;
+            if(e && e.state !== 'gone'){
+              e.doomed = true; e.state = 'die'; e.dt = 0; G.killed++; sfx.kill();
+              G.shake = .95; G.flash = 1;
+              Art.spark(G.parts, e.x, GROUND-22*e.scale, '#f2c45a', 40, 260);
+              Art.spark(G.parts, e.x, GROUND-22*e.scale, '#ffffff', 20, 200);
+              Art.spark(G.parts, e.x, GROUND-22*e.scale, '#a8463a', 14, 180);
+              Art.confettiBurst(G.parts, 120, W-20);
+              G.banner = '打倒魔王！守城成功';
+            }
+            G.ult = null;
+            G.freezeUntil = 0;
+          }
+        }
+      }
+      G.parts = Art.stepParticles(G.parts, dt, GROUND+20);
       if(G.banner) hud();
       if(!G.over){
         if(G.hp <= 0) finish(false);
-        else if(!G.queue.length && G.enemies.length === 0) finish(true);
+        else if(!G.ult && !G.queue.length && G.enemies.length === 0) finish(true);
       }
-      if(!G.over) ensureQuestion();
+      if(!G.over && !G.ult) ensureQuestion();
     }
 
     function draw(){
@@ -260,10 +290,21 @@ window.GameEngine = (function(){
       const crack = Math.min(1, (MAX_HP - G.hp) / (MAX_HP - 1));
       if(crack > 0) Art.drawCrack(g, T, crack);
       Art.drawArcher(g,T,0);
+      // 集氣演出：畫面變暗＋光環收縮＋放射光芒
+      if(G.ult && G.ult.phase === 'charge'){
+        Art.drawUltCharge(g, ARCHER_X, ARCHER_Y, G.ult.t);
+        Art.drawArcher(g,T,0);
+      }
+      const bossE = G.enemies.find(z => z.kind === 'boss' && z.state === 'walk');
+      if(bossE && bossE.charge > 0){
+        const r = 4 + bossE.charge*3 + Math.sin(G.time*8)*1.2 + (G.ult && G.ult.phase === 'charge' ? G.ult.t*14 : 0);
+        Art.drawBossGlow(g, ARCHER_X, ARCHER_Y, r);
+      }
       const tgt = G.cur && G.cur.enemy;
       [...G.enemies].sort((a,b) => b.x - a.x).forEach(e => Art.drawEnemy(g,e,T,e === tgt && e.state === 'walk'));
+      Art.drawParticles(g, G.parts);
       if(G.banner){
-        g.fillStyle = 'rgba(28,36,40,.8)'; g.fillRect(W/2-120,14,240,32);
+        g.fillStyle = 'rgba(28,36,40,.8)'; g.fillRect(W/2-150,14,300,32);
         g.fillStyle = '#efe9dc'; g.font = 'bold 16px sans-serif'; g.textAlign = 'center';
         g.fillText(G.banner, W/2, 36);
       }
@@ -340,8 +381,11 @@ window.GameEngine = (function(){
             e.idx++; e.w = e.words[e.idx] ? e.words[e.idx].w : e.words[0].w;
             fb.innerHTML = `<span class="qp-good">答對！</span> 魔王蓄力 ${e.charge}/${BOSS_WORDS}`;
           }else{
-            e.doomed = true; e.state = 'die'; e.dt = 0; G.killed++; sfx.kill();
-            fb.innerHTML = `<span class="qp-good">蓄力完成，魔王被擊退！</span>`;
+            e.doomed = true;
+            G.ult = { phase:'charge', t:0, e };
+            G.freezeUntil = G.time + 1.4; // 集氣＋爆炸演出期間，敵人停住
+            G.banner = '蓄力完成　必殺一擊';
+            fb.innerHTML = `<span class="qp-good">蓄力完成，發動攻擊！</span>`;
           }
         }else{
           e.hp--;
