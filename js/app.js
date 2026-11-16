@@ -56,24 +56,25 @@ window.App = (function(){
     const html = `
       <section class="level-menu">
         <h2 class="section-title">選擇等級</h2>
-        <div class="card-grid">
+        <div class="level-list-rows">
           ${LEVELS.map(lv => {
             const total = lv.words.length;
             const done = lv.words.filter(w => w.ipa).length;
             const pct = total ? Math.round(done/total*100) : 0;
             return `
-              <button class="level-card" data-level="${lv.id}">
-                <span class="level-card-name">${lv.name}</span>
-                <span class="level-card-exam">${lv.examName}</span>
-                <span class="level-card-count">${total} 字</span>
-                <span class="level-card-progress"><span class="bar" style="width:${pct}%"></span></span>
-                <span class="level-card-pct">${done}/${total} 已完成內容</span>
+              <button class="level-row" data-level="${lv.id}">
+                <span class="level-row-main">
+                  <span class="level-row-name">${lv.name}</span>
+                  <span class="level-row-exam">${lv.examName}</span>
+                </span>
+                <span class="level-row-progress"><span class="bar" style="width:${pct}%"></span></span>
+                <span class="level-row-pct">${done}/${total} 字</span>
               </button>`;
           }).join('')}
         </div>
       </section>`;
     view.innerHTML = html;
-    view.querySelectorAll('.level-card').forEach(btn => {
+    view.querySelectorAll('.level-row').forEach(btn => {
       btn.addEventListener('click', () => renderUnitList(btn.dataset.level));
     });
   }
@@ -93,29 +94,34 @@ window.App = (function(){
       <section class="unit-list">
         <button class="back-btn" data-action="back-levels">← 回等級選單</button>
         <h2 class="section-title">${lv.name}（${lv.examName}）— Unit 列表</h2>
-        <div class="unit-list-rows">
+        <div class="ulist">
           ${groups.map(g => {
             const done = g.words.filter(w => w.ipa).length;
             const total = g.words.length;
             const ready = done === total;
             const stars = ready ? getBestStars(levelId, g.unit) : 0;
             return `
-              <div class="unit-card ${ready ? '' : 'unit-card-wip'}">
-                <button class="unit-card-main" data-unit="${g.unit}">
-                  <span class="unit-card-name">Unit ${g.unit}</span>
-                  <span class="unit-card-topic">${escapeHtml(g.unitName || '')}</span>
-                  <span class="unit-card-count">${total} 字${ready ? '' : '（內容待補）'}</span>
-                </button>
-                ${ready ? `<button class="btn alt sm" data-play="${g.unit}">⚔ 守城</button>` : ''}
-                <span class="unit-card-stars">${stars > 0 ? '★'.repeat(stars)+'☆'.repeat(3-stars) : ''}</span>
-              </div>`;
+              <article class="ucard ${ready ? '' : 'ucard-wip'}">
+                <div class="uhead">
+                  <span class="no">UNIT ${g.unit}</span>
+                  <h3>${escapeHtml(g.unitName || '')}</h3>
+                </div>
+                <div class="meta">
+                  <span>${total} 字${ready ? '' : '（內容待補）'}</span>
+                  ${stars > 0 ? `<span class="unit-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>` : ''}
+                </div>
+                <div class="row">
+                  ${ready ? `<button class="btn sm" data-play="${g.unit}">⚔ 守城</button>` : ''}
+                  <button class="btn alt sm" data-preview="${g.unit}">📖 預習單字</button>
+                </div>
+              </article>`;
           }).join('')}
         </div>
       </section>`;
     view.innerHTML = html;
     view.querySelector('[data-action="back-levels"]').addEventListener('click', renderLevelMenu);
-    view.querySelectorAll('.unit-card-main').forEach(btn => {
-      btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.unit)));
+    view.querySelectorAll('[data-preview]').forEach(btn => {
+      btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.preview)));
     });
     view.querySelectorAll('[data-play]').forEach(btn => {
       btn.addEventListener('click', () => startBattle(levelId, Number(btn.dataset.play)));
@@ -144,21 +150,16 @@ window.App = (function(){
             </button>`;
           }).join('')}
         </div>
-        <button class="btn full" id="diff-confirm">⚔ 開始守城</button>
       </section>`;
     view.innerHTML = html;
-    let chosen = current;
     view.querySelectorAll('[data-diff]').forEach(btn => {
       btn.addEventListener('click', () => {
-        chosen = btn.dataset.diff;
-        view.querySelectorAll('[data-diff]').forEach(b => b.classList.toggle('diff-card-active', b === btn));
+        const chosen = btn.dataset.diff;
+        setDifficulty(chosen);
+        runBattle(levelId, unitNum, chosen);
       });
     });
     view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
-    view.querySelector('#diff-confirm').addEventListener('click', () => {
-      setDifficulty(chosen);
-      runBattle(levelId, unitNum, chosen);
-    });
   }
 
   function runBattle(levelId, unitNum, difficulty){
