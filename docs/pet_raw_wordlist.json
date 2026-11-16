@@ -1,0 +1,7476 @@
+{
+ "adult": [
+  "adj & n"
+ ],
+ "advance": [
+  "n"
+ ],
+ "a/an": [
+  "det"
+ ],
+ "advanced": [
+  "adj"
+ ],
+ "ability": [
+  "n"
+ ],
+ "advantage": [
+  "n"
+ ],
+ "able": [
+  "adj"
+ ],
+ "adventure": [
+  "n"
+ ],
+ "about": [
+  "adv & prep"
+ ],
+ "advertise": [
+  "v"
+ ],
+ "advise": [
+  "v"
+ ],
+ "abroad": [
+  "adv"
+ ],
+ "aeroplane": [
+  "n"
+ ],
+ "absent": [
+  "adj"
+ ],
+ "affect": [
+  "v"
+ ],
+ "absolutely": [
+  "adv"
+ ],
+ "afford": [
+  "v"
+ ],
+ "accent": [
+  "n"
+ ],
+ "accept": [
+  "v"
+ ],
+ "afterwards": [
+  "adv"
+ ],
+ "acceptable": [
+  "adj"
+ ],
+ "again": [
+  "adv"
+ ],
+ "access": [
+  "n"
+ ],
+ "against": [
+  "prep"
+ ],
+ "aged": [
+  "adj"
+ ],
+ "agency": [
+  "n"
+ ],
+ "accident": [
+  "n"
+ ],
+ "ages": [
+  "n pl"
+ ],
+ "accompany": [
+  "v"
+ ],
+ "ago": [
+  "adv"
+ ],
+ "according to": [
+  "prep phr"
+ ],
+ "agree": [
+  "v"
+ ],
+ "account": [
+  "n"
+ ],
+ "ahead": [
+  "adv"
+ ],
+ "aim": [
+  "n & v"
+ ],
+ "accountant": [
+  "n"
+ ],
+ "air": [
+  "n"
+ ],
+ "accurate": [
+  "adj"
+ ],
+ "air conditioning": [
+  "n"
+ ],
+ "ache": [
+  "n"
+ ],
+ "air force": [
+  "n"
+ ],
+ "achieve": [
+  "v"
+ ],
+ "airline": [
+  "n"
+ ],
+ "achievement": [
+  "n"
+ ],
+ "airport": [
+  "n"
+ ],
+ "across": [
+  "adv & prep"
+ ],
+ "alarm": [
+  "n"
+ ],
+ "act": [
+  "n & v"
+ ],
+ "alarm clock": [
+  "n"
+ ],
+ "action": [
+  "n"
+ ],
+ "active": [
+  "adj"
+ ],
+ "activity": [
+  "n"
+ ],
+ "allow": [
+  "v"
+ ],
+ "actor": [
+  "n"
+ ],
+ "almost": [
+  "adv"
+ ],
+ "actress": [
+  "n"
+ ],
+ "alone": [
+  "adv & adj"
+ ],
+ "actually": [
+  "adv"
+ ],
+ "along": [
+  "adv & prep"
+ ],
+ "alphabet": [
+  "n"
+ ],
+ "ad": [
+  "advertisement",
+  "n"
+ ],
+ "also": [
+  "adv"
+ ],
+ "add": [
+  "v"
+ ],
+ "although": [
+  "conj"
+ ],
+ "addition": [
+  "n"
+ ],
+ "altogether": [
+  "adv"
+ ],
+ "address": [
+  "n"
+ ],
+ "admire": [
+  "v"
+ ],
+ "amazed": [
+  "adj"
+ ],
+ "admission": [
+  "n"
+ ],
+ "amazing": [
+  "adj"
+ ],
+ "admit": [
+  "v"
+ ],
+ "ambulance": [
+  "n"
+ ],
+ "among": [
+  "amongst"
+ ],
+ "arrange": [
+  "v"
+ ],
+ "amount": [
+  "n"
+ ],
+ "arrangement": [
+  "n"
+ ],
+ "amusing": [
+  "adj"
+ ],
+ "arrest": [
+  "v"
+ ],
+ "an": [
+  "det"
+ ],
+ "arrival": [
+  "n"
+ ],
+ "ancient": [
+  "adj"
+ ],
+ "arrive": [
+  "v"
+ ],
+ "and": [
+  "conj"
+ ],
+ "art": [
+  "n"
+ ],
+ "angry": [
+  "adj"
+ ],
+ "article": [
+  "n"
+ ],
+ "animal": [
+  "n"
+ ],
+ "artist": [
+  "n"
+ ],
+ "ankle": [
+  "n"
+ ],
+ "as": [
+  "conj & prep"
+ ],
+ "anniversary": [
+  "n"
+ ],
+ "ashamed": [
+  "adj"
+ ],
+ "announce": [
+  "v"
+ ],
+ "ask": [
+  "v"
+ ],
+ "announcement": [
+  "n"
+ ],
+ "asleep": [
+  "adj"
+ ],
+ "annoy": [
+  "v"
+ ],
+ "as long as": [
+  "phr"
+ ],
+ "annoyed": [
+  "adj"
+ ],
+ "aspirin": [
+  "n"
+ ],
+ "annual": [
+  "adj"
+ ],
+ "assist": [
+  "v"
+ ],
+ "another": [
+  "det & pron"
+ ],
+ "assistant": [
+  "n"
+ ],
+ "answer": [
+  "n & v"
+ ],
+ "astronaut": [
+  "n"
+ ],
+ "answerphone": [
+  "n"
+ ],
+ "as well": [
+  "as"
+ ],
+ "ant": [
+  "n"
+ ],
+ "at": [
+  "prep"
+ ],
+ "antique": [
+  "adj & n"
+ ],
+ "any": [
+  "det & pron"
+ ],
+ "anybody": [
+  "pron"
+ ],
+ "at all": [
+  "prep phr"
+ ],
+ "anymore": [
+  "adv"
+ ],
+ "at first": [
+  "prep phr"
+ ],
+ "anyone": [
+  "pron"
+ ],
+ "athlete": [
+  "n"
+ ],
+ "anything": [
+  "pron"
+ ],
+ "athletics": [
+  "n"
+ ],
+ "anyway": [
+  "adv"
+ ],
+ "at last": [
+  "prep phr"
+ ],
+ "anywhere": [
+  "adv"
+ ],
+ "at least": [
+  "prep phr"
+ ],
+ "apart": [
+  "adv"
+ ],
+ "atmosphere": [
+  "n"
+ ],
+ "apart from": [
+  "adv"
+ ],
+ "at once": [
+  "prep phr"
+ ],
+ "apartment": [
+  "n"
+ ],
+ "at present": [
+  "prep phr"
+ ],
+ "apartment building": [
+  "n"
+ ],
+ "attach": [
+  "v"
+ ],
+ "apologise": [
+  "v"
+ ],
+ "attack": [
+  "n & v"
+ ],
+ "apology": [
+  "n"
+ ],
+ "attempt": [
+  "v"
+ ],
+ "app": [
+  "n"
+ ],
+ "attend": [
+  "v"
+ ],
+ "appear": [
+  "v"
+ ],
+ "the same time": [
+  "prep phr"
+ ],
+ "appearance": [
+  "n"
+ ],
+ "attitude": [
+  "n"
+ ],
+ "apple": [
+  "n"
+ ],
+ "attract": [
+  "v"
+ ],
+ "application": [
+  "n"
+ ],
+ "attraction": [
+  "n"
+ ],
+ "apply": [
+  "v"
+ ],
+ "aunt": [
+  "n"
+ ],
+ "appointment": [
+  "n"
+ ],
+ "author": [
+  "n"
+ ],
+ "approach": [
+  "v"
+ ],
+ "autumn": [
+  "n"
+ ],
+ "approve": [
+  "v"
+ ],
+ "available": [
+  "adj"
+ ],
+ "approximately": [
+  "adv"
+ ],
+ "average": [
+  "adj & n"
+ ],
+ "architect": [
+  "n"
+ ],
+ "avoid": [
+  "v"
+ ],
+ "architecture": [
+  "n"
+ ],
+ "awake": [
+  "adj"
+ ],
+ "area": [
+  "n"
+ ],
+ "away": [
+  "adv"
+ ],
+ "argue": [
+  "v"
+ ],
+ "awesome": [
+  "adj"
+ ],
+ "argument": [
+  "n"
+ ],
+ "awful": [
+  "adj"
+ ],
+ "Arithmetic": [
+  "n"
+ ],
+ "arm": [
+  "n"
+ ],
+ "armchair": [
+  "n"
+ ],
+ "army": [
+  "n"
+ ],
+ "around": [
+  "adv & prep"
+ ],
+ "baby": [
+  "n"
+ ],
+ "babysit": [
+  "v"
+ ],
+ "babysitter": [
+  "n"
+ ],
+ "bee": [
+  "n"
+ ],
+ "beef": [
+  "n"
+ ],
+ "background": [
+  "experience",
+  "n"
+ ],
+ "begin": [
+  "v"
+ ],
+ "backpack": [
+  "n"
+ ],
+ "beginner": [
+  "n"
+ ],
+ "backpacker": [
+  "n"
+ ],
+ "beginning": [
+  "n"
+ ],
+ "backpacking": [
+  "n"
+ ],
+ "behave": [
+  "v"
+ ],
+ "backwards": [
+  "adv"
+ ],
+ "behaviour": [
+  "n"
+ ],
+ "bad": [
+  "adj"
+ ],
+ "behind": [
+  "prep & adv"
+ ],
+ "badly": [
+  "adv"
+ ],
+ "believe": [
+  "v"
+ ],
+ "badminton": [
+  "n"
+ ],
+ "bell": [
+  "n"
+ ],
+ "bag": [
+  "n"
+ ],
+ "belong": [
+  "v"
+ ],
+ "baggage": [
+  "n"
+ ],
+ "below": [
+  "adv & prep"
+ ],
+ "bake": [
+  "v"
+ ],
+ "belt": [
+  "n"
+ ],
+ "baker": [
+  "n"
+ ],
+ "beneath": [
+  "prep"
+ ],
+ "balcony": [
+  "n"
+ ],
+ "benefit": [
+  "n & v"
+ ],
+ "bald": [
+  "adj"
+ ],
+ "be over": [
+  "phr v"
+ ],
+ "ballet": [
+  "n"
+ ],
+ "beside": [
+  "adv & prep"
+ ],
+ "balloon": [
+  "n"
+ ],
+ "besides": [
+  "prep"
+ ],
+ "banana": [
+  "n"
+ ],
+ "best": [
+  "adj & adv"
+ ],
+ "band": [
+  "n"
+ ],
+ "bestseller": [
+  "n"
+ ],
+ "bandage": [
+  "n"
+ ],
+ "better": [
+  "adj & adv"
+ ],
+ "banker": [
+  "n"
+ ],
+ "between": [
+  "prep & adv"
+ ],
+ "banking": [
+  "n"
+ ],
+ "beyond": [
+  "prep & adv"
+ ],
+ "bar": [
+  "n"
+ ],
+ "bicycle": [
+  "n"
+ ],
+ "barbecue": [
+  "n & v"
+ ],
+ "big": [
+  "adj"
+ ],
+ "barber": [
+  "n"
+ ],
+ "bike": [
+  "n"
+ ],
+ "bargain": [
+  "n"
+ ],
+ "bill": [
+  "n"
+ ],
+ "base on": [
+  "phr v"
+ ],
+ "bin": [
+  "n"
+ ],
+ "basic": [
+  "adj"
+ ],
+ "biography": [
+  "n"
+ ],
+ "basin": [
+  "n"
+ ],
+ "biology": [
+  "n"
+ ],
+ "basket": [
+  "n"
+ ],
+ "bird": [
+  "n"
+ ],
+ "basketball": [
+  "n"
+ ],
+ "birth": [
+  "n"
+ ],
+ "bat": [
+  "n"
+ ],
+ "birthday": [
+  "n"
+ ],
+ "bath": [
+  "n & v"
+ ],
+ "biscuit": [
+  "n"
+ ],
+ "bathing suit": [
+  "n"
+ ],
+ "bit": [
+  "n"
+ ],
+ "bathroom": [
+  "n"
+ ],
+ "bite": [
+  "v"
+ ],
+ "bathtub": [
+  "n"
+ ],
+ "bitter": [
+  "adj"
+ ],
+ "battery": [
+  "n"
+ ],
+ "black": [
+  "adj & n"
+ ],
+ "battle": [
+  "n"
+ ],
+ "blackboard": [
+  "n"
+ ],
+ "bay": [
+  "n"
+ ],
+ "blame": [
+  "v"
+ ],
+ "be": [
+  "av & v"
+ ],
+ "blank": [
+  "adj"
+ ],
+ "bean": [
+  "n"
+ ],
+ "blanket": [
+  "n"
+ ],
+ "bear": [
+  "n"
+ ],
+ "bleed": [
+  "v"
+ ],
+ "beard": [
+  "n"
+ ],
+ "blind": [
+  "adj"
+ ],
+ "beat": [
+  "v"
+ ],
+ "block": [
+  "n"
+ ],
+ "because": [
+  "conj"
+ ],
+ "blog": [
+  "n"
+ ],
+ "because of": [
+  "prep phr"
+ ],
+ "blogger": [
+  "n"
+ ],
+ "become": [
+  "v"
+ ],
+ "bed": [
+  "n"
+ ],
+ "blood": [
+  "n"
+ ],
+ "bedroom": [
+  "n"
+ ],
+ "blouse": [
+  "n"
+ ],
+ "break down": [
+  "phr v"
+ ],
+ "blue": [
+  "adj & n"
+ ],
+ "breakfast": [
+  "n"
+ ],
+ "board": [
+  "n & v"
+ ],
+ "break in": [
+  "phr v"
+ ],
+ "boarding pass": [
+  "n"
+ ],
+ "boat": [
+  "n"
+ ],
+ "break up": [
+  "phr v"
+ ],
+ "boiled": [
+  "adj"
+ ],
+ "breath": [
+  "n"
+ ],
+ "bold": [
+  "adj"
+ ],
+ "breathe": [
+  "v"
+ ],
+ "bomb": [
+  "n & v"
+ ],
+ "breeze": [
+  "n"
+ ],
+ "bone": [
+  "n"
+ ],
+ "bride": [
+  "n"
+ ],
+ "book": [
+  "n & v"
+ ],
+ "bridge": [
+  "n"
+ ],
+ "bookcase": [
+  "n"
+ ],
+ "brief": [
+  "adj"
+ ],
+ "booking": [
+  "n"
+ ],
+ "bright": [
+  "adj"
+ ],
+ "booking office": [
+  "n"
+ ],
+ "bring": [
+  "v"
+ ],
+ "bookshelf": [
+  "n"
+ ],
+ "bring up": [
+  "phr v"
+ ],
+ "bookstore": [
+  "n"
+ ],
+ "broad": [
+  "adj"
+ ],
+ "boot": [
+  "n"
+ ],
+ "broccoli": [
+  "n"
+ ],
+ "border": [
+  "n"
+ ],
+ "brother": [
+  "n"
+ ],
+ "bored": [
+  "adj"
+ ],
+ "brown": [
+  "adj & n"
+ ],
+ "boring": [
+  "adj"
+ ],
+ "brush": [
+  "n & v"
+ ],
+ "born": [
+  "adj"
+ ],
+ "bucket": [
+  "n"
+ ],
+ "borrow": [
+  "v"
+ ],
+ "bug": [
+  "n"
+ ],
+ "bossy": [
+  "adj"
+ ],
+ "build": [
+  "v"
+ ],
+ "both": [
+  "pron & det"
+ ],
+ "building": [
+  "n"
+ ],
+ "bulb": [
+  "n"
+ ],
+ "bother": [
+  "v"
+ ],
+ "bull": [
+  "n"
+ ],
+ "burger": [
+  "n"
+ ],
+ "burning": [
+  "adj"
+ ],
+ "bottle": [
+  "n"
+ ],
+ "bury": [
+  "v"
+ ],
+ "bottle bank": [
+  "n"
+ ],
+ "bus": [
+  "n"
+ ],
+ "bottom": [
+  "adj & n"
+ ],
+ "bush": [
+  "n"
+ ],
+ "bowl": [
+  "n"
+ ],
+ "business": [
+  "n"
+ ],
+ "box": [
+  "n"
+ ],
+ "businessman": [
+  "n"
+ ],
+ "boxing": [
+  "n"
+ ],
+ "businesswoman": [
+  "n"
+ ],
+ "boy": [
+  "n"
+ ],
+ "bus station": [
+  "n"
+ ],
+ "boyfriend": [
+  "n"
+ ],
+ "bus stop": [
+  "n"
+ ],
+ "bracelet": [
+  "n"
+ ],
+ "busy": [
+  "adj"
+ ],
+ "brain": [
+  "n"
+ ],
+ "but": [
+  "conj & prep"
+ ],
+ "brake": [
+  "n & v"
+ ],
+ "butcher": [
+  "n"
+ ],
+ "branch": [
+  "n"
+ ],
+ "butter": [
+  "n"
+ ],
+ "brand new": [
+  "adj"
+ ],
+ "butterfly": [
+  "n"
+ ],
+ "brave": [
+  "adj"
+ ],
+ "button": [
+  "n"
+ ],
+ "bread": [
+  "n"
+ ],
+ "buy": [
+  "v"
+ ],
+ "break": [
+  "n & v"
+ ],
+ "buyer": [
+  "n"
+ ],
+ "by": [
+  "prep"
+ ],
+ "careless": [
+  "adj"
+ ],
+ "by accident": [
+  "prep phr"
+ ],
+ "car park": [
+  "n"
+ ],
+ "by hand": [
+  "prep phr"
+ ],
+ "carpet": [
+  "n"
+ ],
+ "by mistake": [
+  "prep phr"
+ ],
+ "carrot": [
+  "n"
+ ],
+ "by name": [
+  "prep phr"
+ ],
+ "carry": [
+  "v"
+ ],
+ "bye": [
+  "exclam"
+ ],
+ "carry on": [
+  "phr v"
+ ],
+ "carry out": [
+  "phr v"
+ ],
+ "cab": [
+  "n"
+ ],
+ "cabbage": [
+  "n"
+ ],
+ "cartoon": [
+  "n"
+ ],
+ "cabin": [
+  "n"
+ ],
+ "case": [
+  "n"
+ ],
+ "cafe": [
+  "n"
+ ],
+ "cash": [
+  "n"
+ ],
+ "cafeteria": [
+  "n"
+ ],
+ "cash machine": [
+  "n"
+ ],
+ "cake": [
+  "n"
+ ],
+ "cashpoint": [
+  "n"
+ ],
+ "calculator": [
+  "n"
+ ],
+ "castle": [
+  "n"
+ ],
+ "calendar": [
+  "n"
+ ],
+ "casual": [
+  "adj"
+ ],
+ "call": [
+  "n & v"
+ ],
+ "cat": [
+  "n"
+ ],
+ "call for": [
+  "phr v"
+ ],
+ "catch": [
+  "v"
+ ],
+ "call in": [
+  "phr v"
+ ],
+ "cattle": [
+  "n"
+ ],
+ "calm": [
+  "adj"
+ ],
+ "CD": [
+  "n"
+ ],
+ "camel": [
+  "n"
+ ],
+ "CD player": [
+  "n"
+ ],
+ "camera": [
+  "n"
+ ],
+ "ceiling": [
+  "n"
+ ],
+ "camp": [
+  "n & v"
+ ],
+ "celebrate": [
+  "v"
+ ],
+ "camping": [
+  "n"
+ ],
+ "celebration": [
+  "n"
+ ],
+ "campsite": [
+  "n"
+ ],
+ "celebrity": [
+  "n"
+ ],
+ "can": [
+  "n & mv"
+ ],
+ "cell phone": [
+  "n"
+ ],
+ "canal": [
+  "n"
+ ],
+ "cent": [
+  "n"
+ ],
+ "cancel": [
+  "v"
+ ],
+ "centimetre": [
+  "cm"
+ ],
+ "candidate": [
+  "n"
+ ],
+ "candle": [
+  "n"
+ ],
+ "central": [
+  "adj"
+ ],
+ "candy": [
+  "n"
+ ],
+ "central heating": [
+  "n"
+ ],
+ "canteen": [
+  "n"
+ ],
+ "centre/center": [
+  "n"
+ ],
+ "cap": [
+  "n"
+ ],
+ "century": [
+  "n"
+ ],
+ "capital": [
+  "adj & n"
+ ],
+ "cereal": [
+  "n"
+ ],
+ "captain": [
+  "n"
+ ],
+ "certificate": [
+  "n"
+ ],
+ "car": [
+  "n"
+ ],
+ "chain": [
+  "n"
+ ],
+ "card": [
+  "n"
+ ],
+ "chair": [
+  "n"
+ ],
+ "cardboard": [
+  "adj & n"
+ ],
+ "championship": [
+  "n"
+ ],
+ "care": [
+  "n & v"
+ ],
+ "chance": [
+  "n"
+ ],
+ "channel": [
+  "n"
+ ],
+ "something": [
+  "pron",
+  "v"
+ ],
+ "chapter": [
+  "n"
+ ],
+ "career": [
+  "n"
+ ],
+ "character": [
+  "n"
+ ],
+ "careful": [
+  "adj"
+ ],
+ "charge": [
+  "n & v"
+ ],
+ "carefully": [
+  "ad"
+ ],
+ "charity": [
+  "n"
+ ],
+ "charming": [
+  "adj"
+ ],
+ "climate change": [
+  "n"
+ ],
+ "chat": [
+  "n & v"
+ ],
+ "climb": [
+  "v"
+ ],
+ "chatroom": [
+  "n"
+ ],
+ "clinic": [
+  "n"
+ ],
+ "chat show": [
+  "n"
+ ],
+ "clock": [
+  "adv",
+  "n"
+ ],
+ "cheap": [
+  "adj"
+ ],
+ "cheat": [
+  "v"
+ ],
+ "closed": [
+  "adj"
+ ],
+ "check": [
+  "n & v"
+ ],
+ "clothes": [
+  "n pl"
+ ],
+ "check in": [
+  "phr v"
+ ],
+ "clothing": [
+  "n"
+ ],
+ "check-in": [
+  "n"
+ ],
+ "cloudy": [
+  "adj"
+ ],
+ "check out": [
+  "phr v"
+ ],
+ "club": [
+  "n"
+ ],
+ "coach": [
+  "n"
+ ],
+ "checkout": [
+  "n"
+ ],
+ "coast": [
+  "n"
+ ],
+ "cheek": [
+  "n"
+ ],
+ "coat": [
+  "n"
+ ],
+ "cheerful": [
+  "adj"
+ ],
+ "coconut": [
+  "n"
+ ],
+ "cod": [
+  "n"
+ ],
+ "cheese": [
+  "n"
+ ],
+ "coffee": [
+  "n"
+ ],
+ "chef": [
+  "n"
+ ],
+ "coin": [
+  "n"
+ ],
+ "chemist": [
+  "n"
+ ],
+ "cola": [
+  "n"
+ ],
+ "chemistry": [
+  "n"
+ ],
+ "cold": [
+  "adj & n"
+ ],
+ "cheque": [
+  "n"
+ ],
+ "collar": [
+  "n"
+ ],
+ "chess": [
+  "n"
+ ],
+ "colleague": [
+  "n"
+ ],
+ "chest of drawers": [
+  "n"
+ ],
+ "collect": [
+  "v"
+ ],
+ "chicken": [
+  "n"
+ ],
+ "collection": [
+  "n"
+ ],
+ "child": [
+  "n"
+ ],
+ "college": [
+  "n"
+ ],
+ "childhood": [
+  "n"
+ ],
+ "colour": [
+  "n & v"
+ ],
+ "chill out": [
+  "phr v"
+ ],
+ "colourful": [
+  "adj"
+ ],
+ "chilli": [
+  "n"
+ ],
+ "comb": [
+  "n & v"
+ ],
+ "chin": [
+  "n"
+ ],
+ "come": [
+  "v"
+ ],
+ "chip": [
+  "n"
+ ],
+ "comedy": [
+  "n"
+ ],
+ "come on": [
+  "phr v"
+ ],
+ "chocolate": [
+  "n"
+ ],
+ "comfort": [
+  "n"
+ ],
+ "choice": [
+  "n"
+ ],
+ "comfortable": [
+  "adj"
+ ],
+ "choose": [
+  "v"
+ ],
+ "comment": [
+  "n",
+  "v"
+ ],
+ "cinema": [
+  "n"
+ ],
+ "circle": [
+  "n"
+ ],
+ "circus": [
+  "n"
+ ],
+ "comic": [
+  "adj & n"
+ ],
+ "comma": [
+  "n"
+ ],
+ "city": [
+  "n"
+ ],
+ "clap": [
+  "v"
+ ],
+ "classmate": [
+  "n"
+ ],
+ "communication": [
+  "n"
+ ],
+ "classroom": [
+  "n"
+ ],
+ "company": [
+  "n"
+ ],
+ "clean": [
+  "adj & v"
+ ],
+ "compare": [
+  "v"
+ ],
+ "cleaner": [
+  "n"
+ ],
+ "compete": [
+  "v"
+ ],
+ "clear": [
+  "adj & v"
+ ],
+ "competition": [
+  "n"
+ ],
+ "clearly": [
+  "adv"
+ ],
+ "competitor": [
+  "n"
+ ],
+ "clever": [
+  "adj"
+ ],
+ "complain": [
+  "v"
+ ],
+ "click": [
+  "n & v"
+ ],
+ "complaint": [
+  "n"
+ ],
+ "cliff": [
+  "n"
+ ],
+ "complete": [
+  "adj & v"
+ ],
+ "completely": [
+  "adv"
+ ],
+ "complicated": [
+  "adj"
+ ],
+ "courage": [
+  "n"
+ ],
+ "composition": [
+  "n"
+ ],
+ "course": [
+  "n"
+ ],
+ "conclusion": [
+  "n"
+ ],
+ "court": [
+  "n"
+ ],
+ "conference": [
+  "n"
+ ],
+ "cousin": [
+  "n"
+ ],
+ "confident": [
+  "adj"
+ ],
+ "cover": [
+  "n & v"
+ ],
+ "confirm": [
+  "v"
+ ],
+ "cow": [
+  "n"
+ ],
+ "confused": [
+  "adj"
+ ],
+ "crash": [
+  "n & v"
+ ],
+ "confusing": [
+  "adj"
+ ],
+ "cream": [
+  "adj & n"
+ ],
+ "create": [
+  "v"
+ ],
+ "connect": [
+  "v"
+ ],
+ "creative": [
+  "adj"
+ ],
+ "connection": [
+  "n"
+ ],
+ "creature": [
+  "n"
+ ],
+ "consider": [
+  "v"
+ ],
+ "credit": [
+  "n"
+ ],
+ "consist": [
+  "v"
+ ],
+ "credit card": [
+  "n"
+ ],
+ "consonant": [
+  "n"
+ ],
+ "crew": [
+  "n"
+ ],
+ "contain": [
+  "v"
+ ],
+ "cricket": [
+  "n"
+ ],
+ "contents": [
+  "n"
+ ],
+ "crime": [
+  "n"
+ ],
+ "contest": [
+  "n"
+ ],
+ "criminal": [
+  "n"
+ ],
+ "continent": [
+  "n"
+ ],
+ "crop": [
+  "n"
+ ],
+ "continue": [
+  "v"
+ ],
+ "cross": [
+  "n & v"
+ ],
+ "contract": [
+  "n"
+ ],
+ "crossing": [
+  "n"
+ ],
+ "control": [
+  "n & v"
+ ],
+ "cross out": [
+  "phr v"
+ ],
+ "convenient": [
+  "adj"
+ ],
+ "crossroads": [
+  "n"
+ ],
+ "conversation": [
+  "n"
+ ],
+ "crowd": [
+  "n"
+ ],
+ "convince": [
+  "v"
+ ],
+ "crowded": [
+  "adj"
+ ],
+ "cook": [
+  "n & v"
+ ],
+ "cruel": [
+  "adj"
+ ],
+ "cooker": [
+  "n"
+ ],
+ "cruise": [
+  "n"
+ ],
+ "cookery": [
+  "n"
+ ],
+ "cry": [
+  "n & v"
+ ],
+ "cookie": [
+  "n"
+ ],
+ "cucumber": [
+  "n"
+ ],
+ "cooking": [
+  "n"
+ ],
+ "cultural": [
+  "adj"
+ ],
+ "culture": [
+  "n"
+ ],
+ "copy": [
+  "n & v"
+ ],
+ "cup": [
+  "n"
+ ],
+ "corn": [
+  "n"
+ ],
+ "cupboard": [
+  "n"
+ ],
+ "corner": [
+  "n"
+ ],
+ "cure": [
+  "n & v"
+ ],
+ "correct": [
+  "adj"
+ ],
+ "curious": [
+  "adj"
+ ],
+ "correction": [
+  "n"
+ ],
+ "curiously": [
+  "adv"
+ ],
+ "costume": [
+  "n"
+ ],
+ "curly": [
+  "adj"
+ ],
+ "cosy": [
+  "adj"
+ ],
+ "curtain": [
+  "n"
+ ],
+ "cottage": [
+  "n"
+ ],
+ "cushion": [
+  "n"
+ ],
+ "cotton": [
+  "n"
+ ],
+ "custom": [
+  "n"
+ ],
+ "cough": [
+  "n & v"
+ ],
+ "customer": [
+  "n"
+ ],
+ "could": [
+  "mv"
+ ],
+ "customs": [
+  "n pl"
+ ],
+ "country": [
+  "n"
+ ],
+ "cut": [
+  "n & v"
+ ],
+ "countryside": [
+  "n"
+ ],
+ "cute": [
+  "adj"
+ ],
+ "couple": [
+  "n"
+ ],
+ "cut up": [
+  "phr v"
+ ],
+ "CV": [
+  "Curriculum Vitae"
+ ],
+ "department store": [
+  "n"
+ ],
+ "cycle": [
+  "n & v"
+ ],
+ "departure": [
+  "n"
+ ],
+ "cycling": [
+  "n"
+ ],
+ "deposit": [
+  "n"
+ ],
+ "depressed": [
+  "adj"
+ ],
+ "dad": [
+  "n"
+ ],
+ "depth": [
+  "n"
+ ],
+ "damage": [
+  "n & v"
+ ],
+ "describe": [
+  "v"
+ ],
+ "damaged": [
+  "adj"
+ ],
+ "description": [
+  "n"
+ ],
+ "dance": [
+  "n & v"
+ ],
+ "desert": [
+  "n"
+ ],
+ "dancer": [
+  "n"
+ ],
+ "deserve": [
+  "v"
+ ],
+ "dancing": [
+  "n"
+ ],
+ "design": [
+  "n & v"
+ ],
+ "danger": [
+  "n"
+ ],
+ "designer": [
+  "n"
+ ],
+ "dangerous": [
+  "adj"
+ ],
+ "desk": [
+  "n"
+ ],
+ "dark": [
+  "adj & n"
+ ],
+ "despite": [
+  "prep"
+ ],
+ "data": [
+  "n"
+ ],
+ "dessert": [
+  "n"
+ ],
+ "date": [
+  "n & v"
+ ],
+ "destination": [
+  "n"
+ ],
+ "daughter": [
+  "n"
+ ],
+ "detail": [
+  "n"
+ ],
+ "day": [
+  "n"
+ ],
+ "detective": [
+  "n"
+ ],
+ "dead": [
+  "adj"
+ ],
+ "develop": [
+  "v"
+ ],
+ "deaf": [
+  "adj"
+ ],
+ "development": [
+  "n"
+ ],
+ "deal": [
+  "v"
+ ],
+ "diagram": [
+  "n"
+ ],
+ "dial": [
+  "v"
+ ],
+ "dear": [
+  "adj & exclam"
+ ],
+ "dictionary": [
+  "n"
+ ],
+ "death": [
+  "n"
+ ],
+ "different": [
+  "adj"
+ ],
+ "decide": [
+  "v"
+ ],
+ "difficult": [
+  "adj"
+ ],
+ "decision": [
+  "n"
+ ],
+ "difficulty": [
+  "n"
+ ],
+ "declare": [
+  "v"
+ ],
+ "dig": [
+  "v"
+ ],
+ "decorate": [
+  "v"
+ ],
+ "digital": [
+  "adj"
+ ],
+ "decrease": [
+  "n & v"
+ ],
+ "deep": [
+  "adj & adv"
+ ],
+ "dining room": [
+  "n"
+ ],
+ "defeat": [
+  "n & v"
+ ],
+ "dinner": [
+  "n"
+ ],
+ "defence": [
+  "n"
+ ],
+ "diploma": [
+  "n"
+ ],
+ "defend": [
+  "v"
+ ],
+ "direct": [
+  "adj & v"
+ ],
+ "definitely": [
+  "adv"
+ ],
+ "degree": [
+  "n"
+ ],
+ "directly": [
+  "adv"
+ ],
+ "director": [
+  "n"
+ ],
+ "dirt": [
+  "n"
+ ],
+ "dirty": [
+  "adj"
+ ],
+ "delay": [
+  "n & v"
+ ],
+ "disabled": [
+  "adj"
+ ],
+ "delayed": [
+  "adj"
+ ],
+ "disadvantage": [
+  "n"
+ ],
+ "delete": [
+  "v"
+ ],
+ "disagree": [
+  "v"
+ ],
+ "delicious": [
+  "adj"
+ ],
+ "disappear": [
+  "v"
+ ],
+ "delighted": [
+  "adj"
+ ],
+ "disappoint": [
+  "v"
+ ],
+ "deliver": [
+  "v"
+ ],
+ "disappointed": [
+  "adj"
+ ],
+ "delivery": [
+  "n"
+ ],
+ "disappointing": [
+  "adj"
+ ],
+ "demand": [
+  "n & v"
+ ],
+ "disappointment": [
+  "n"
+ ],
+ "dentist": [
+  "n"
+ ],
+ "disc/disk": [
+  "n"
+ ],
+ "depart": [
+  "v"
+ ],
+ "disc jockey": [
+  "DJ"
+ ],
+ "dress": [
+  "n & v"
+ ],
+ "dressed": [
+  "adj"
+ ],
+ "discover": [
+  "v"
+ ],
+ "drink": [
+  "n & v"
+ ],
+ "discovery": [
+  "n"
+ ],
+ "drive": [
+  "n & v"
+ ],
+ "discuss": [
+  "v"
+ ],
+ "driver": [
+  "n"
+ ],
+ "discussion": [
+  "n"
+ ],
+ "s licence": [
+  "Br Eng"
+ ],
+ "disease": [
+  "n"
+ ],
+ "disgusting": [
+  "adj"
+ ],
+ "driving licence": [
+  "n"
+ ],
+ "dish": [
+  "n"
+ ],
+ "drop": [
+  "n & v"
+ ],
+ "disk": [
+  "n"
+ ],
+ "display": [
+  "n & v"
+ ],
+ "drugstore": [
+  "n"
+ ],
+ "distance": [
+  "n"
+ ],
+ "drum": [
+  "n"
+ ],
+ "district": [
+  "n"
+ ],
+ "dry": [
+  "adj & v"
+ ],
+ "disturb": [
+  "v"
+ ],
+ "duck": [
+  "n"
+ ],
+ "dive": [
+  "v"
+ ],
+ "due": [
+  "adj"
+ ],
+ "divide": [
+  "v"
+ ],
+ "due to": [
+  "prep phr"
+ ],
+ "diving": [
+  "n"
+ ],
+ "dull": [
+  "adj"
+ ],
+ "DJ": [
+  "disc jockey"
+ ],
+ "during": [
+  "prep"
+ ],
+ "dust": [
+  "n"
+ ],
+ "do": [
+  "av & v"
+ ],
+ "dustbin": [
+  "n"
+ ],
+ "Dr": [
+  "n"
+ ],
+ "dusty": [
+  "adj"
+ ],
+ "document": [
+  "n"
+ ],
+ "duty": [
+  "n"
+ ],
+ "documentary": [
+  "n"
+ ],
+ "duty-free": [
+  "adj & n"
+ ],
+ "dog": [
+  "n"
+ ],
+ "duvet": [
+  "n"
+ ],
+ "doll": [
+  "n"
+ ],
+ "DVD": [
+  "n"
+ ],
+ "dollar": [
+  "n"
+ ],
+ "DVD player": [
+  "n"
+ ],
+ "dolphin": [
+  "n"
+ ],
+ "donkey": [
+  "n"
+ ],
+ "door": [
+  "n"
+ ],
+ "dot": [
+  "n"
+ ],
+ "double": [
+  "adj & det"
+ ],
+ "ear": [
+  "n"
+ ],
+ "doubt": [
+  "n & v"
+ ],
+ "earache": [
+  "n"
+ ],
+ "down": [
+  "adv & prep"
+ ],
+ "earn": [
+  "v"
+ ],
+ "download": [
+  "n & v"
+ ],
+ "earring": [
+  "n"
+ ],
+ "downstairs": [
+  "adj & adv"
+ ],
+ "earth": [
+  "n"
+ ],
+ "dozen": [
+  "det & n"
+ ],
+ "doctor": [
+  "n"
+ ],
+ "eastern": [
+  "adj"
+ ],
+ "drag": [
+  "v"
+ ],
+ "easily": [
+  "adv"
+ ],
+ "easygoing": [
+  "adj"
+ ],
+ "drama": [
+  "n"
+ ],
+ "eat": [
+  "v"
+ ],
+ "economics": [
+  "n"
+ ],
+ "edge": [
+  "n"
+ ],
+ "draw": [
+  "v"
+ ],
+ "education": [
+  "n"
+ ],
+ "efficient": [
+  "adj"
+ ],
+ "drawer": [
+  "n"
+ ],
+ "drawing": [
+  "n"
+ ],
+ "elbow": [
+  "n"
+ ],
+ "elder": [
+  "adj"
+ ],
+ "eraser": [
+  "n"
+ ],
+ "elderly": [
+  "adj"
+ ],
+ "escape": [
+  "v"
+ ],
+ "election": [
+  "n"
+ ],
+ "especially": [
+  "adv"
+ ],
+ "electric": [
+  "adj"
+ ],
+ "essay": [
+  "n"
+ ],
+ "electrical": [
+  "adj"
+ ],
+ "essential": [
+  "adj"
+ ],
+ "electricity": [
+  "n"
+ ],
+ "euro": [
+  "n"
+ ],
+ "electronic": [
+  "adj"
+ ],
+ "even": [
+  "adv"
+ ],
+ "elephant": [
+  "n"
+ ],
+ "event": [
+  "n"
+ ],
+ "elevator": [
+  "n"
+ ],
+ "even though": [
+  "conj"
+ ],
+ "else": [
+  "adv"
+ ],
+ "ever": [
+  "adv"
+ ],
+ "email": [
+  "n & v"
+ ],
+ "every": [
+  "det"
+ ],
+ "embarrassed": [
+  "adj"
+ ],
+ "everybody": [
+  "pron"
+ ],
+ "embarrassing": [
+  "adj"
+ ],
+ "everyone": [
+  "pron"
+ ],
+ "embassy": [
+  "n"
+ ],
+ "everything": [
+  "pron"
+ ],
+ "emergency": [
+  "n"
+ ],
+ "everywhere": [
+  "adv"
+ ],
+ "employ": [
+  "v"
+ ],
+ "exact": [
+  "adj"
+ ],
+ "employee": [
+  "n"
+ ],
+ "exactly": [
+  "adv"
+ ],
+ "employer": [
+  "n"
+ ],
+ "examination/exam": [
+  "n"
+ ],
+ "employment": [
+  "n"
+ ],
+ "examiner": [
+  "n"
+ ],
+ "empty": [
+  "adj"
+ ],
+ "example": [
+  "n"
+ ],
+ "encourage": [
+  "v"
+ ],
+ "excellent": [
+  "adj"
+ ],
+ "end": [
+  "n & v"
+ ],
+ "ending": [
+  "n"
+ ],
+ "exchange": [
+  "n",
+  "v"
+ ],
+ "energy": [
+  "n"
+ ],
+ "excited": [
+  "adj"
+ ],
+ "engaged": [
+  "adj"
+ ],
+ "exciting": [
+  "adj"
+ ],
+ "engine": [
+  "n"
+ ],
+ "exhausted": [
+  "adj"
+ ],
+ "engineer": [
+  "n"
+ ],
+ "exhibition": [
+  "n"
+ ],
+ "engineering": [
+  "n"
+ ],
+ "exist": [
+  "v"
+ ],
+ "enjoy": [
+  "v"
+ ],
+ "exit": [
+  "n"
+ ],
+ "enjoyable": [
+  "adj"
+ ],
+ "expect": [
+  "v"
+ ],
+ "enormous": [
+  "adj"
+ ],
+ "expedition": [
+  "n"
+ ],
+ "expensive": [
+  "adj"
+ ],
+ "enquire": [
+  "v"
+ ],
+ "experience": [
+  "n & v"
+ ],
+ "enter": [
+  "v"
+ ],
+ "entertain": [
+  "v"
+ ],
+ "expert": [
+  "n"
+ ],
+ "entertainment": [
+  "n"
+ ],
+ "explain": [
+  "v"
+ ],
+ "entrance": [
+  "n"
+ ],
+ "explanation": [
+  "n"
+ ],
+ "entry": [
+  "n"
+ ],
+ "explode": [
+  "v"
+ ],
+ "envelope": [
+  "n"
+ ],
+ "explore": [
+  "v"
+ ],
+ "environment": [
+  "n"
+ ],
+ "explorer": [
+  "n"
+ ],
+ "episode": [
+  "n"
+ ],
+ "equal": [
+  "adj"
+ ],
+ "extraordinary": [
+  "adj"
+ ],
+ "equipment": [
+  "n"
+ ],
+ "extremely": [
+  "adv"
+ ],
+ "extreme sport": [
+  "n"
+ ],
+ "festival": [
+  "n"
+ ],
+ "eye": [
+  "n"
+ ],
+ "fetch": [
+  "v"
+ ],
+ "fever": [
+  "n"
+ ],
+ "fiction": [
+  "n"
+ ],
+ "field": [
+  "n"
+ ],
+ "face": [
+  "n"
+ ],
+ "fight": [
+  "n & v"
+ ],
+ "face to face": [
+  "adv"
+ ],
+ "file": [
+  "n"
+ ],
+ "fact": [
+  "n"
+ ],
+ "fill in": [
+  "phr v"
+ ],
+ "fail": [
+  "v"
+ ],
+ "fill up": [
+  "phr v"
+ ],
+ "fairly": [
+  "adv"
+ ],
+ "film": [
+  "n & v"
+ ],
+ "fall": [
+  "n & v"
+ ],
+ "film maker": [
+  "n"
+ ],
+ "final": [
+  "adj & n"
+ ],
+ "false": [
+  "adj"
+ ],
+ "find": [
+  "v"
+ ],
+ "familiar": [
+  "with"
+ ],
+ "find out": [
+  "phr v"
+ ],
+ "famous": [
+  "adj"
+ ],
+ "fine": [
+  "adj & n"
+ ],
+ "fan": [
+  "n"
+ ],
+ "finger": [
+  "n"
+ ],
+ "fancy": [
+  "v"
+ ],
+ "finish": [
+  "n & v"
+ ],
+ "fantastic": [
+  "adj"
+ ],
+ "firefighter": [
+  "n"
+ ],
+ "far": [
+  "adv"
+ ],
+ "firework": [
+  "n"
+ ],
+ "farmer": [
+  "n"
+ ],
+ "first": [
+  "adj & adv"
+ ],
+ "fashion": [
+  "n"
+ ],
+ "first name": [
+  "n"
+ ],
+ "fashionable": [
+  "adj"
+ ],
+ "fish": [
+  "n & v"
+ ],
+ "fast": [
+  "adj & adv"
+ ],
+ "fishing": [
+  "n"
+ ],
+ "fasten": [
+  "v"
+ ],
+ "fit": [
+  "adj & v"
+ ],
+ "father": [
+  "n"
+ ],
+ "fitness": [
+  "n"
+ ],
+ "fault": [
+  "n"
+ ],
+ "fix": [
+  "v"
+ ],
+ "favour": [
+  "n"
+ ],
+ "flag": [
+  "n"
+ ],
+ "favourite": [
+  "adj & n"
+ ],
+ "flat": [
+  "adj & n"
+ ],
+ "fax": [
+  "v & n"
+ ],
+ "flavour": [
+  "n"
+ ],
+ "fear": [
+  "n"
+ ],
+ "flight": [
+  "n"
+ ],
+ "fee": [
+  "n"
+ ],
+ "float": [
+  "v"
+ ],
+ "feed": [
+  "v"
+ ],
+ "flood": [
+  "n & v"
+ ],
+ "feel": [
+  "v"
+ ],
+ "floor": [
+  "n"
+ ],
+ "feeling": [
+  "n"
+ ],
+ "flour": [
+  "n"
+ ],
+ "feel like": [
+  "v"
+ ],
+ "flow": [
+  "v"
+ ],
+ "female": [
+  "adj & n"
+ ],
+ "flu": [
+  "n"
+ ],
+ "ferry": [
+  "n"
+ ],
+ "flute": [
+  "n"
+ ],
+ "fly": [
+  "n & v"
+ ],
+ "fry": [
+  "v"
+ ],
+ "focus": [
+  "sth"
+ ],
+ "on/upon sth/sb": [
+  "v"
+ ],
+ "frying pan": [
+  "n"
+ ],
+ "fog": [
+  "n"
+ ],
+ "fuel": [
+  "n"
+ ],
+ "foggy": [
+  "adj"
+ ],
+ "full": [
+  "adj"
+ ],
+ "fold": [
+  "v"
+ ],
+ "full stop": [
+  "n"
+ ],
+ "folder": [
+  "computer"
+ ],
+ "full time": [
+  "adv"
+ ],
+ "folk": [
+  "adj & n"
+ ],
+ "full-time": [
+  "adj"
+ ],
+ "follow": [
+  "v"
+ ],
+ "fully": [
+  "adv"
+ ],
+ "following": [
+  "adj"
+ ],
+ "fun": [
+  "adj & n"
+ ],
+ "fond": [
+  "adj"
+ ],
+ "funny": [
+  "adj"
+ ],
+ "fool": [
+  "n"
+ ],
+ "fur": [
+  "n"
+ ],
+ "foot": [
+  "n"
+ ],
+ "furniture": [
+  "n"
+ ],
+ "football": [
+  "n"
+ ],
+ "further": [
+  "adv & adj"
+ ],
+ "footballer": [
+  "n"
+ ],
+ "furthest": [
+  "adj"
+ ],
+ "football player": [
+  "n"
+ ],
+ "future": [
+  "adj & n"
+ ],
+ "for": [
+  "prep"
+ ],
+ "forbidden": [
+  "adj"
+ ],
+ "forecast": [
+  "n"
+ ],
+ "foreign": [
+  "adj"
+ ],
+ "foreigner": [
+  "n"
+ ],
+ "gain": [
+  "v"
+ ],
+ "forever": [
+  "adv"
+ ],
+ "gale": [
+  "n"
+ ],
+ "forget": [
+  "v"
+ ],
+ "gallery": [
+  "n"
+ ],
+ "fork": [
+  "n"
+ ],
+ "game": [
+  "n"
+ ],
+ "form": [
+  "n & v"
+ ],
+ "gap": [
+  "n"
+ ],
+ "garden": [
+  "n"
+ ],
+ "former": [
+  "adj"
+ ],
+ "garlic": [
+  "n"
+ ],
+ "for sale": [
+  "phr"
+ ],
+ "gas": [
+  "n"
+ ],
+ "fortnight": [
+  "n"
+ ],
+ "gas station": [
+  "n"
+ ],
+ "fortunately": [
+  "adv"
+ ],
+ "gate": [
+  "n"
+ ],
+ "fountain": [
+  "n"
+ ],
+ "general": [
+  "adj"
+ ],
+ "frame": [
+  "n"
+ ],
+ "generally": [
+  "adv"
+ ],
+ "freeze": [
+  "v"
+ ],
+ "generation": [
+  "n"
+ ],
+ "freezer": [
+  "n"
+ ],
+ "generous": [
+  "adj"
+ ],
+ "freezing": [
+  "adj"
+ ],
+ "gentle": [
+  "adj"
+ ],
+ "French fries": [
+  "n"
+ ],
+ "geography": [
+  "n"
+ ],
+ "frequent": [
+  "adj"
+ ],
+ "get": [
+  "v"
+ ],
+ "frequently": [
+  "adv"
+ ],
+ "get along": [
+  "with"
+ ],
+ "fridge": [
+  "n"
+ ],
+ "get back": [
+  "phr v"
+ ],
+ "friend": [
+  "n"
+ ],
+ "friendly": [
+  "adj"
+ ],
+ "get down": [
+  "phr v"
+ ],
+ "friendship": [
+  "n"
+ ],
+ "frighten": [
+  "v"
+ ],
+ "frightened": [
+  "adj"
+ ],
+ "get fit": [
+  "v"
+ ],
+ "frightening": [
+  "adj"
+ ],
+ "frog": [
+  "n"
+ ],
+ "get in": [
+  "phr v"
+ ],
+ "front": [
+  "adj & n"
+ ],
+ "get off": [
+  "phr v"
+ ],
+ "fruit": [
+  "n"
+ ],
+ "get on": [
+  "phr v",
+  "with"
+ ],
+ "good evening": [
+  "exclam"
+ ],
+ "good morning": [
+  "exclam"
+ ],
+ "giraffe": [
+  "n"
+ ],
+ "girl": [
+  "n"
+ ],
+ "gorgeous": [
+  "adj"
+ ],
+ "girlfriend": [
+  "n"
+ ],
+ "government": [
+  "n"
+ ],
+ "give": [
+  "v"
+ ],
+ "grab": [
+  "v"
+ ],
+ "graduation": [
+  "n"
+ ],
+ "give out": [
+  "phr v"
+ ],
+ "grandchild": [
+  "n"
+ ],
+ "give up": [
+  "phr v"
+ ],
+ "give way": [
+  "phr v"
+ ],
+ "grandfather": [
+  "n"
+ ],
+ "grandmother": [
+  "n"
+ ],
+ "glad": [
+  "adj"
+ ],
+ "grandpa": [
+  "n"
+ ],
+ "glance": [
+  "v"
+ ],
+ "grandparent": [
+  "n"
+ ],
+ "glass": [
+  "n & adj"
+ ],
+ "grandson": [
+  "n"
+ ],
+ "glasses": [
+  "n pl"
+ ],
+ "granny": [
+  "n"
+ ],
+ "global warming": [
+  "n"
+ ],
+ "grant": [
+  "n"
+ ],
+ "go": [
+  "v & n"
+ ],
+ "goalkeeper": [
+  "n"
+ ],
+ "grass": [
+  "n"
+ ],
+ "goat": [
+  "n"
+ ],
+ "grateful": [
+  "adj"
+ ],
+ "go for": [
+  "phr v"
+ ],
+ "great": [
+  "adj"
+ ],
+ "greet": [
+  "v"
+ ],
+ "greeting": [
+  "n"
+ ],
+ "grey": [
+  "adj & n"
+ ],
+ "golden": [
+  "adj"
+ ],
+ "grill": [
+  "n & v"
+ ],
+ "golf": [
+  "n"
+ ],
+ "grilled": [
+  "adj"
+ ],
+ "good": [
+  "adj"
+ ],
+ "grocery store": [
+  "n"
+ ],
+ "group": [
+  "n"
+ ],
+ "happiness": [
+  "n"
+ ],
+ "grow": [
+  "v"
+ ],
+ "harbour": [
+  "n"
+ ],
+ "grow up": [
+  "phr v"
+ ],
+ "hard": [
+  "adj & adv"
+ ],
+ "guest": [
+  "n"
+ ],
+ "hardware": [
+  "n"
+ ],
+ "guest-house": [
+  "n"
+ ],
+ "hat": [
+  "n"
+ ],
+ "guide": [
+  "n & v"
+ ],
+ "hate": [
+  "v"
+ ],
+ "guided": [
+  "adj"
+ ],
+ "have": [
+  "av & v"
+ ],
+ "guidebook": [
+  "n"
+ ],
+ "have to": [
+  "mv"
+ ],
+ "guilty": [
+  "adj"
+ ],
+ "he": [
+  "pron"
+ ],
+ "guitar": [
+  "n"
+ ],
+ "head": [
+  "n"
+ ],
+ "gun": [
+  "n"
+ ],
+ "headache": [
+  "n"
+ ],
+ "guy": [
+  "n"
+ ],
+ "headline": [
+  "n"
+ ],
+ "gym": [
+  "n"
+ ],
+ "headphones": [
+  "n"
+ ],
+ "gymnastics": [
+  "n"
+ ],
+ "headteacher": [
+  "n"
+ ],
+ "health": [
+  "n"
+ ],
+ "healthy": [
+  "adj"
+ ],
+ "hear": [
+  "v"
+ ],
+ "heart": [
+  "n"
+ ],
+ "habit": [
+  "n"
+ ],
+ "heat": [
+  "n"
+ ],
+ "hair": [
+  "n"
+ ],
+ "heater": [
+  "n"
+ ],
+ "haircut": [
+  "n"
+ ],
+ "heating": [
+  "n"
+ ],
+ "hairdresser": [
+  "n"
+ ],
+ "heavy": [
+  "adj"
+ ],
+ "hairdryer": [
+  "n"
+ ],
+ "heel": [
+  "n"
+ ],
+ "half-price": [
+  "adj"
+ ],
+ "height": [
+  "n"
+ ],
+ "hall": [
+  "n"
+ ],
+ "helicopter": [
+  "n"
+ ],
+ "hand": [
+  "n & v"
+ ],
+ "hello": [
+  "exclam"
+ ],
+ "handbag": [
+  "n"
+ ],
+ "helmet": [
+  "n"
+ ],
+ "hand-held": [
+  "adj"
+ ],
+ "help": [
+  "n & v"
+ ],
+ "hand in": [
+  "phr v"
+ ],
+ "her": [
+  "det & pron"
+ ],
+ "here": [
+  "adv"
+ ],
+ "handkerchief": [
+  "n"
+ ],
+ "hero": [
+  "n"
+ ],
+ "handle": [
+  "v"
+ ],
+ "heroine": [
+  "n"
+ ],
+ "hand out": [
+  "phr v"
+ ],
+ "handsome": [
+  "adj"
+ ],
+ "herself": [
+  "pron"
+ ],
+ "handwriting": [
+  "n"
+ ],
+ "hey": [
+  "exclam"
+ ],
+ "hang": [
+  "v"
+ ],
+ "hi": [
+  "exclam"
+ ],
+ "hang out": [
+  "phr v"
+ ],
+ "high": [
+  "adj & adv"
+ ],
+ "hang up": [
+  "phr v"
+ ],
+ "hike": [
+  "v"
+ ],
+ "him": [
+  "pron"
+ ],
+ "happen": [
+  "v"
+ ],
+ "himself": [
+  "pron"
+ ],
+ "happy": [
+  "adj"
+ ],
+ "hip hop": [
+  "n"
+ ],
+ "happily": [
+  "adv"
+ ],
+ "hire": [
+  "v & n"
+ ],
+ "his": [
+  "det & pron"
+ ],
+ "husband": [
+  "n"
+ ],
+ "historic": [
+  "adj"
+ ],
+ "hut": [
+  "n"
+ ],
+ "historical": [
+  "adj"
+ ],
+ "history": [
+  "n"
+ ],
+ "hit": [
+  "n & v"
+ ],
+ "hitchhike": [
+  "v"
+ ],
+ "ice": [
+  "n"
+ ],
+ "hobby": [
+  "n"
+ ],
+ "ice cream": [
+  "n"
+ ],
+ "hockey": [
+  "n"
+ ],
+ "ice hockey": [
+  "n"
+ ],
+ "hold": [
+  "v"
+ ],
+ "ice skates": [
+  "n"
+ ],
+ "hold up": [
+  "phr v"
+ ],
+ "ice skating": [
+  "n"
+ ],
+ "ID": [
+  "n"
+ ],
+ "hole": [
+  "n"
+ ],
+ "ID card": [
+  "n"
+ ],
+ "holiday": [
+  "n"
+ ],
+ "idea": [
+  "n"
+ ],
+ "home": [
+  "adv & n"
+ ],
+ "identification": [
+  "n"
+ ],
+ "homepage": [
+  "n"
+ ],
+ "identify": [
+  "v"
+ ],
+ "honest": [
+  "adj"
+ ],
+ "identity card": [
+  "ID"
+ ],
+ "honestly": [
+  "adv"
+ ],
+ "if": [
+  "conj"
+ ],
+ "honey": [
+  "n"
+ ],
+ "ill": [
+  "adj"
+ ],
+ "honeymoon": [
+  "n"
+ ],
+ "illness": [
+  "n"
+ ],
+ "hoodie": [
+  "n"
+ ],
+ "imagination": [
+  "n"
+ ],
+ "hope": [
+  "n & v"
+ ],
+ "imagine": [
+  "v"
+ ],
+ "hopeful": [
+  "adj"
+ ],
+ "immediately": [
+  "adv"
+ ],
+ "hopefully": [
+  "adv"
+ ],
+ "immigration": [
+  "n"
+ ],
+ "important": [
+  "adj"
+ ],
+ "hopeless": [
+  "adj"
+ ],
+ "impossible": [
+  "adj"
+ ],
+ "horrible": [
+  "adj"
+ ],
+ "improve": [
+  "v"
+ ],
+ "horror": [
+  "adj"
+ ],
+ "improvement": [
+  "n"
+ ],
+ "in": [
+  "adv & prep"
+ ],
+ "horse": [
+  "n"
+ ],
+ "in advance": [
+  "prep phr"
+ ],
+ "in case": [
+  "adv & conj"
+ ],
+ "hospital": [
+  "n"
+ ],
+ "inch": [
+  "n"
+ ],
+ "hostel": [
+  "n"
+ ],
+ "include": [
+  "v"
+ ],
+ "hot": [
+  "adj"
+ ],
+ "including": [
+  "prep"
+ ],
+ "hotel": [
+  "n"
+ ],
+ "incorrect": [
+  "adj"
+ ],
+ "hour": [
+  "n"
+ ],
+ "increase": [
+  "v"
+ ],
+ "house": [
+  "n"
+ ],
+ "incredible": [
+  "adj"
+ ],
+ "housewife": [
+  "n"
+ ],
+ "incredibly": [
+  "adv"
+ ],
+ "housework": [
+  "n"
+ ],
+ "how": [
+  "adv"
+ ],
+ "indeed": [
+  "adv"
+ ],
+ "however": [
+  "adv"
+ ],
+ "independent": [
+  "adj"
+ ],
+ "how much": [
+  "adv"
+ ],
+ "individual": [
+  "adj"
+ ],
+ "hug": [
+  "n & v"
+ ],
+ "huge": [
+  "adj"
+ ],
+ "indoor": [
+  "adj"
+ ],
+ "indoors": [
+  "adv"
+ ],
+ "human": [
+  "adj & n"
+ ],
+ "industry": [
+  "n"
+ ],
+ "humid": [
+  "adj"
+ ],
+ "inexpensive": [
+  "adj"
+ ],
+ "humour/humor": [
+  "n"
+ ],
+ "in fact": [
+  "prep phr"
+ ],
+ "hunger": [
+  "n"
+ ],
+ "hungry": [
+  "adj"
+ ],
+ "influence": [
+  "n & v"
+ ],
+ "hunt": [
+  "v"
+ ],
+ "inform": [
+  "v"
+ ],
+ "information": [
+  "n"
+ ],
+ "in front of": [
+  "prep phr"
+ ],
+ "iron": [
+  "n & v"
+ ],
+ "ingredient": [
+  "n"
+ ],
+ "ironing": [
+  "n"
+ ],
+ "in half": [
+  "prep phr"
+ ],
+ "issue": [
+  "n"
+ ],
+ "in ink": [
+  "prep phr"
+ ],
+ "initial": [
+  "n"
+ ],
+ "it": [
+  "pron"
+ ],
+ "injure": [
+  "v"
+ ],
+ "its": [
+  "det"
+ ],
+ "ink": [
+  "n"
+ ],
+ "itself": [
+  "pron"
+ ],
+ "in love": [
+  "prep phr"
+ ],
+ "in pencil": [
+  "prep phr"
+ ],
+ "in order": [
+  "prep phr"
+ ],
+ "in order to": [
+  "prep phr"
+ ],
+ "inquiry": [
+  "n"
+ ],
+ "jacket": [
+  "n"
+ ],
+ "insect": [
+  "n"
+ ],
+ "jail": [
+  "n"
+ ],
+ "inside": [
+  "adv & prep"
+ ],
+ "jam": [
+  "n"
+ ],
+ "install": [
+  "v"
+ ],
+ "jazz": [
+  "n"
+ ],
+ "instance": [
+  "n"
+ ],
+ "jealous": [
+  "adj"
+ ],
+ "instead": [
+  "of"
+ ],
+ "jet": [
+  "n"
+ ],
+ "jewellery": [
+  "n"
+ ],
+ "jog": [
+  "v"
+ ],
+ "instructions": [
+  "n pl"
+ ],
+ "jogging": [
+  "n"
+ ],
+ "instructor": [
+  "n"
+ ],
+ "join": [
+  "v"
+ ],
+ "intend": [
+  "v"
+ ],
+ "joke": [
+  "n & v"
+ ],
+ "interest": [
+  "n & v"
+ ],
+ "journey": [
+  "n"
+ ],
+ "interested": [
+  "adj"
+ ],
+ "judge": [
+  "n & v"
+ ],
+ "interesting": [
+  "adj"
+ ],
+ "jug": [
+  "n"
+ ],
+ "intermediate": [
+  "adj"
+ ],
+ "juice": [
+  "n"
+ ],
+ "international": [
+  "adj"
+ ],
+ "jump": [
+  "n & v"
+ ],
+ "internet": [
+  "n"
+ ],
+ "jumper": [
+  "n"
+ ],
+ "interrupt": [
+  "v"
+ ],
+ "jungle": [
+  "n"
+ ],
+ "interval": [
+  "n"
+ ],
+ "just": [
+  "adv"
+ ],
+ "interview": [
+  "n & v"
+ ],
+ "interviewer": [
+  "n"
+ ],
+ "in the end": [
+  "prep phr"
+ ],
+ "in time": [
+  "prep phr"
+ ],
+ "kangaroo": [
+  "n"
+ ],
+ "into": [
+  "prep"
+ ],
+ "keen": [
+  "adj"
+ ],
+ "in two": [
+  "prep phr"
+ ],
+ "keep": [
+  "v"
+ ],
+ "invent": [
+  "v"
+ ],
+ "keeper": [
+  "n"
+ ],
+ "inventor": [
+  "n"
+ ],
+ "keep in": [
+  "phr v"
+ ],
+ "invitation": [
+  "n"
+ ],
+ "invite": [
+  "v"
+ ],
+ "keep on": [
+  "phr v"
+ ],
+ "keep up": [
+  "phr v"
+ ],
+ "lawyer": [
+  "n"
+ ],
+ "key": [
+  "n"
+ ],
+ "lazy": [
+  "adj"
+ ],
+ "kick": [
+  "n & v"
+ ],
+ "league": [
+  "n"
+ ],
+ "kid": [
+  "n"
+ ],
+ "learn": [
+  "v"
+ ],
+ "leather": [
+  "n"
+ ],
+ "kilometre": [
+  "km"
+ ],
+ "leave": [
+  "v"
+ ],
+ "lecture": [
+  "n"
+ ],
+ "kind": [
+  "adj & n"
+ ],
+ "lecturer": [
+  "n"
+ ],
+ "king": [
+  "n"
+ ],
+ "kiss": [
+  "n & v"
+ ],
+ "left-hand": [
+  "adj"
+ ],
+ "kit": [
+  "n"
+ ],
+ "leg": [
+  "n"
+ ],
+ "kitchen": [
+  "n"
+ ],
+ "leisure": [
+  "n"
+ ],
+ "kite": [
+  "n"
+ ],
+ "lemon": [
+  "n"
+ ],
+ "kitten": [
+  "n"
+ ],
+ "lemonade": [
+  "n"
+ ],
+ "knee": [
+  "n"
+ ],
+ "lend": [
+  "v"
+ ],
+ "knife": [
+  "n"
+ ],
+ "length": [
+  "n"
+ ],
+ "knit": [
+  "v"
+ ],
+ "knock": [
+  "v"
+ ],
+ "lesson": [
+  "n"
+ ],
+ "knock down": [
+  "phr v"
+ ],
+ "let": [
+  "v"
+ ],
+ "letter": [
+  "n"
+ ],
+ "lettuce": [
+  "n"
+ ],
+ "level": [
+  "n"
+ ],
+ "library": [
+  "n"
+ ],
+ "label": [
+  "n"
+ ],
+ "librarian": [
+  "n"
+ ],
+ "laboratory": [
+  "lab"
+ ],
+ "licence": [
+  "n"
+ ],
+ "ladder": [
+  "n"
+ ],
+ "lie": [
+  "n & v"
+ ],
+ "lady": [
+  "n"
+ ],
+ "lie down": [
+  "phr v"
+ ],
+ "lake": [
+  "n"
+ ],
+ "life": [
+  "n"
+ ],
+ "lamb": [
+  "n"
+ ],
+ "lift": [
+  "n & v"
+ ],
+ "language": [
+  "n"
+ ],
+ "laptop": [
+  "computer"
+ ],
+ "lighter": [
+  "n"
+ ],
+ "lightning": [
+  "n"
+ ],
+ "late": [
+  "adj & adv"
+ ],
+ "like": [
+  "prep & v"
+ ],
+ "lately": [
+  "adv"
+ ],
+ "likely": [
+  "adj"
+ ],
+ "later": [
+  "adj & adv"
+ ],
+ "limit": [
+  "n & v"
+ ],
+ "latest": [
+  "adj"
+ ],
+ "limited": [
+  "adj"
+ ],
+ "laundry": [
+  "n"
+ ],
+ "line": [
+  "n"
+ ],
+ "law": [
+  "n"
+ ],
+ "link": [
+  "n"
+ ],
+ "luggage": [
+  "n"
+ ],
+ "lion": [
+  "n"
+ ],
+ "lunchtime": [
+  "n"
+ ],
+ "lip": [
+  "n"
+ ],
+ "luxury": [
+  "n"
+ ],
+ "liquid": [
+  "n"
+ ],
+ "list": [
+  "n"
+ ],
+ "listen": [
+  "v"
+ ],
+ "literature": [
+  "n"
+ ],
+ "litre": [
+  "n"
+ ],
+ "machine": [
+  "n"
+ ],
+ "litter": [
+  "n"
+ ],
+ "mad": [
+  "adj"
+ ],
+ "Madam": [
+  "n"
+ ],
+ "live": [
+  "v"
+ ],
+ "made of/from/out of": [
+  "v"
+ ],
+ "lively": [
+  "adj"
+ ],
+ "magic": [
+  "adj & n"
+ ],
+ "living room": [
+  "n"
+ ],
+ "magnificent": [
+  "adj"
+ ],
+ "load": [
+  "n"
+ ],
+ "mail": [
+  "n & v"
+ ],
+ "loan": [
+  "n"
+ ],
+ "main": [
+  "adj"
+ ],
+ "local": [
+  "adj"
+ ],
+ "main course": [
+  "n"
+ ],
+ "locate": [
+  "v"
+ ],
+ "mainly": [
+  "adv"
+ ],
+ "location": [
+  "n"
+ ],
+ "make sure": [
+  "v"
+ ],
+ "lock": [
+  "n & v"
+ ],
+ "make-up": [
+  "n"
+ ],
+ "locker": [
+  "n"
+ ],
+ "male": [
+  "adj & n"
+ ],
+ "logo": [
+  "n"
+ ],
+ "mall": [
+  "n"
+ ],
+ "long": [
+  "adj"
+ ],
+ "man": [
+  "n"
+ ],
+ "long jump": [
+  "n"
+ ],
+ "manage": [
+  "v"
+ ],
+ "manager": [
+  "n"
+ ],
+ "look at": [
+  "phr v"
+ ],
+ "mango": [
+  "n"
+ ],
+ "look for": [
+  "phr v"
+ ],
+ "many": [
+  "det & pron"
+ ],
+ "look forward to": [
+  "phr v"
+ ],
+ "map": [
+  "n"
+ ],
+ "look like": [
+  "v"
+ ],
+ "market": [
+  "n"
+ ],
+ "look out": [
+  "phr v"
+ ],
+ "marriage": [
+  "n"
+ ],
+ "married": [
+  "adj"
+ ],
+ "look up": [
+  "phr v"
+ ],
+ "marry": [
+  "v"
+ ],
+ "match": [
+  "n & v"
+ ],
+ "lost": [
+  "adj"
+ ],
+ "mate": [
+  "n"
+ ],
+ "a lot": [
+  "n"
+ ],
+ "material": [
+  "n"
+ ],
+ "lottery": [
+  "n"
+ ],
+ "mathematics": [
+  "n"
+ ],
+ "loud": [
+  "adj"
+ ],
+ "loudly": [
+  "adv"
+ ],
+ "love": [
+  "n & v"
+ ],
+ "lovely": [
+  "adj"
+ ],
+ "low": [
+  "adj"
+ ],
+ "matter": [
+  "n & v"
+ ],
+ "maximum": [
+  "adj & n"
+ ],
+ "minimum": [
+  "adj & n"
+ ],
+ "may": [
+  "mv"
+ ],
+ "minus": [
+  "prep"
+ ],
+ "maybe": [
+  "adv"
+ ],
+ "minute": [
+  "n"
+ ],
+ "me": [
+  "pron"
+ ],
+ "mirror": [
+  "n"
+ ],
+ "meal": [
+  "n"
+ ],
+ "miserable": [
+  "adj"
+ ],
+ "mean": [
+  "v"
+ ],
+ "miss": [
+  "v"
+ ],
+ "meaning": [
+  "n"
+ ],
+ "mistake": [
+  "n"
+ ],
+ "meanwhile": [
+  "adv"
+ ],
+ "mix": [
+  "v & n"
+ ],
+ "measure": [
+  "v"
+ ],
+ "mobile": [
+  "phone"
+ ],
+ "meat": [
+  "n"
+ ],
+ "model": [
+  "n"
+ ],
+ "medicine": [
+  "n"
+ ],
+ "meet": [
+  "v"
+ ],
+ "modern": [
+  "adj"
+ ],
+ "meeting": [
+  "n"
+ ],
+ "moment": [
+  "n"
+ ],
+ "melon": [
+  "n"
+ ],
+ "money": [
+  "n"
+ ],
+ "member": [
+  "n"
+ ],
+ "monkey": [
+  "n"
+ ],
+ "membership": [
+  "n"
+ ],
+ "monster": [
+  "n"
+ ],
+ "memory": [
+  "n"
+ ],
+ "month": [
+  "n"
+ ],
+ "mend": [
+  "v"
+ ],
+ "moon": [
+  "n"
+ ],
+ "mention": [
+  "v"
+ ],
+ "menu": [
+  "n"
+ ],
+ "morning": [
+  "n"
+ ],
+ "mess": [
+  "n"
+ ],
+ "mosquito": [
+  "n"
+ ],
+ "message": [
+  "n"
+ ],
+ "messy": [
+  "adj"
+ ],
+ "mostly": [
+  "adv"
+ ],
+ "metal": [
+  "n"
+ ],
+ "mother": [
+  "n"
+ ],
+ "method": [
+  "n"
+ ],
+ "motorbike": [
+  "n"
+ ],
+ "metre": [
+  "n"
+ ],
+ "motor-racing": [
+  "n"
+ ],
+ "microphone": [
+  "n"
+ ],
+ "motorway": [
+  "n"
+ ],
+ "microwave": [
+  "n"
+ ],
+ "mountain": [
+  "n"
+ ],
+ "midday": [
+  "n"
+ ],
+ "moustache": [
+  "n"
+ ],
+ "middle": [
+  "n"
+ ],
+ "mouth": [
+  "n"
+ ],
+ "middle-aged": [
+  "adj"
+ ],
+ "move": [
+  "v"
+ ],
+ "midnight": [
+  "n"
+ ],
+ "movie": [
+  "n"
+ ],
+ "might": [
+  "mv"
+ ],
+ "movie star": [
+  "n"
+ ],
+ "mild": [
+  "adj"
+ ],
+ "movie theater": [
+  "n"
+ ],
+ "mile": [
+  "n"
+ ],
+ "Mr": [
+  "n"
+ ],
+ "milk": [
+  "n"
+ ],
+ "Mrs": [
+  "n"
+ ],
+ "millimetre": [
+  "mm"
+ ],
+ "Ms": [
+  "n"
+ ],
+ "million": [
+  "n"
+ ],
+ "mug": [
+  "n"
+ ],
+ "mind": [
+  "n & v"
+ ],
+ "mum": [
+  "n"
+ ],
+ "music": [
+  "n"
+ ],
+ "musician": [
+  "n"
+ ],
+ "must": [
+  "mv"
+ ],
+ "mine": [
+  "pron"
+ ],
+ "my": [
+  "det"
+ ],
+ "normal": [
+  "adj"
+ ],
+ "myself": [
+  "pron"
+ ],
+ "normally": [
+  "adv"
+ ],
+ "mystery": [
+  "n"
+ ],
+ "northeast": [
+  "adj & n"
+ ],
+ "northern": [
+  "adj"
+ ],
+ "northwest": [
+  "adj & n"
+ ],
+ "name": [
+  "n & v"
+ ],
+ "nose": [
+  "n"
+ ],
+ "narrow": [
+  "adj"
+ ],
+ "not": [
+  "adv"
+ ],
+ "nasty": [
+  "adj"
+ ],
+ "note": [
+  "n & v"
+ ],
+ "nature": [
+  "n"
+ ],
+ "notebook": [
+  "n"
+ ],
+ "navy blue": [
+  "adj"
+ ],
+ "nothing": [
+  "pron"
+ ],
+ "notice": [
+  "n & v"
+ ],
+ "neat": [
+  "adj"
+ ],
+ "necessary": [
+  "adj"
+ ],
+ "noticeboard": [
+  "n"
+ ],
+ "neck": [
+  "n"
+ ],
+ "novel": [
+  "n"
+ ],
+ "necklace": [
+  "n"
+ ],
+ "novelist": [
+  "n"
+ ],
+ "need": [
+  "v"
+ ],
+ "negative": [
+  "adj"
+ ],
+ "now": [
+  "adv"
+ ],
+ "neighbour": [
+  "n"
+ ],
+ "nowadays": [
+  "adv"
+ ],
+ "neighbourhood": [
+  "n"
+ ],
+ "nowhere": [
+  "adv"
+ ],
+ "number": [
+  "n"
+ ],
+ "nurse": [
+  "n"
+ ],
+ "nephew": [
+  "n"
+ ],
+ "nervous": [
+  "adj"
+ ],
+ "nest": [
+  "n"
+ ],
+ "object": [
+  "n"
+ ],
+ "net": [
+  "n"
+ ],
+ "obvious": [
+  "adj"
+ ],
+ "network": [
+  "n"
+ ],
+ "obviously": [
+  "adv"
+ ],
+ "never": [
+  "adv"
+ ],
+ "occasion": [
+  "n"
+ ],
+ "new": [
+  "adj"
+ ],
+ "occasionally": [
+  "adv"
+ ],
+ "news": [
+  "n"
+ ],
+ "occupation": [
+  "n"
+ ],
+ "newspaper": [
+  "n"
+ ],
+ "ocean": [
+  "n"
+ ],
+ "next": [
+  "adj & adv"
+ ],
+ "next to": [
+  "prep"
+ ],
+ "of": [
+  "prep"
+ ],
+ "nice": [
+  "adj"
+ ],
+ "of course": [
+  "adv"
+ ],
+ "niece": [
+  "n"
+ ],
+ "off": [
+  "adv & prep"
+ ],
+ "nightmare": [
+  "n"
+ ],
+ "offer": [
+  "n & v"
+ ],
+ "office": [
+  "n"
+ ],
+ "nobody": [
+  "pron"
+ ],
+ "officer": [
+  "n"
+ ],
+ "noise": [
+  "n"
+ ],
+ "often": [
+  "adv"
+ ],
+ "noisy": [
+  "adj"
+ ],
+ "oh": [
+  "exclam"
+ ],
+ "none": [
+  "pron"
+ ],
+ "noon": [
+  "n"
+ ],
+ "oil": [
+  "n"
+ ],
+ "no one": [
+  "pron"
+ ],
+ "okay": [
+  "adj & exclam"
+ ],
+ "old": [
+  "adj"
+ ],
+ "out of order": [
+  "prep phr"
+ ],
+ "old-fashioned": [
+  "adj"
+ ],
+ "out of work": [
+  "prep phr"
+ ],
+ "olive": [
+  "n"
+ ],
+ "omelette": [
+  "n"
+ ],
+ "oven": [
+  "n"
+ ],
+ "on": [
+  "adv & prep"
+ ],
+ "over": [
+  "adv & prep"
+ ],
+ "one": [
+  "det & pron"
+ ],
+ "overnight": [
+  "adj & adv"
+ ],
+ "on fire": [
+  "prep phr"
+ ],
+ "owe": [
+  "v"
+ ],
+ "on foot": [
+  "prep phr"
+ ],
+ "only": [
+  "adj & adv"
+ ],
+ "on purpose": [
+  "prep phr"
+ ],
+ "on request": [
+  "prep phr"
+ ],
+ "on sale": [
+  "prep phr"
+ ],
+ "pack": [
+  "v"
+ ],
+ "onto": [
+  "prep"
+ ],
+ "packet": [
+  "n"
+ ],
+ "on vacation": [
+  "prep phr"
+ ],
+ "page": [
+  "n"
+ ],
+ "open": [
+  "adj & v"
+ ],
+ "pain": [
+  "n"
+ ],
+ "opening hours": [
+  "n pl"
+ ],
+ "painful": [
+  "adj"
+ ],
+ "opera": [
+  "n"
+ ],
+ "paint": [
+  "n & v"
+ ],
+ "operate": [
+  "v"
+ ],
+ "painter": [
+  "n"
+ ],
+ "operation": [
+  "n"
+ ],
+ "painting": [
+  "n"
+ ],
+ "operator": [
+  "n"
+ ],
+ "pair": [
+  "n"
+ ],
+ "opinion": [
+  "n"
+ ],
+ "palace": [
+  "n"
+ ],
+ "opportunity": [
+  "n"
+ ],
+ "pale": [
+  "adj"
+ ],
+ "option": [
+  "n"
+ ],
+ "pan": [
+  "n"
+ ],
+ "or": [
+  "conj"
+ ],
+ "pants": [
+  "n"
+ ],
+ "orange": [
+  "adj & n"
+ ],
+ "paper": [
+  "n"
+ ],
+ "organisation": [
+  "n"
+ ],
+ "parent": [
+  "n"
+ ],
+ "organise": [
+  "v"
+ ],
+ "park": [
+  "n & v"
+ ],
+ "otherwise": [
+  "adv"
+ ],
+ "parking": [
+  "n"
+ ],
+ "ought": [
+  "mv"
+ ],
+ "parking lot": [
+  "n"
+ ],
+ "our": [
+  "det"
+ ],
+ "parrot": [
+  "n"
+ ],
+ "ours": [
+  "pron"
+ ],
+ "part": [
+  "n"
+ ],
+ "ourselves": [
+  "pron"
+ ],
+ "out": [
+  "adv",
+  "v"
+ ],
+ "partly": [
+  "adv"
+ ],
+ "outdoor": [
+  "adj"
+ ],
+ "particular": [
+  "adj"
+ ],
+ "outdoors": [
+  "adv"
+ ],
+ "out of date": [
+  "prep phr"
+ ],
+ "particularly": [
+  "adv"
+ ],
+ "partner": [
+  "n"
+ ],
+ "perform": [
+  "v"
+ ],
+ "part time": [
+  "adv"
+ ],
+ "performance": [
+  "n"
+ ],
+ "part-time": [
+  "adj"
+ ],
+ "performer": [
+  "n"
+ ],
+ "party": [
+  "n"
+ ],
+ "perfume": [
+  "n"
+ ],
+ "pass": [
+  "n & v"
+ ],
+ "permanent": [
+  "adj"
+ ],
+ "pass on": [
+  "phr v"
+ ],
+ "permitted": [
+  "adj"
+ ],
+ "person": [
+  "n"
+ ],
+ "personal": [
+  "adj"
+ ],
+ "passenger": [
+  "n"
+ ],
+ "personally": [
+  "adv"
+ ],
+ "passport": [
+  "n"
+ ],
+ "persuade": [
+  "v"
+ ],
+ "password": [
+  "n"
+ ],
+ "pet": [
+  "n"
+ ],
+ "petrol": [
+  "n"
+ ],
+ "petrol station": [
+  "n"
+ ],
+ "pharmacy": [
+  "n"
+ ],
+ "phone": [
+  "n & v"
+ ],
+ "pasta": [
+  "n"
+ ],
+ "photographer": [
+  "n"
+ ],
+ "path": [
+  "n"
+ ],
+ "photography": [
+  "n"
+ ],
+ "patient": [
+  "adj & n"
+ ],
+ "phrase": [
+  "n"
+ ],
+ "pattern": [
+  "n"
+ ],
+ "pick": [
+  "v"
+ ],
+ "pause": [
+  "v"
+ ],
+ "pick up": [
+  "phr v"
+ ],
+ "PC": [
+  "personal computer"
+ ],
+ "picnic": [
+  "n"
+ ],
+ "pea": [
+  "n"
+ ],
+ "picture": [
+  "n"
+ ],
+ "peace": [
+  "n"
+ ],
+ "pie": [
+  "n"
+ ],
+ "peaceful": [
+  "adj"
+ ],
+ "piece": [
+  "n"
+ ],
+ "peak": [
+  "n"
+ ],
+ "peanut": [
+  "n"
+ ],
+ "pear": [
+  "n"
+ ],
+ "pig": [
+  "n"
+ ],
+ "pedestrian": [
+  "n"
+ ],
+ "pile": [
+  "n"
+ ],
+ "peel": [
+  "v"
+ ],
+ "pill": [
+  "n"
+ ],
+ "pen": [
+  "n"
+ ],
+ "pillow": [
+  "n"
+ ],
+ "pence": [
+  "n pl"
+ ],
+ "pencil": [
+  "n"
+ ],
+ "pilot": [
+  "n"
+ ],
+ "pin": [
+  "n & v"
+ ],
+ "pencil case": [
+  "n"
+ ],
+ "penfriend": [
+  "n"
+ ],
+ "pineapple": [
+  "n"
+ ],
+ "pink": [
+  "adj & n"
+ ],
+ "penguin": [
+  "n"
+ ],
+ "pipe": [
+  "n"
+ ],
+ "penny": [
+  "n"
+ ],
+ "pirate": [
+  "n"
+ ],
+ "people": [
+  "n pl"
+ ],
+ "pitch": [
+  "n"
+ ],
+ "pepper": [
+  "n"
+ ],
+ "pity": [
+  "n"
+ ],
+ "per": [
+  "prep"
+ ],
+ "percent": [
+  "adv"
+ ],
+ "perfect": [
+  "adj"
+ ],
+ "pizza": [
+  "n"
+ ],
+ "place": [
+  "n"
+ ],
+ "perfectly": [
+  "adv"
+ ],
+ "plain": [
+  "adj"
+ ],
+ "pool": [
+  "n"
+ ],
+ "poor": [
+  "adj"
+ ],
+ "pop": [
+  "n"
+ ],
+ "plane": [
+  "n"
+ ],
+ "population": [
+  "n"
+ ],
+ "planet": [
+  "n"
+ ],
+ "port": [
+  "n"
+ ],
+ "plant": [
+  "n & v"
+ ],
+ "position": [
+  "n"
+ ],
+ "plastic": [
+  "adj & n"
+ ],
+ "positive": [
+  "adj"
+ ],
+ "plate": [
+  "n"
+ ],
+ "possibility": [
+  "n"
+ ],
+ "platform": [
+  "n"
+ ],
+ "possible": [
+  "adj"
+ ],
+ "play": [
+  "n & v"
+ ],
+ "possibly": [
+  "adv"
+ ],
+ "player": [
+  "n"
+ ],
+ "postman": [
+  "n"
+ ],
+ "playground": [
+  "n"
+ ],
+ "post office": [
+  "n"
+ ],
+ "pleasant": [
+  "adj"
+ ],
+ "postpone": [
+  "v"
+ ],
+ "please": [
+  "exclam & v"
+ ],
+ "pot": [
+  "n"
+ ],
+ "pleased": [
+  "adj"
+ ],
+ "pleasure": [
+  "n"
+ ],
+ "pour": [
+  "v"
+ ],
+ "plenty": [
+  "pron"
+ ],
+ "powder": [
+  "n"
+ ],
+ "plot": [
+  "n"
+ ],
+ "power": [
+  "n"
+ ],
+ "plug": [
+  "n & v"
+ ],
+ "powerful": [
+  "adj"
+ ],
+ "plus": [
+  "prep & conj"
+ ],
+ "prayer": [
+  "n"
+ ],
+ "predict": [
+  "v"
+ ],
+ "pocket": [
+  "n"
+ ],
+ "prefer": [
+  "v"
+ ],
+ "pocket money": [
+  "n"
+ ],
+ "pregnant": [
+  "adj"
+ ],
+ "podcast": [
+  "n"
+ ],
+ "preparation": [
+  "n"
+ ],
+ "poem": [
+  "n"
+ ],
+ "prepare": [
+  "v"
+ ],
+ "poet": [
+  "n"
+ ],
+ "prepared": [
+  "adj"
+ ],
+ "poetry": [
+  "n"
+ ],
+ "prescription": [
+  "n"
+ ],
+ "policewoman": [
+  "n"
+ ],
+ "presentation": [
+  "n"
+ ],
+ "prove": [
+  "v"
+ ],
+ "presenter": [
+  "n"
+ ],
+ "provide": [
+  "v"
+ ],
+ "pretty": [
+  "adj & adv"
+ ],
+ "publish": [
+  "v"
+ ],
+ "prevent": [
+  "v"
+ ],
+ "publisher": [
+  "n"
+ ],
+ "previous": [
+  "adj"
+ ],
+ "pull": [
+  "v"
+ ],
+ "previously": [
+  "adv"
+ ],
+ "pullover": [
+  "n"
+ ],
+ "price": [
+  "n"
+ ],
+ "pump": [
+  "n"
+ ],
+ "prince": [
+  "n"
+ ],
+ "punish": [
+  "v"
+ ],
+ "princess": [
+  "n"
+ ],
+ "pupil": [
+  "n"
+ ],
+ "principal": [
+  "adj"
+ ],
+ "puppy": [
+  "n"
+ ],
+ "print": [
+  "v"
+ ],
+ "pure": [
+  "adj"
+ ],
+ "printer": [
+  "n"
+ ],
+ "purpose": [
+  "n"
+ ],
+ "private": [
+  "adj"
+ ],
+ "purse": [
+  "n"
+ ],
+ "prize": [
+  "n"
+ ],
+ "push": [
+  "n & v"
+ ],
+ "probably": [
+  "adv"
+ ],
+ "put": [
+  "v"
+ ],
+ "problem": [
+  "n"
+ ],
+ "put away": [
+  "phr v"
+ ],
+ "product": [
+  "n"
+ ],
+ "put down": [
+  "phr v"
+ ],
+ "profession": [
+  "n"
+ ],
+ "put on": [
+  "phr v"
+ ],
+ "professor": [
+  "n"
+ ],
+ "programmer": [
+  "n"
+ ],
+ "put through": [
+  "phr v"
+ ],
+ "progress": [
+  "n"
+ ],
+ "prohibited": [
+  "adj"
+ ],
+ "put up": [
+  "phr v"
+ ],
+ "project": [
+  "n"
+ ],
+ "promise": [
+  "n & v"
+ ],
+ "pyjamas": [
+  "n pl"
+ ],
+ "promote": [
+  "v"
+ ],
+ "pronounce": [
+  "v"
+ ],
+ "pronunciation": [
+  "n"
+ ],
+ "qualification": [
+  "n"
+ ],
+ "proper": [
+  "adj"
+ ],
+ "qualified": [
+  "adj"
+ ],
+ "quality": [
+  "n"
+ ],
+ "quantity": [
+  "n"
+ ],
+ "property": [
+  "n"
+ ],
+ "queen": [
+  "n"
+ ],
+ "protect": [
+  "v"
+ ],
+ "question": [
+  "n"
+ ],
+ "questionnaire": [
+  "n"
+ ],
+ "reading": [
+  "n"
+ ],
+ "queue": [
+  "n"
+ ],
+ "ready": [
+  "adj"
+ ],
+ "quick": [
+  "adj"
+ ],
+ "real": [
+  "adj"
+ ],
+ "quickly": [
+  "adv"
+ ],
+ "realise": [
+  "v"
+ ],
+ "quietly": [
+  "adv"
+ ],
+ "realistic": [
+  "adj"
+ ],
+ "quit": [
+  "v"
+ ],
+ "reality": [
+  "n"
+ ],
+ "quite": [
+  "adv"
+ ],
+ "really": [
+  "adv"
+ ],
+ "quiz": [
+  "n"
+ ],
+ "reasonably": [
+  "adv"
+ ],
+ "rebuild": [
+  "v"
+ ],
+ "receipt": [
+  "n"
+ ],
+ "receive": [
+  "v"
+ ],
+ "recent": [
+  "adj"
+ ],
+ "rabbit": [
+  "n"
+ ],
+ "reception": [
+  "n"
+ ],
+ "race": [
+  "n & v"
+ ],
+ "receptionist": [
+  "n"
+ ],
+ "recommend": [
+  "v"
+ ],
+ "racing": [
+  "n"
+ ],
+ "record": [
+  "n & v"
+ ],
+ "rail": [
+  "n"
+ ],
+ "recording": [
+  "n"
+ ],
+ "railway": [
+  "n"
+ ],
+ "recycle": [
+  "v"
+ ],
+ "raincoat": [
+  "n"
+ ],
+ "recycled": [
+  "adj"
+ ],
+ "rainforest": [
+  "n"
+ ],
+ "recycling": [
+  "n"
+ ],
+ "raise": [
+  "v"
+ ],
+ "red": [
+  "adj"
+ ],
+ "range": [
+  "n"
+ ],
+ "refreshments": [
+  "n pl"
+ ],
+ "refuse": [
+  "v"
+ ],
+ "rap": [
+  "n"
+ ],
+ "regarding": [
+  "prep"
+ ],
+ "rare": [
+  "adj"
+ ],
+ "region": [
+  "n"
+ ],
+ "rarely": [
+  "adv"
+ ],
+ "register": [
+  "v"
+ ],
+ "regular": [
+  "adj"
+ ],
+ "regularly": [
+  "adv"
+ ],
+ "relation": [
+  "n"
+ ],
+ "raw": [
+  "adj"
+ ],
+ "relationship": [
+  "n"
+ ],
+ "relative": [
+  "n"
+ ],
+ "reach": [
+  "v"
+ ],
+ "react": [
+  "v"
+ ],
+ "relax": [
+  "v"
+ ],
+ "relaxation": [
+  "n"
+ ],
+ "read": [
+  "v"
+ ],
+ "relaxed": [
+  "adj"
+ ],
+ "religion": [
+  "n"
+ ],
+ "right-hand": [
+  "adj"
+ ],
+ "rely": [
+  "on"
+ ],
+ "ring": [
+  "n & v"
+ ],
+ "remote control": [
+  "n"
+ ],
+ "remove": [
+  "v"
+ ],
+ "ring back": [
+  "phr v"
+ ],
+ "rent": [
+  "n & v"
+ ],
+ "ring up": [
+  "phr v"
+ ],
+ "repair": [
+  "n & v"
+ ],
+ "replace": [
+  "v"
+ ],
+ "rise": [
+  "v"
+ ],
+ "reporter": [
+  "n"
+ ],
+ "river": [
+  "n"
+ ],
+ "request": [
+  "n & v"
+ ],
+ "road": [
+  "n"
+ ],
+ "require": [
+  "v"
+ ],
+ "roast": [
+  "adj & v"
+ ],
+ "rescue": [
+  "n & v"
+ ],
+ "rob": [
+  "v"
+ ],
+ "research": [
+  "n & v"
+ ],
+ "robot": [
+  "n"
+ ],
+ "reservation": [
+  "n"
+ ],
+ "rock": [
+  "n"
+ ],
+ "resort": [
+  "n"
+ ],
+ "respect": [
+  "n & v"
+ ],
+ "rocket": [
+  "n"
+ ],
+ "role": [
+  "n"
+ ],
+ "roll": [
+  "n"
+ ],
+ "restaurant": [
+  "n"
+ ],
+ "room": [
+  "n"
+ ],
+ "retirement": [
+  "n"
+ ],
+ "roommate": [
+  "n"
+ ],
+ "return": [
+  "n & v"
+ ],
+ "rope": [
+  "n"
+ ],
+ "reward": [
+  "n"
+ ],
+ "rider": [
+  "n"
+ ],
+ "roundabout": [
+  "n"
+ ],
+ "riding": [
+  "n"
+ ],
+ "route": [
+  "n"
+ ],
+ "routine": [
+  "n"
+ ],
+ "rubber": [
+  "n"
+ ],
+ "rug": [
+  "n"
+ ],
+ "scared": [
+  "adj"
+ ],
+ "rugby": [
+  "n"
+ ],
+ "scarf": [
+  "n"
+ ],
+ "ruin": [
+  "n"
+ ],
+ "scary": [
+  "adj"
+ ],
+ "rule": [
+  "n & v"
+ ],
+ "scene": [
+  "n"
+ ],
+ "ruler": [
+  "n"
+ ],
+ "schoolchild": [
+  "n"
+ ],
+ "run": [
+  "n",
+  "v"
+ ],
+ "science fiction": [
+  "n"
+ ],
+ "scientist": [
+  "n"
+ ],
+ "scissors": [
+  "n pl"
+ ],
+ "scooter": [
+  "n"
+ ],
+ "score": [
+  "n & v"
+ ],
+ "runner": [
+  "n"
+ ],
+ "run out": [
+  "phr v"
+ ],
+ "scream": [
+  "n & v"
+ ],
+ "screen": [
+  "n"
+ ],
+ "sculpture": [
+  "n"
+ ],
+ "sea": [
+  "n"
+ ],
+ "search": [
+  "n & v"
+ ],
+ "seaside": [
+  "n"
+ ],
+ "sad": [
+  "adj"
+ ],
+ "season": [
+  "n"
+ ],
+ "safe": [
+  "adj"
+ ],
+ "seat": [
+  "n"
+ ],
+ "safely": [
+  "adv"
+ ],
+ "sailing": [
+  "n"
+ ],
+ "salad": [
+  "n"
+ ],
+ "sale": [
+  "n"
+ ],
+ "secondary": [
+  "adj"
+ ],
+ "salmon": [
+  "n"
+ ],
+ "second-hand": [
+  "adj & adv"
+ ],
+ "salt": [
+  "n"
+ ],
+ "secret": [
+  "adj & n"
+ ],
+ "secretary": [
+  "n"
+ ],
+ "security guard": [
+  "n"
+ ],
+ "sandwich": [
+  "n"
+ ],
+ "satisfactory": [
+  "adj"
+ ],
+ "seem": [
+  "v"
+ ],
+ "satisfied": [
+  "adj"
+ ],
+ "select": [
+  "v"
+ ],
+ "sauce": [
+  "n"
+ ],
+ "selfie": [
+  "n"
+ ],
+ "saucer": [
+  "n"
+ ],
+ "selfish": [
+  "adj"
+ ],
+ "sausage": [
+  "n"
+ ],
+ "self-service": [
+  "adj"
+ ],
+ "save": [
+  "v"
+ ],
+ "sell": [
+  "v"
+ ],
+ "say": [
+  "v"
+ ],
+ "sentence": [
+  "n"
+ ],
+ "series": [
+  "n"
+ ],
+ "shirt": [
+  "n"
+ ],
+ "serious": [
+  "adj"
+ ],
+ "shocking": [
+  "adj"
+ ],
+ "serve": [
+  "v"
+ ],
+ "shop": [
+  "n & v"
+ ],
+ "server": [
+  "n"
+ ],
+ "shopper": [
+  "n"
+ ],
+ "shopping": [
+  "n"
+ ],
+ "shore": [
+  "n"
+ ],
+ "short": [
+  "adj"
+ ],
+ "session": [
+  "n"
+ ],
+ "shorts": [
+  "n pl"
+ ],
+ "set": [
+  "n & v"
+ ],
+ "should": [
+  "mv"
+ ],
+ "set off": [
+  "phr v"
+ ],
+ "shoulder": [
+  "n"
+ ],
+ "set out": [
+  "phr v"
+ ],
+ "show": [
+  "n & v"
+ ],
+ "set up": [
+  "phr v"
+ ],
+ "several": [
+  "det & pron"
+ ],
+ "show up": [
+  "phr v"
+ ],
+ "sew": [
+  "v"
+ ],
+ "shower": [
+  "n"
+ ],
+ "shadow": [
+  "n"
+ ],
+ "shut": [
+  "adj & v"
+ ],
+ "shake": [
+  "v"
+ ],
+ "shy": [
+  "adj"
+ ],
+ "shall": [
+  "mv"
+ ],
+ "sick": [
+  "adj"
+ ],
+ "shame": [
+  "n"
+ ],
+ "side": [
+  "n"
+ ],
+ "shampoo": [
+  "n"
+ ],
+ "sight": [
+  "n"
+ ],
+ "shave": [
+  "v"
+ ],
+ "signature": [
+  "n"
+ ],
+ "she": [
+  "pron"
+ ],
+ "signpost": [
+  "n"
+ ],
+ "sheep": [
+  "n"
+ ],
+ "sheet": [
+  "n"
+ ],
+ "sign up": [
+  "v"
+ ],
+ "silent": [
+  "adj"
+ ],
+ "silk": [
+  "adj & n"
+ ],
+ "shelf": [
+  "n"
+ ],
+ "shine": [
+  "v"
+ ],
+ "silly": [
+  "adj"
+ ],
+ "silver": [
+  "adj & n"
+ ],
+ "shiny": [
+  "adj"
+ ],
+ "similar": [
+  "adj"
+ ],
+ "ship": [
+  "n"
+ ],
+ "simple": [
+  "adj"
+ ],
+ "smooth": [
+  "adj"
+ ],
+ "sing": [
+  "v"
+ ],
+ "snack": [
+  "n"
+ ],
+ "singer": [
+  "n"
+ ],
+ "snake": [
+  "n"
+ ],
+ "singing": [
+  "n"
+ ],
+ "snow": [
+  "n & v"
+ ],
+ "single": [
+  "n & adj"
+ ],
+ "snowboard": [
+  "n & v"
+ ],
+ "sink": [
+  "n & v"
+ ],
+ "soap": [
+  "n"
+ ],
+ "sir": [
+  "n"
+ ],
+ "sociable": [
+  "adj"
+ ],
+ "social": [
+  "adj"
+ ],
+ "sister": [
+  "n"
+ ],
+ "social media": [
+  "n"
+ ],
+ "society": [
+  "n"
+ ],
+ "sit": [
+  "v"
+ ],
+ "sock": [
+  "n"
+ ],
+ "sit down": [
+  "phr v"
+ ],
+ "sofa": [
+  "n"
+ ],
+ "site": [
+  "n"
+ ],
+ "soft": [
+  "adj"
+ ],
+ "sitting room": [
+  "n"
+ ],
+ "size": [
+  "n"
+ ],
+ "software": [
+  "n"
+ ],
+ "skate": [
+  "n & v"
+ ],
+ "soldier": [
+  "n"
+ ],
+ "skateboard": [
+  "n & v"
+ ],
+ "solution": [
+  "n"
+ ],
+ "skateboarding": [
+  "n"
+ ],
+ "solve": [
+  "n"
+ ],
+ "skating": [
+  "n"
+ ],
+ "some": [
+  "det & pron"
+ ],
+ "ski": [
+  "n & v"
+ ],
+ "somebody": [
+  "pron"
+ ],
+ "skiing": [
+  "n"
+ ],
+ "somehow": [
+  "adv"
+ ],
+ "skill": [
+  "n"
+ ],
+ "someone": [
+  "pron"
+ ],
+ "skin": [
+  "n"
+ ],
+ "sky": [
+  "n"
+ ],
+ "sometimes": [
+  "adv"
+ ],
+ "sleep": [
+  "n & v"
+ ],
+ "somewhere": [
+  "adv"
+ ],
+ "sleepy": [
+  "adj"
+ ],
+ "song": [
+  "n"
+ ],
+ "sleeve": [
+  "n"
+ ],
+ "sleeveless": [
+  "adj"
+ ],
+ "soon": [
+  "adv"
+ ],
+ "slightly": [
+  "adv"
+ ],
+ "sore": [
+  "adj"
+ ],
+ "slim": [
+  "adj"
+ ],
+ "sorry": [
+  "adj"
+ ],
+ "sort": [
+  "n"
+ ],
+ "slow": [
+  "adj"
+ ],
+ "soul": [
+  "n"
+ ],
+ "slowly": [
+  "adv"
+ ],
+ "sound": [
+  "n & v"
+ ],
+ "smartphone": [
+  "n"
+ ],
+ "smell": [
+  "n & v"
+ ],
+ "soup": [
+  "n"
+ ],
+ "smile": [
+  "n & v"
+ ],
+ "sour": [
+  "adj"
+ ],
+ "smoking": [
+  "n"
+ ],
+ "southwest": [
+  "adj & n"
+ ],
+ "start": [
+  "n & v"
+ ],
+ "sparkling": [
+  "adj"
+ ],
+ "stay behind": [
+  "phr v"
+ ],
+ "speak": [
+  "v"
+ ],
+ "speaker": [
+  "n"
+ ],
+ "steak": [
+  "n"
+ ],
+ "special": [
+  "adj"
+ ],
+ "steal": [
+  "v"
+ ],
+ "specially": [
+  "adv"
+ ],
+ "steep": [
+  "adj"
+ ],
+ "species": [
+  "n"
+ ],
+ "step": [
+  "n"
+ ],
+ "speed": [
+  "n"
+ ],
+ "spell": [
+  "v"
+ ],
+ "step over/in/on/out of": [
+  "sth"
+ ],
+ "spelling": [
+  "n"
+ ],
+ "spend": [
+  "v"
+ ],
+ "stick": [
+  "n & v"
+ ],
+ "spice": [
+  "n"
+ ],
+ "spicy": [
+  "adj"
+ ],
+ "sticky": [
+  "adj"
+ ],
+ "spill": [
+  "v"
+ ],
+ "still": [
+  "adj & adv"
+ ],
+ "spinach": [
+  "n"
+ ],
+ "spoil": [
+  "v"
+ ],
+ "stomach": [
+  "n"
+ ],
+ "spoon": [
+  "n"
+ ],
+ "stomach ache": [
+  "n"
+ ],
+ "sport": [
+  "n"
+ ],
+ "stone": [
+  "n"
+ ],
+ "spy": [
+  "n"
+ ],
+ "stop": [
+  "n & v"
+ ],
+ "stadium": [
+  "n"
+ ],
+ "store": [
+  "n"
+ ],
+ "stage": [
+  "n"
+ ],
+ "storm": [
+  "n"
+ ],
+ "stairs": [
+  "n pl"
+ ],
+ "straight": [
+  "adj & adv"
+ ],
+ "stamp": [
+  "n"
+ ],
+ "strange": [
+  "adj"
+ ],
+ "stand": [
+  "v"
+ ],
+ "strawberry": [
+  "n"
+ ],
+ "star": [
+  "n"
+ ],
+ "stream": [
+  "n"
+ ],
+ "street": [
+  "n"
+ ],
+ "stressed": [
+  "adj"
+ ],
+ "support": [
+  "n & v"
+ ],
+ "strict": [
+  "adj"
+ ],
+ "stripe": [
+  "n"
+ ],
+ "suppose": [
+  "v"
+ ],
+ "studies": [
+  "n pl"
+ ],
+ "study": [
+  "n & v"
+ ],
+ "sure": [
+  "adj & adv"
+ ],
+ "stuff": [
+  "n"
+ ],
+ "surfboard": [
+  "n"
+ ],
+ "stupid": [
+  "adj"
+ ],
+ "surfing": [
+  "n"
+ ],
+ "style": [
+  "n"
+ ],
+ "surname": [
+  "n"
+ ],
+ "stylish": [
+  "adj"
+ ],
+ "surprise": [
+  "n & v"
+ ],
+ "subject": [
+  "n"
+ ],
+ "surprised": [
+  "adj"
+ ],
+ "subtract": [
+  "v"
+ ],
+ "subway": [
+  "n"
+ ],
+ "sweater": [
+  "n"
+ ],
+ "succeed": [
+  "v"
+ ],
+ "sweatshirt": [
+  "n"
+ ],
+ "success": [
+  "n"
+ ],
+ "sweet": [
+  "adj & n"
+ ],
+ "suddenly": [
+  "adv"
+ ],
+ "suffer": [
+  "v"
+ ],
+ "swim": [
+  "n & v"
+ ],
+ "sugar": [
+  "n"
+ ],
+ "swimmer": [
+  "n"
+ ],
+ "suggest": [
+  "v"
+ ],
+ "swimming": [
+  "n"
+ ],
+ "suggestion": [
+  "n"
+ ],
+ "swimming costume": [
+  "n"
+ ],
+ "suit": [
+  "n & v"
+ ],
+ "sum": [
+  "n"
+ ],
+ "system": [
+  "n"
+ ],
+ "sun": [
+  "n"
+ ],
+ "sunbathe": [
+  "v"
+ ],
+ "sunglasses": [
+  "n pl"
+ ],
+ "sunny": [
+  "adj"
+ ],
+ "table": [
+  "n"
+ ],
+ "sunrise": [
+  "n"
+ ],
+ "table-cloth": [
+  "n"
+ ],
+ "sunset": [
+  "n"
+ ],
+ "tablet": [
+  "n"
+ ],
+ "sunshine": [
+  "n"
+ ],
+ "table tennis": [
+  "n"
+ ],
+ "superhero": [
+  "n"
+ ],
+ "take": [
+  "v"
+ ],
+ "supply": [
+  "v"
+ ],
+ "tent": [
+  "n"
+ ],
+ "takeaway": [
+  "n"
+ ],
+ "terrific": [
+  "adj"
+ ],
+ "take away": [
+  "v"
+ ],
+ "terrified": [
+  "adj"
+ ],
+ "take care of": [
+  "v"
+ ],
+ "text": [
+  "n & v"
+ ],
+ "textbook": [
+  "n"
+ ],
+ "text message": [
+  "n"
+ ],
+ "take off": [
+  "phr v"
+ ],
+ "than": [
+  "conj & prep"
+ ],
+ "thank": [
+  "v"
+ ],
+ "take part": [
+  "in"
+ ],
+ "thank you": [
+  "exclam"
+ ],
+ "take place": [
+  "v"
+ ],
+ "the": [
+  "det"
+ ],
+ "take up": [
+  "phr v"
+ ],
+ "their": [
+  "det"
+ ],
+ "talent": [
+  "n"
+ ],
+ "them": [
+  "pron"
+ ],
+ "talented": [
+  "adj"
+ ],
+ "themselves": [
+  "pron"
+ ],
+ "talk": [
+  "n & v"
+ ],
+ "then": [
+  "adv"
+ ],
+ "talk show": [
+  "n"
+ ],
+ "there": [
+  "adv"
+ ],
+ "tall": [
+  "adj"
+ ],
+ "therefore": [
+  "adv"
+ ],
+ "tap": [
+  "n"
+ ],
+ "these": [
+  "det & pron"
+ ],
+ "taste": [
+  "n & v"
+ ],
+ "thick": [
+  "adj"
+ ],
+ "tasty": [
+  "adj"
+ ],
+ "think": [
+  "v"
+ ],
+ "teaching": [
+  "n"
+ ],
+ "thirsty": [
+  "adj"
+ ],
+ "team": [
+  "n"
+ ],
+ "this": [
+  "det & pron"
+ ],
+ "tear": [
+  "n & v"
+ ],
+ "those": [
+  "det & pron"
+ ],
+ "teenager": [
+  "n"
+ ],
+ "thriller": [
+  "n"
+ ],
+ "telephone": [
+  "n & v"
+ ],
+ "throat": [
+  "n"
+ ],
+ "television": [
+  "TV"
+ ],
+ "tell": [
+  "v"
+ ],
+ "temperature": [
+  "n"
+ ],
+ "thunder": [
+  "n"
+ ],
+ "temporary": [
+  "adj"
+ ],
+ "ticket": [
+  "n"
+ ],
+ "tennis": [
+  "n"
+ ],
+ "tidy": [
+  "adj & v"
+ ],
+ "tense": [
+  "n"
+ ],
+ "tidy up": [
+  "phr v"
+ ],
+ "tie": [
+  "n & v"
+ ],
+ "touch": [
+  "v"
+ ],
+ "tiger": [
+  "n"
+ ],
+ "tourism": [
+  "n"
+ ],
+ "tight": [
+  "adj"
+ ],
+ "tourist": [
+  "n"
+ ],
+ "tights": [
+  "n pl"
+ ],
+ "tournament": [
+  "n"
+ ],
+ "towel": [
+  "n"
+ ],
+ "till": [
+  "conj & prep"
+ ],
+ "tower": [
+  "n"
+ ],
+ "town": [
+  "n"
+ ],
+ "time": [
+  "n & v"
+ ],
+ "track": [
+  "n"
+ ],
+ "timetable": [
+  "n"
+ ],
+ "traffic jam": [
+  "n"
+ ],
+ "tin": [
+  "n"
+ ],
+ "tip": [
+  "advice",
+  "n"
+ ],
+ "trainer": [
+  "n"
+ ],
+ "training": [
+  "n"
+ ],
+ "tired": [
+  "adj"
+ ],
+ "tram": [
+  "n"
+ ],
+ "tiring": [
+  "adj"
+ ],
+ "transfer": [
+  "v"
+ ],
+ "tissue": [
+  "n"
+ ],
+ "translate": [
+  "v"
+ ],
+ "title": [
+  "n"
+ ],
+ "translation": [
+  "n"
+ ],
+ "to": [
+  "prep"
+ ],
+ "transport": [
+  "n"
+ ],
+ "toast": [
+  "n"
+ ],
+ "trash can": [
+  "n"
+ ],
+ "today": [
+  "adv & n"
+ ],
+ "travel agent": [
+  "n"
+ ],
+ "toe": [
+  "n"
+ ],
+ "tree": [
+  "n"
+ ],
+ "together": [
+  "adv"
+ ],
+ "trend": [
+  "n"
+ ],
+ "toilet": [
+  "n"
+ ],
+ "trick": [
+  "n"
+ ],
+ "tomato": [
+  "n"
+ ],
+ "trip": [
+  "n"
+ ],
+ "tongue": [
+  "n"
+ ],
+ "trouble": [
+  "n"
+ ],
+ "tonight": [
+  "adv & n"
+ ],
+ "trousers": [
+  "n pl"
+ ],
+ "too": [
+  "adv"
+ ],
+ "truck": [
+  "Am Eng"
+ ],
+ "tooth/teeth": [
+  "n"
+ ],
+ "toothache": [
+  "n"
+ ],
+ "true": [
+  "adj"
+ ],
+ "trumpet": [
+  "n"
+ ],
+ "top": [
+  "adj & n"
+ ],
+ "trust": [
+  "v"
+ ],
+ "topic": [
+  "n"
+ ],
+ "try": [
+  "v"
+ ],
+ "try on": [
+  "phr v"
+ ],
+ "undress": [
+  "v"
+ ],
+ "T-shirt": [
+  "n"
+ ],
+ "unemployment": [
+  "n"
+ ],
+ "tube": [
+  "n"
+ ],
+ "unexpected": [
+  "adj"
+ ],
+ "tuna": [
+  "n"
+ ],
+ "unfit": [
+  "adj"
+ ],
+ "tune": [
+  "n"
+ ],
+ "unforgettable": [
+  "adj"
+ ],
+ "tunnel": [
+  "n"
+ ],
+ "unfortunately": [
+  "adv"
+ ],
+ "turkey": [
+  "n"
+ ],
+ "unfriendly": [
+  "adj"
+ ],
+ "turn": [
+  "n & v"
+ ],
+ "unhappy": [
+  "n"
+ ],
+ "union": [
+  "n"
+ ],
+ "unit": [
+  "n"
+ ],
+ "unkind": [
+  "adj"
+ ],
+ "turn down": [
+  "phr v"
+ ],
+ "unknown": [
+  "adj"
+ ],
+ "turning": [
+  "n"
+ ],
+ "uninterested": [
+  "adj"
+ ],
+ "turn into": [
+  "phr v"
+ ],
+ "universe": [
+  "n"
+ ],
+ "turn off": [
+  "phr v"
+ ],
+ "unless": [
+  "conj"
+ ],
+ "turn on": [
+  "phr v"
+ ],
+ "unlucky": [
+  "adj"
+ ],
+ "turn up": [
+  "phr v"
+ ],
+ "unpack": [
+  "v"
+ ],
+ "twice": [
+  "adv"
+ ],
+ "unsure": [
+  "adj"
+ ],
+ "twin": [
+  "n"
+ ],
+ "untidy": [
+  "adj"
+ ],
+ "type": [
+  "n & v"
+ ],
+ "until": [
+  "prep & conj"
+ ],
+ "typical": [
+  "adj"
+ ],
+ "typically": [
+  "adv"
+ ],
+ "tyre": [
+  "n"
+ ],
+ "up": [
+  "adv & prep"
+ ],
+ "umbrella": [
+  "n"
+ ],
+ "uncle": [
+  "n"
+ ],
+ "update": [
+  "n & v"
+ ],
+ "uncomfortable": [
+  "adj"
+ ],
+ "upload": [
+  "n & v"
+ ],
+ "under": [
+  "prep"
+ ],
+ "upon": [
+  "prep"
+ ],
+ "underground": [
+  "adj & n"
+ ],
+ "upper": [
+  "adj"
+ ],
+ "underline": [
+  "v"
+ ],
+ "up to": [
+  "prep phr"
+ ],
+ "underpants": [
+  "n"
+ ],
+ "up to date": [
+  "prep phr"
+ ],
+ "understand": [
+  "v"
+ ],
+ "urgent": [
+  "adj"
+ ],
+ "underwater": [
+  "adj"
+ ],
+ "urgently": [
+  "adv"
+ ],
+ "underwear": [
+  "n"
+ ],
+ "us": [
+  "pron"
+ ],
+ "use": [
+  "n & v"
+ ],
+ "used to": [
+  "v"
+ ],
+ "waitress": [
+  "n"
+ ],
+ "wake up": [
+  "phr v"
+ ],
+ "walk": [
+  "n & v"
+ ],
+ "walking": [
+  "n"
+ ],
+ "useful": [
+  "adj"
+ ],
+ "wall": [
+  "n"
+ ],
+ "user": [
+  "n"
+ ],
+ "wallet": [
+  "n"
+ ],
+ "usual": [
+  "adj"
+ ],
+ "want": [
+  "v"
+ ],
+ "usually": [
+  "adv"
+ ],
+ "war": [
+  "n"
+ ],
+ "wardrobe": [
+  "n"
+ ],
+ "warm": [
+  "adj"
+ ],
+ "warn": [
+  "v"
+ ],
+ "v/versus": [
+  "prep"
+ ],
+ "warning": [
+  "n"
+ ],
+ "valley": [
+  "n"
+ ],
+ "wash up": [
+  "phr v"
+ ],
+ "valuable": [
+  "adj"
+ ],
+ "washing machine": [
+  "n"
+ ],
+ "value": [
+  "n"
+ ],
+ "washing-up": [
+  "n"
+ ],
+ "vanilla": [
+  "n"
+ ],
+ "waste": [
+  "adj & v & n"
+ ],
+ "various": [
+  "adj"
+ ],
+ "vase": [
+  "n"
+ ],
+ "watch": [
+  "n & v"
+ ],
+ "vehicle": [
+  "n"
+ ],
+ "water": [
+  "n & v"
+ ],
+ "version": [
+  "n"
+ ],
+ "waterfall": [
+  "n"
+ ],
+ "via": [
+  "prep"
+ ],
+ "way": [
+  "n"
+ ],
+ "view": [
+  "n"
+ ],
+ "village": [
+  "n"
+ ],
+ "violin": [
+  "n"
+ ],
+ "we": [
+  "pron"
+ ],
+ "weak": [
+  "adj"
+ ],
+ "visa": [
+  "n"
+ ],
+ "vocabulary": [
+  "n"
+ ],
+ "wear": [
+  "v"
+ ],
+ "volleyball": [
+  "n"
+ ],
+ "wear out": [
+  "phr v & adj"
+ ],
+ "vote": [
+  "n & v"
+ ],
+ "weather": [
+  "n"
+ ],
+ "vowel": [
+  "n"
+ ],
+ "weather forecast": [
+  "n"
+ ],
+ "web": [
+  "n"
+ ],
+ "webcam": [
+  "n"
+ ],
+ "web page": [
+  "n"
+ ],
+ "website": [
+  "n"
+ ],
+ "wedding": [
+  "n"
+ ],
+ "wind": [
+  "n"
+ ],
+ "weekday": [
+  "n"
+ ],
+ "window": [
+  "n"
+ ],
+ "weekend": [
+  "n"
+ ],
+ "windscreen": [
+  "n"
+ ],
+ "weekly": [
+  "adj & adv"
+ ],
+ "windsurfing": [
+  "n"
+ ],
+ "welcome": [
+  "n & v"
+ ],
+ "winner": [
+  "n"
+ ],
+ "without": [
+  "prep"
+ ],
+ "well-dressed": [
+  "adj"
+ ],
+ "woman": [
+  "n"
+ ],
+ "well-known": [
+  "adj"
+ ],
+ "wonder": [
+  "v"
+ ],
+ "wonderful": [
+  "adj"
+ ],
+ "western": [
+  "adj"
+ ],
+ "wood": [
+  "n"
+ ],
+ "wet": [
+  "adj"
+ ],
+ "wooden": [
+  "adj"
+ ],
+ "whale": [
+  "n"
+ ],
+ "work": [
+  "n & v"
+ ],
+ "whenever": [
+  "conj"
+ ],
+ "worker": [
+  "n"
+ ],
+ "where": [
+  "adv & conj"
+ ],
+ "working": [
+  "adj"
+ ],
+ "wherever": [
+  "conj"
+ ],
+ "workout": [
+  "n"
+ ],
+ "whether": [
+  "conj"
+ ],
+ "which": [
+  "pron & det"
+ ],
+ "work out": [
+  "phr v"
+ ],
+ "whilst": [
+  "conj"
+ ],
+ "world": [
+  "n"
+ ],
+ "worried": [
+  "adj"
+ ],
+ "white": [
+  "adj"
+ ],
+ "worry": [
+  "n & v"
+ ],
+ "who": [
+  "pron"
+ ],
+ "worse": [
+  "adj & adv"
+ ],
+ "whole": [
+  "adj & n"
+ ],
+ "worst": [
+  "adj & adv"
+ ],
+ "whose": [
+  "det & pron"
+ ],
+ "worth": [
+  "adj"
+ ],
+ "why": [
+  "adv"
+ ],
+ "would": [
+  "mv"
+ ],
+ "wide": [
+  "adj"
+ ],
+ "wow": [
+  "exclam"
+ ],
+ "wife": [
+  "n"
+ ],
+ "wild": [
+  "adj"
+ ],
+ "write": [
+  "v"
+ ],
+ "wildlife": [
+  "n"
+ ],
+ "write down": [
+  "phr v"
+ ],
+ "will": [
+  "mv"
+ ],
+ "win": [
+  "v"
+ ],
+ "writer": [
+  "n"
+ ],
+ "writing": [
+  "n"
+ ],
+ "written": [
+  "adj"
+ ],
+ "wrong": [
+  "adj"
+ ],
+ "yard": [
+  "n"
+ ],
+ "yeah": [
+  "exclam"
+ ],
+ "year": [
+  "n"
+ ],
+ "yellow": [
+  "adj"
+ ],
+ "yes": [
+  "adv"
+ ],
+ "yesterday": [
+  "adv"
+ ],
+ "yet": [
+  "adv"
+ ],
+ "yoga": [
+  "n"
+ ],
+ "urt": [
+  "n"
+ ],
+ "you": [
+  "pron"
+ ],
+ "you know": [
+  "exclam"
+ ],
+ "young": [
+  "adj"
+ ],
+ "your": [
+  "det"
+ ],
+ "yours": [
+  "pron"
+ ],
+ "yourself": [
+  "pron"
+ ],
+ "youth": [
+  "n"
+ ],
+ "zebra": [
+  "n"
+ ],
+ "zero": [
+  "n"
+ ],
+ "zone": [
+  "n"
+ ],
+ "zoo": [
+  "n"
+ ]
+}
