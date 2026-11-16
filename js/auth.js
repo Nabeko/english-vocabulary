@@ -5,6 +5,7 @@
 (function(){
   const PASS_KEY = 'ev_auth_v1';
   const PASSWORD = '2004522';
+  const ENABLED = false; // 暫時關閉密碼鎖：設回 true 即可恢復
 
   function isUnlocked(){
     try{ return localStorage.getItem(PASS_KEY) === '1'; }catch(e){ return false; }
@@ -52,7 +53,7 @@
 
   window.EVAuth = {
     init(){
-      if(isUnlocked()){
+      if(!ENABLED || isUnlocked()){
         document.documentElement.classList.remove('locked');
         if(window.onAuthed) window.onAuthed();
       } else {
