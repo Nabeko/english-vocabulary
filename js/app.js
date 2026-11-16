@@ -206,7 +206,7 @@ window.App = (function(){
           ${g.words.map(w => `
             <li class="word-item">
               <div class="word-head">
-                <button class="speak-btn" data-word="${escapeHtml(w.w)}" title="朗讀">🔊</button>
+                <button class="speak-btn" data-word="${escapeHtml(w.tts || w.w)}" title="朗讀">🔊</button>
                 <span class="word-en">${escapeHtml(w.w)}</span>
                 <span class="word-ipa">${escapeHtml(w.ipa || '（待補）')}</span>
                 <span class="word-pos">${escapeHtml(w.pos || '')}</span>

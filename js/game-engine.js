@@ -287,7 +287,7 @@ window.GameEngine = (function(){
       const qp = container.querySelector('#ge-qp');
       let promptHtml;
       if(q.type === 'en2zh'){
-        promptHtml = `<div class="qp-word">${esc(x.w)}</div>${canSpeak ? `<button class="qp-say" data-say="${esc(x.w)}">🔊 發音</button>` : ''}`;
+        promptHtml = `<div class="qp-word">${esc(x.w)}</div>${canSpeak ? `<button class="qp-say" data-say="${esc(x.tts || x.w)}">🔊 發音</button>` : ''}`;
       }else if(q.type === 'zh2en'){
         promptHtml = `<div class="qp-zh">${esc(x.zh)}<span class="qp-pos">${esc(x.pos||'')}</span></div>`;
       }else{
@@ -345,7 +345,7 @@ window.GameEngine = (function(){
         G.lock = G.time + 1.6;
         G.cur.stale = true;
       }
-      speak(x.w);
+      speak(x.tts || x.w);
       hud();
     }
 

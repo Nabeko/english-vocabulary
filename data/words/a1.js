@@ -147,7 +147,7 @@ const WORDS_A1 = [
   { w: 'buy', unit: 9, unitName: 'Shopping & Services', ipa: '/baɪ/', pos: 'v.', zh: '購買', ex: 'I want to buy a new bike.', exZh: '我想買一輛新腳踏車。' },
   { w: 'café', unit: 9, unitName: 'Shopping & Services', ipa: '/ˈkæfeɪ/', pos: 'n.', zh: '咖啡廳', ex: 'We had lunch at a café.', exZh: '我們在咖啡廳吃了午餐。' },
   { w: 'change', unit: 9, unitName: 'Shopping & Services', ipa: '/tʃeɪndʒ/', pos: 'n./v.', zh: '零錢/改變', ex: 'Here is your change.', exZh: '這是你的零錢。' },
-  { w: 'present', unit: 9, unitName: 'Shopping & Services', ipa: '/ˈprɛzənt/', pos: 'n.', zh: '禮物', ex: 'This is a present for you.', exZh: '這是給你的禮物。' },
+  { w: 'present', unit: 9, unitName: 'Shopping & Services', ipa: '/ˈprɛzənt/', pos: 'n.', zh: '禮物', ex: 'This is a present for you.', exZh: '這是給你的禮物。', tts: 'PREZ-ent' },
   { w: 'shop', unit: 9, unitName: 'Shopping & Services', ipa: '/ʃɒp/', pos: 'n./v.', zh: '商店/購物', ex: 'I shop for clothes on weekends.', exZh: '我週末購物買衣服。' },
   { w: 'shopping', unit: 9, unitName: 'Shopping & Services', ipa: '/ˈʃɒpɪŋ/', pos: 'n.', zh: '購物', ex: 'We went shopping yesterday.', exZh: '我們昨天去購物了。' },
   { w: 'supermarket', unit: 9, unitName: 'Shopping & Services', ipa: '/ˈsuːpərmɑːrkɪt/', pos: 'n.', zh: '超級市場', ex: 'Mum buys food at the supermarket.', exZh: '媽媽在超級市場買食物。' },
