@@ -280,6 +280,7 @@ window.GameEngine = (function(){
     }
 
     function ensureQuestion(){
+      if(G.cur && G.cur.stale && G.time < G.lock) return; // 等鎖定時間過了（讓答題回饋文字有時間被看到）才換下一題
       const target = G.enemies.filter(e => e.state === 'walk' && !e.doomed).sort((a,b) => a.x - b.x)[0];
       if(!target){ G.cur = null; renderWait(); return; }
       if(!G.cur || G.cur.enemy !== target || G.cur.stale){
