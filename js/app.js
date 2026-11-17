@@ -55,10 +55,16 @@ window.App = (function(){
   }
 
   // 把一個Unit的單字陣列切成多個小關（每關最多 STAGE_SIZE 個字）
+  // 若最後一關剩不到 15 字，直接併入前一關（避免出現太短、不成比例的小關）
+  const STAGE_MERGE_MIN = 15;
   function splitStages(words){
     const stages = [];
     for(let i = 0; i < words.length; i += STAGE_SIZE){
       stages.push(words.slice(i, i + STAGE_SIZE));
+    }
+    if(stages.length > 1 && stages[stages.length-1].length < STAGE_MERGE_MIN){
+      const last = stages.pop();
+      stages[stages.length-1] = stages[stages.length-1].concat(last);
     }
     return stages.length ? stages : [[]];
   }
@@ -134,11 +140,13 @@ window.App = (function(){
             const ready = done === total;
             const stars = ready ? getBestStars(levelId, g.unit) : 0;
             const stages = splitStages(g.words);
+            let stageOffset = 0;
             const stageRowsHtml = ready ? stages.map((s, i) => {
               const stageKey = stageProgressKey(g.unit, i, stages.length);
               const rangeLabel = stages.length > 1
-                ? `第 ${i*STAGE_SIZE+1}–${i*STAGE_SIZE+s.length} 字`
+                ? `第 ${stageOffset+1}–${stageOffset+s.length} 字`
                 : `共 ${s.length} 字`;
+              stageOffset += s.length;
               const diffButtons = DIFF_OPTS.map(d => {
                 const st = getStars(levelId, stageKey, d.id);
                 return `<button class="stage-diff-btn ${d.id === 'normal' ? 'active' : ''}" data-diff="${d.id}" data-stars="${st}">${d.label}</button>`;

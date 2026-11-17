@@ -79,15 +79,16 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .ucard .row > .btn{flex:1 1 120px}
 
 /* ===== Unit 列表內的「每小關+難度+星級」一列式選單（對齊 lexilereadingrex 格式） ===== */
-.stage-rows{display:flex;flex-direction:column;gap:6px;margin:4px 0}
-.stage-row{display:grid;grid-template-columns:minmax(70px,auto) 1fr minmax(46px,auto) minmax(60px,auto);align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:var(--panel2)}
-.stage-range{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap}
-.stage-diff-group{display:flex;gap:4px;justify-content:center}
+.stage-rows{display:grid;grid-template-columns:minmax(76px,auto) 1fr minmax(46px,auto) minmax(60px,auto);gap:6px;margin:4px 0}
+.stage-row{display:contents}
+.stage-range{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;padding:8px 0 8px 10px;background:var(--panel2);border-radius:8px 0 0 8px}
+.stage-diff-group{display:flex;gap:4px;justify-content:center;padding:8px 0;background:var(--panel2)}
 .stage-diff-btn{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--panel);color:var(--muted);white-space:nowrap}
 .stage-diff-btn.active{background:var(--ochre);color:#1c1608}
 .stage-diff-btn:active{transform:translateY(1px)}
-.stage-stars{font-size:13px;color:var(--ochreD);letter-spacing:1px;white-space:nowrap;text-align:center}
-.stage-row .btn.sm{justify-self:end}
+.stage-stars{font-size:13px;color:var(--ochreD);letter-spacing:1px;white-space:nowrap;text-align:center;padding:8px 0;background:var(--panel2)}
+.stage-row .btn.sm{justify-self:end;margin:4px 10px 4px 0;background:var(--panel2);box-shadow:none}
+.stage-row .btn.sm{border-radius:0 8px 8px 0}
 
 .word-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .word-item{background:var(--panel);color:var(--ink);border-radius:10px;padding:12px 14px;box-shadow:inset 0 -3px 0 var(--line)}
