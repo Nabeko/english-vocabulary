@@ -12,6 +12,7 @@ window.App = (function(){
 
   let view;
   const DIFF_KEY = 'ev_difficulty_v1';
+  const STAGE_SIZE = 20; // 每小關最多幾個單字，超過自動切成多小關
   const DIFF_OPTS = [
     { id:'easy',   label:'簡單',   desc:'速度慢、怪物少，適合剛入門' },
     { id:'normal', label:'適中',   desc:'原本的速度與怪物組合' },
@@ -39,6 +40,7 @@ window.App = (function(){
     try{ localStorage.setItem(PROGRESS_KEY, JSON.stringify(p)); }catch(e){}
   }
 
+
   function escapeHtml(s){
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
@@ -50,6 +52,20 @@ window.App = (function(){
       map.get(w.unit).words.push(w);
     }
     return [...map.values()].sort((a,b) => a.unit - b.unit);
+  }
+
+  // 把一個Unit的單字陣列切成多個小關（每關最多 STAGE_SIZE 個字）
+  function splitStages(words){
+    const stages = [];
+    for(let i = 0; i < words.length; i += STAGE_SIZE){
+      stages.push(words.slice(i, i + STAGE_SIZE));
+    }
+    return stages.length ? stages : [[]];
+  }
+
+  // 單一關卡的進度key：只有一關時沿用舊格式（相容既有存檔），多關時加上小關編號
+  function stageProgressKey(unitNum, stageIdx, totalStages){
+    return totalStages > 1 ? `${unitNum}:s${stageIdx}` : `${unitNum}`;
   }
 
   function renderLevelMenu(){
@@ -80,6 +96,23 @@ window.App = (function(){
   }
 
   function getBestStars(levelId, unitNum){
+    const lv = LEVELS.find(l => l.id === levelId);
+    const g = lv && groupByUnit(lv.words).find(x => x.unit === unitNum);
+    const stages = g ? splitStages(g.words) : [[]];
+    if(stages.length > 1){
+      // 多關時，顯示「所有小關都通關的最低星級」當作整個Unit的代表星級（最嚴格，確保全部打過才顯示星）
+      let min = 3;
+      for(let i = 0; i < stages.length; i++){
+        const key = stageProgressKey(unitNum, i, stages.length);
+        let best = 0;
+        for(const d of ['hard','normal','easy']){
+          const s = getStars(levelId, key, d);
+          if(s > best) best = s;
+        }
+        if(best < min) min = best;
+      }
+      return min;
+    }
     for(const d of ['hard','normal','easy']){
       const s = getStars(levelId, unitNum, d);
       if(s > 0) return s;
@@ -107,7 +140,7 @@ window.App = (function(){
                   <h3>${escapeHtml(g.unitName || '')}</h3>
                 </div>
                 <div class="meta">
-                  <span>${total} 字${ready ? '' : '（內容待補）'}</span>
+                  <span>${total} 字${ready ? '' : '（內容待補）'}${splitStages(g.words).length > 1 ? `・共${splitStages(g.words).length}小關` : ''}</span>
                   ${stars > 0 ? `<span class="unit-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>` : ''}
                 </div>
                 <div class="row">
@@ -129,19 +162,62 @@ window.App = (function(){
   }
 
   function startBattle(levelId, unitNum){
-    renderDifficultyPicker(levelId, unitNum);
+    const lv = LEVELS.find(l => l.id === levelId);
+    const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
+    const stages = splitStages(g.words);
+    if(stages.length > 1) renderStagePicker(levelId, unitNum);
+    else renderDifficultyPicker(levelId, unitNum, 0, 1);
   }
 
-  function renderDifficultyPicker(levelId, unitNum){
+  function renderStagePicker(levelId, unitNum){
     const lv = LEVELS.find(l => l.id === levelId);
+    const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
+    const stages = splitStages(g.words);
+    const html = `
+      <section class="stage-picker">
+        <button class="back-btn" data-action="back-units">← 回 Unit 列表</button>
+        <h2 class="section-title">UNIT ${unitNum}：${escapeHtml(g.unitName || '')}（共${stages.length}小關，每關${STAGE_SIZE}字）</h2>
+        <div class="diff-grid">
+          ${stages.map((s, i) => {
+            const key = stageProgressKey(unitNum, i, stages.length);
+            const stars = getBestStageStars(levelId, key);
+            return `
+            <button class="diff-card" data-stage="${i}">
+              <span class="diff-card-label">第 ${i+1} 關</span>
+              <span class="diff-card-desc">${s.length} 字</span>
+              <span class="diff-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>
+            </button>`;
+          }).join('')}
+        </div>
+      </section>`;
+    view.innerHTML = html;
+    view.querySelectorAll('[data-stage]').forEach(btn => {
+      btn.addEventListener('click', () => renderDifficultyPicker(levelId, unitNum, Number(btn.dataset.stage), stages.length));
+    });
+    view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
+  }
+
+  function getBestStageStars(levelId, stageKey){
+    let best = 0;
+    for(const d of ['hard','normal','easy']){
+      const s = getStars(levelId, stageKey, d);
+      if(s > best) best = s;
+    }
+    return best;
+  }
+
+  function renderDifficultyPicker(levelId, unitNum, stageIdx, totalStages){
+    const lv = LEVELS.find(l => l.id === levelId);
+    const stageKey = stageProgressKey(unitNum, stageIdx, totalStages);
     const current = getDifficulty();
+    const backTarget = totalStages > 1 ? () => renderStagePicker(levelId, unitNum) : () => renderUnitList(levelId);
     const html = `
       <section class="diff-picker">
-        <button class="back-btn" data-action="back-units">← 回 Unit 列表</button>
-        <h2 class="section-title">選擇難度</h2>
+        <button class="back-btn" data-action="back-units">← 回${totalStages > 1 ? '選關' : 'Unit 列表'}</button>
+        <h2 class="section-title">選擇難度${totalStages > 1 ? `（第 ${stageIdx+1}/${totalStages} 關）` : ''}</h2>
         <div class="diff-grid">
           ${DIFF_OPTS.map(d => {
-            const stars = getStars(levelId, unitNum, d.id);
+            const stars = getStars(levelId, stageKey, d.id);
             return `
             <button class="diff-card ${d.id === current ? 'diff-card-active' : ''}" data-diff="${d.id}">
               <span class="diff-card-label">${d.label}</span>
@@ -156,22 +232,26 @@ window.App = (function(){
       btn.addEventListener('click', () => {
         const chosen = btn.dataset.diff;
         setDifficulty(chosen);
-        runBattle(levelId, unitNum, chosen);
+        runBattle(levelId, unitNum, chosen, stageIdx, totalStages);
       });
     });
-    view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
+    view.querySelector('[data-action="back-units"]').addEventListener('click', backTarget);
   }
 
-  function runBattle(levelId, unitNum, difficulty){
+  function runBattle(levelId, unitNum, difficulty, stageIdx, totalStages){
     const lv = LEVELS.find(l => l.id === levelId);
     const groups = groupByUnit(lv.words);
     const g = groups.find(x => x.unit === unitNum);
+    const stages = splitStages(g.words);
+    const stageWords = stages[stageIdx || 0] || g.words;
+    const stageKey = stageProgressKey(unitNum, stageIdx || 0, totalStages || stages.length);
+    const titleSuffix = (totalStages || stages.length) > 1 ? ` 第${(stageIdx||0)+1}關` : '';
     window.GameEngine.start(view, {
-      words: g.words,
-      title: `${lv.name} Unit ${unitNum} 守城`,
+      words: stageWords,
+      title: `${lv.name} Unit ${unitNum} 守城${titleSuffix}`,
       difficulty,
-      onFinish: (stars) => saveStars(levelId, unitNum, difficulty, stars),
-      onExit: () => renderUnitList(levelId),
+      onFinish: (stars) => saveStars(levelId, stageKey, difficulty, stars),
+      onExit: () => ((totalStages || stages.length) > 1 ? renderStagePicker(levelId, unitNum) : renderUnitList(levelId)),
     });
   }
 
