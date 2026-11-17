@@ -133,6 +133,25 @@ window.App = (function(){
             const total = g.words.length;
             const ready = done === total;
             const stars = ready ? getBestStars(levelId, g.unit) : 0;
+            const stages = splitStages(g.words);
+            const stageRowsHtml = ready ? stages.map((s, i) => {
+              const stageKey = stageProgressKey(g.unit, i, stages.length);
+              const rangeLabel = stages.length > 1
+                ? `第 ${i*STAGE_SIZE+1}–${i*STAGE_SIZE+s.length} 字`
+                : `共 ${s.length} 字`;
+              const diffButtons = DIFF_OPTS.map(d => {
+                const st = getStars(levelId, stageKey, d.id);
+                return `<button class="stage-diff-btn ${d.id === 'normal' ? 'active' : ''}" data-diff="${d.id}" data-stars="${st}">${d.label}</button>`;
+              }).join('');
+              const defaultStars = getStars(levelId, stageKey, 'normal');
+              return `
+                <div class="stage-row" data-unit="${g.unit}" data-stage="${i}">
+                  <span class="stage-range">${rangeLabel}</span>
+                  <div class="stage-diff-group">${diffButtons}</div>
+                  <span class="stage-stars">${'★'.repeat(defaultStars)}${'☆'.repeat(3-defaultStars)}</span>
+                  <button class="btn sm" data-play-stage>⚔ 守城</button>
+                </div>`;
+            }).join('') : '';
             return `
               <article class="ucard ${ready ? '' : 'ucard-wip'}">
                 <div class="uhead">
@@ -140,11 +159,11 @@ window.App = (function(){
                   <h3>${escapeHtml(g.unitName || '')}</h3>
                 </div>
                 <div class="meta">
-                  <span>${total} 字${ready ? '' : '（內容待補）'}${splitStages(g.words).length > 1 ? `・共${splitStages(g.words).length}小關` : ''}</span>
+                  <span>${total} 字${ready ? '' : '（內容待補）'}${stages.length > 1 ? `・共${stages.length}小關` : ''}</span>
                   ${stars > 0 ? `<span class="unit-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>` : ''}
                 </div>
+                ${ready ? `<div class="stage-rows">${stageRowsHtml}</div>` : ''}
                 <div class="row">
-                  ${ready ? `<button class="btn sm" data-play="${g.unit}">⚔ 守城</button>` : ''}
                   <button class="btn alt sm" data-preview="${g.unit}">📖 預習單字</button>
                 </div>
               </article>`;
@@ -156,8 +175,27 @@ window.App = (function(){
     view.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.preview)));
     });
-    view.querySelectorAll('[data-play]').forEach(btn => {
-      btn.addEventListener('click', () => startBattle(levelId, Number(btn.dataset.play)));
+    view.querySelectorAll('.stage-row').forEach(row => {
+      const unitNum = Number(row.dataset.unit);
+      const stageIdx = Number(row.dataset.stage);
+      const diffBtns = row.querySelectorAll('.stage-diff-btn');
+      const starsEl = row.querySelector('.stage-stars');
+      diffBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          diffBtns.forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          const st = Number(b.dataset.stars);
+          starsEl.textContent = '★'.repeat(st) + '☆'.repeat(3-st);
+        });
+      });
+      row.querySelector('[data-play-stage]').addEventListener('click', () => {
+        const activeBtn = row.querySelector('.stage-diff-btn.active') || diffBtns[1];
+        const diff = activeBtn.dataset.diff;
+        setDifficulty(diff);
+        const g2 = groups.find(x => x.unit === unitNum);
+        const totalStages = splitStages(g2.words).length;
+        runBattle(levelId, unitNum, diff, stageIdx, totalStages);
+      });
     });
   }
 
@@ -165,77 +203,7 @@ window.App = (function(){
     const lv = LEVELS.find(l => l.id === levelId);
     const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
     const stages = splitStages(g.words);
-    if(stages.length > 1) renderStagePicker(levelId, unitNum);
-    else renderDifficultyPicker(levelId, unitNum, 0, 1);
-  }
-
-  function renderStagePicker(levelId, unitNum){
-    const lv = LEVELS.find(l => l.id === levelId);
-    const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
-    const stages = splitStages(g.words);
-    const html = `
-      <section class="stage-picker">
-        <button class="back-btn" data-action="back-units">← 回 Unit 列表</button>
-        <h2 class="section-title">UNIT ${unitNum}：${escapeHtml(g.unitName || '')}（共${stages.length}小關，每關${STAGE_SIZE}字）</h2>
-        <div class="diff-grid">
-          ${stages.map((s, i) => {
-            const key = stageProgressKey(unitNum, i, stages.length);
-            const stars = getBestStageStars(levelId, key);
-            return `
-            <button class="diff-card" data-stage="${i}">
-              <span class="diff-card-label">第 ${i+1} 關</span>
-              <span class="diff-card-desc">${s.length} 字</span>
-              <span class="diff-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>
-            </button>`;
-          }).join('')}
-        </div>
-      </section>`;
-    view.innerHTML = html;
-    view.querySelectorAll('[data-stage]').forEach(btn => {
-      btn.addEventListener('click', () => renderDifficultyPicker(levelId, unitNum, Number(btn.dataset.stage), stages.length));
-    });
-    view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
-  }
-
-  function getBestStageStars(levelId, stageKey){
-    let best = 0;
-    for(const d of ['hard','normal','easy']){
-      const s = getStars(levelId, stageKey, d);
-      if(s > best) best = s;
-    }
-    return best;
-  }
-
-  function renderDifficultyPicker(levelId, unitNum, stageIdx, totalStages){
-    const lv = LEVELS.find(l => l.id === levelId);
-    const stageKey = stageProgressKey(unitNum, stageIdx, totalStages);
-    const current = getDifficulty();
-    const backTarget = totalStages > 1 ? () => renderStagePicker(levelId, unitNum) : () => renderUnitList(levelId);
-    const html = `
-      <section class="diff-picker">
-        <button class="back-btn" data-action="back-units">← 回${totalStages > 1 ? '選關' : 'Unit 列表'}</button>
-        <h2 class="section-title">選擇難度${totalStages > 1 ? `（第 ${stageIdx+1}/${totalStages} 關）` : ''}</h2>
-        <div class="diff-grid">
-          ${DIFF_OPTS.map(d => {
-            const stars = getStars(levelId, stageKey, d.id);
-            return `
-            <button class="diff-card ${d.id === current ? 'diff-card-active' : ''}" data-diff="${d.id}">
-              <span class="diff-card-label">${d.label}</span>
-              <span class="diff-card-desc">${d.desc}</span>
-              <span class="diff-card-stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</span>
-            </button>`;
-          }).join('')}
-        </div>
-      </section>`;
-    view.innerHTML = html;
-    view.querySelectorAll('[data-diff]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const chosen = btn.dataset.diff;
-        setDifficulty(chosen);
-        runBattle(levelId, unitNum, chosen, stageIdx, totalStages);
-      });
-    });
-    view.querySelector('[data-action="back-units"]').addEventListener('click', backTarget);
+    runBattle(levelId, unitNum, getDifficulty(), 0, stages.length);
   }
 
   function runBattle(levelId, unitNum, difficulty, stageIdx, totalStages){
@@ -251,7 +219,7 @@ window.App = (function(){
       title: `${lv.name} Unit ${unitNum} 守城${titleSuffix}`,
       difficulty,
       onFinish: (stars) => saveStars(levelId, stageKey, difficulty, stars),
-      onExit: () => ((totalStages || stages.length) > 1 ? renderStagePicker(levelId, unitNum) : renderUnitList(levelId)),
+      onExit: () => renderUnitList(levelId),
     });
   }
 

@@ -78,6 +78,16 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .ucard .row{display:flex;gap:8px;flex-wrap:wrap}
 .ucard .row > .btn{flex:1 1 120px}
 
+/* ===== Unit 列表內的「每小關+難度+星級」一列式選單（對齊 lexilereadingrex 格式） ===== */
+.stage-rows{display:flex;flex-direction:column;gap:6px;margin:4px 0}
+.stage-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:8px;background:var(--panel2)}
+.stage-range{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;flex:0 0 auto}
+.stage-diff-group{display:flex;gap:4px;flex:1 1 auto}
+.stage-diff-btn{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--panel);color:var(--muted);white-space:nowrap}
+.stage-diff-btn.active{background:var(--ochre);color:#1c1608}
+.stage-diff-btn:active{transform:translateY(1px)}
+.stage-stars{font-size:13px;color:var(--ochreD);letter-spacing:1px;white-space:nowrap;min-width:46px;text-align:center}
+
 .word-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .word-item{background:var(--panel);color:var(--ink);border-radius:10px;padding:12px 14px;box-shadow:inset 0 -3px 0 var(--line)}
 .word-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
