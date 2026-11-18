@@ -137,11 +137,16 @@ window.BattleArt = (function(){
     }
     g.restore();
   }
-  function drawCastle(g,T,r){
+  // 主題造型皆沿用原版城堡的結構（雙塔位置、城門拱形、窗戶座標、磚牆排法），
+  // 只替換表面紋理與塔頂裝飾，確保風格統一、不會「看起來隨便」。
+  function drawCastleBase(g,T,r,opts){
+    opts = opts || {};
     const base = GROUND + 8;
+    const texture = opts.texture || bricks;
     g.lineJoin = 'round'; g.strokeStyle = T.ink;
+    // 右塔（含城門）
     g.fillStyle = T.stone; g.fillRect(0,128,WALL_X,base-128);
-    bricks(g,0,128,WALL_X,base-128,r,T);
+    texture(g,0,128,WALL_X,base-128,r,T);
     g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(0,128,WALL_X,3);
     g.lineWidth = 2; g.strokeRect(-2,128,WALL_X+2,base-128);
     for(let x=98; x+10<=WALL_X; x+=16){ g.fillStyle = T.stone; g.fillRect(x,117,11,11); g.strokeRect(x,117,11,11); }
@@ -157,8 +162,9 @@ window.BattleArt = (function(){
     g.strokeStyle = T.stoneD; g.lineWidth = 1;
     for(let a=Math.PI; a<=Math.PI*2+.01; a+=Math.PI/6){ g.beginPath(); g.moveTo(124+Math.cos(a)*18,200+Math.sin(a)*18); g.lineTo(124+Math.cos(a)*25,200+Math.sin(a)*25); g.stroke(); }
     g.strokeStyle = T.ink; g.lineWidth = 2; g.beginPath(); g.arc(124,200,25,Math.PI,0); g.stroke();
+    // 左塔
     g.fillStyle = T.stoneL; g.fillRect(20,68,78,base-68);
-    bricks(g,20,68,78,base-68,r,T);
+    texture(g,20,68,78,base-68,r,T);
     g.fillStyle = 'rgba(0,0,0,.14)'; g.fillRect(20,68,11,base-68);
     g.lineWidth = 2; g.strokeStyle = T.ink; g.strokeRect(20,68,78,base-68);
     for(let x=20; x+12<=98; x+=16.5){ g.fillStyle = T.stoneL; g.fillRect(x,56,12,12); g.strokeRect(x,56,12,12); }
@@ -167,16 +173,96 @@ window.BattleArt = (function(){
       g.beginPath(); g.moveTo(cx-5,cy+20); g.lineTo(cx-5,cy+5); g.arc(cx,cy+5,5,Math.PI,0); g.lineTo(cx+5,cy+20); g.closePath();
       g.fillStyle = T.win; g.fill(); g.lineWidth = 1.8; g.stroke();
     });
+    if(opts.topper) opts.topper(g,T,r,base);
     if(!T.night){
       g.fillStyle = '#4f7a4a';
       for(let i=0;i<70;i++){ const x = 20 + r()*70, y = base - r()*r()*120; ell(g,x,y,2.2+r()*2,1.6+r()*1.4); g.fill(); }
       for(let i=0;i<40;i++){ const x = r()*WALL_X, y = base - r()*r()*30; ell(g,x,y,2+r()*2,1.5); g.fill(); }
     }
   }
+  function drawCastle(g,T,r){ drawCastleBase(g,T,r); }
+  // jungle：石牆改木紋理，塔頂加樹冠與藤蔓垂掛
+  function texWood(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.strokeStyle = T.stoneD; g.lineWidth = 1;
+    for(let xx=x+4; xx<x+w; xx+=9){ g.beginPath(); g.moveTo(xx,y); g.lineTo(xx+(r()*3-1.5),y+h); g.stroke(); }
+    for(let yy=y+14; yy<y+h; yy+=22){ g.strokeStyle = 'rgba(0,0,0,.18)'; g.beginPath(); g.moveTo(x,yy); g.lineTo(x+w,yy); g.stroke(); }
+    g.restore();
+  }
+  function topperJungle(g,T,r,base){
+    const leafCol = '#3a8a4e', leafMid = '#2e7040', leafD = '#1e5230';
+    [[59,56,30,18],[124,117,24,14]].forEach(([cx,cy,rx,ry]) => {
+      g.fillStyle = leafD; ell(g,cx+3,cy-ry*.6,rx,ry); g.fill();
+      g.fillStyle = leafMid; ell(g,cx-4,cy-ry*1.1,rx*.8,ry*.8); g.fill();
+      g.fillStyle = leafCol; ell(g,cx+2,cy-ry*1.5,rx*.6,ry*.6); g.fill();
+      g.strokeStyle = T.ink; g.lineWidth = 1.6; ell(g,cx+3,cy-ry*.6,rx,ry); g.stroke();
+    });
+    g.strokeStyle = leafD; g.lineWidth = 1.4;
+    for(let i=0;i<4;i++){ const x = 24 + r()*70, y0 = 70; const len = 10+r()*16; g.beginPath(); g.moveTo(x,y0); g.quadraticCurveTo(x+(r()*4-2),y0+len*.6,x+(r()*3-1.5),y0+len); g.stroke(); }
+  }
+  // ocean/coral：石牆改貝殼螺旋紋理，塔頂加螺旋尖頂
+  function texShell(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.strokeStyle = T.stoneD; g.lineWidth = 1.2;
+    const cx = x+w/2;
+    for(let k=0;k<8;k++){ g.beginPath(); g.arc(cx, y+h-6-k*16, 6+k*5, Math.PI*.1, Math.PI*1.3); g.stroke(); }
+    g.restore();
+  }
+  function topperShell(g,T,r,base){
+    [[59,56,16],[124,38,20]].forEach(([cx,cy,rad]) => {
+      g.beginPath(); g.moveTo(cx-rad*.5,cy+rad); g.quadraticCurveTo(cx-rad*.6,cy-rad*.3,cx,cy-rad); g.quadraticCurveTo(cx+rad*.6,cy-rad*.3,cx+rad*.5,cy+rad); g.closePath();
+      g.fillStyle = T.stoneL; g.fill(); g.lineWidth = 1.8; g.strokeStyle = T.ink; g.stroke();
+      g.strokeStyle = T.stoneD; g.lineWidth = 1.2;
+      for(let k=0;k<3;k++){ g.beginPath(); g.arc(cx,cy+rad-4-k*7, 3+k*3, Math.PI*.2, Math.PI*1.1); g.stroke(); }
+    });
+  }
+  // haunted：石牆改腐朽木紋，塔頂加破損尖塔與蜘蛛網
+  function texHaunted(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.strokeStyle = 'rgba(0,0,0,.4)'; g.lineWidth = 1;
+    for(let xx=x+3; xx<x+w; xx+=11){ g.beginPath(); g.moveTo(xx,y); g.lineTo(xx+(r()*5-2.5),y+h); g.stroke(); }
+    for(let i=0;i<6;i++){ const xx=x+r()*w, yy=y+r()*h; g.strokeStyle='rgba(0,0,0,.3)'; g.beginPath(); g.moveTo(xx,yy); g.lineTo(xx+r()*8-4,yy+r()*8-4); g.stroke(); }
+    g.restore();
+  }
+  function topperHaunted(g,T,r,base){
+    [[59,56,16],[124,38,14]].forEach(([cx,cy,h]) => {
+      g.beginPath(); g.moveTo(cx-10,cy); g.lineTo(cx-2,cy-h); g.lineTo(cx+10,cy); g.closePath();
+      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+    });
+    // 蜘蛛網裝飾
+    g.strokeStyle = 'rgba(220,220,230,.5)'; g.lineWidth = 1;
+    const cx=20, cy=68;
+    for(let a=0;a<Math.PI/2;a+=Math.PI/8){ g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+Math.cos(a)*16,cy+Math.sin(a)*16); g.stroke(); }
+    for(let k=4;k<=16;k+=4){ g.beginPath(); g.arc(cx,cy,k,0,Math.PI/2); g.stroke(); }
+  }
+  // crystal/ice-cave：石牆改削面晶體紋理，塔頂加晶簇尖刺
+  function texCrystal(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.strokeStyle = 'rgba(255,255,255,.3)'; g.lineWidth = 1;
+    for(let i=0;i<10;i++){ const xx=x+r()*w, yy=y+r()*h, s=6+r()*10; g.beginPath(); g.moveTo(xx,yy-s); g.lineTo(xx+s*.5,yy); g.lineTo(xx,yy+s); g.lineTo(xx-s*.5,yy); g.closePath(); g.stroke(); }
+    g.restore();
+  }
+  function topperCrystal(g,T,r,base){
+    [[49,56],[69,50],[114,40],[134,36]].forEach(([cx,cy],i) => {
+      const h = 14 + (i%2)*10;
+      g.beginPath(); g.moveTo(cx-6,cy); g.lineTo(cx,cy-h); g.lineTo(cx+6,cy); g.closePath();
+      g.fillStyle = i%2 ? T.stoneL : T.stone; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.strokeStyle = 'rgba(255,255,255,.4)'; g.lineWidth = 1; g.beginPath(); g.moveTo(cx,cy-h); g.lineTo(cx,cy); g.stroke();
+    });
+  }
+  const CASTLE_RENDERERS = {
+    jungle: (g,T,r) => drawCastleBase(g,T,r,{texture:texWood, topper:topperJungle}),
+    ocean: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
+    coral: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
+    haunted: (g,T,r) => drawCastleBase(g,T,r,{texture:texHaunted, topper:topperHaunted}),
+    'ice-cave': (g,T,r) => drawCastleBase(g,T,r,{texture:texCrystal, topper:topperCrystal}),
+    crystal: (g,T,r) => drawCastleBase(g,T,r,{texture:texCrystal, topper:topperCrystal}),
+  };
   const bgCache = {};
   function makeBg(theme){
     if(bgCache[theme]) return bgCache[theme];
     const T = THEMES[theme] || THEMES.forest, r = rngFrom('bg-'+theme);
+
     const c = document.createElement('canvas'); c.width = W*DPR; c.height = H*DPR;
     const g = c.getContext('2d'); g.scale(DPR,DPR);
     let gr = g.createLinearGradient(0,0,0,GROUND); gr.addColorStop(0,T.sky[0]); gr.addColorStop(1,T.sky[1]);
@@ -199,7 +285,7 @@ window.BattleArt = (function(){
     g.strokeStyle = T.groundD; g.lineWidth = 1.2;
     for(let i=0;i<120;i++){ const x = r()*W, y = GROUND + 22 + r()*(H-GROUND-22), h = 3 + r()*5; g.beginPath(); g.moveTo(x-2,y-h); g.lineTo(x,y); g.lineTo(x+2,y-h*.8); g.stroke(); }
     for(let i=0;i<26;i++){ g.fillStyle = r()<.5 ? '#e8d27a' : '#efe9dc'; circle(g, r()*W, GROUND+28 + r()*40, 1.6); g.fill(); }
-    drawCastle(g,T,r);
+    (CASTLE_RENDERERS[theme] || drawCastle)(g,T,r);
     for(let i=0;i<3200;i++){ g.fillStyle = r()<.5 ? 'rgba(0,0,0,.05)' : 'rgba(255,255,255,.05)'; g.fillRect(r()*W, r()*H, 1.3, 1.3); }
     const vg = g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,W*.62); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.22)');
     g.fillStyle = vg; g.fillRect(0,0,W,H);
