@@ -329,7 +329,7 @@ const WORDS_PRE_A1 = [
   { w: 'a lot of', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/ə lɒt əv/', pos: 'phr.', zh: '很多的', ex: 'She has a lot of toys.', exZh: '她有很多玩具。' },
   { w: 'about', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/əˈbaʊt/', pos: 'prep.', zh: '關於', ex: 'Tell me about your day.', exZh: '告訴我你今天過得如何。' },
   { w: 'add', unit: 7, unitName: 'School & Learning', ipa: '/æd/', pos: 'v.', zh: '加上', ex: 'Add two and three.', exZh: '把二加上三。' },
-  { w: 'again', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/əˈɡɛn/', pos: 'adv.', zh: '再一次', ex: 'Please say it again.', exZh: '請再說一次。' },  { w: 'Ann/Anna', unit: 1, unitName: 'Family & Friends', ipa: '/æn/ /ˈænə/', pos: 'n.', zh: '安/安娜（人名）', ex: 'Anna is from Spain.', exZh: '安娜來自西班牙。' },
+  { w: 'again', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/əˈɡɛn/', pos: 'adv.', zh: '再一次', ex: 'Please say it again.', exZh: '請再說一次。' },
   { w: 'ask', unit: 7, unitName: 'School & Learning', ipa: '/æsk/', pos: 'v.', zh: '問', ex: 'Can I ask you a question?', exZh: '我可以問你一個問題嗎？' },
   { w: 'be', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/biː/', pos: 'v.', zh: '是（be動詞）', ex: 'I want to be a doctor.', exZh: '我想成為一名醫生。' },
   { w: 'behind', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/bɪˈhaɪnd/', pos: 'prep.', zh: '在後面', ex: 'The cat is behind the sofa.', exZh: '貓在沙發後面。' },  { w: 'between', unit: 13, unitName: 'High-Frequency / Core Words', ipa: '/bɪˈtwiːn/', pos: 'prep.', zh: '在...之間', ex: 'The ball is between the two boxes.', exZh: '球在這兩個箱子之間。' },  { w: 'bounce', unit: 8, unitName: 'Entertainment, Hobbies & Technology', ipa: '/baʊns/', pos: 'v.', zh: '彈跳', ex: 'The ball bounces on the floor.', exZh: '球在地板上彈跳。' },
