@@ -3,11 +3,17 @@
 window.App = (function(){
 
   const LEVELS = [
-    { id: 'preA1', name: 'pre-A1', examName: 'Starters', words: (window.WORDS_PRE_A1 || []) },
-    { id: 'a1',    name: 'A1',     examName: 'Movers',   words: (window.WORDS_A1 || []) },
-    { id: 'a2',    name: 'A2',     examName: 'Flyers',   words: (window.WORDS_A2 || []) },
-    { id: 'ket',   name: 'A2–B1',  examName: 'KET',      words: (window.WORDS_KET || []) },
-    { id: 'pet',   name: 'B1–B2',  examName: 'PET',      words: (window.WORDS_PET || []) },
+    { id: 'preA1', name: 'pre-A1', examName: 'Starters', system: 'cambridge', words: (window.WORDS_PRE_A1 || []) },
+    { id: 'a1',    name: 'A1',     examName: 'Movers',   system: 'cambridge', words: (window.WORDS_A1 || []) },
+    { id: 'a2',    name: 'A2',     examName: 'Flyers',   system: 'cambridge', words: (window.WORDS_A2 || []) },
+    { id: 'ket',   name: 'A2–B1',  examName: 'KET',      system: 'cambridge', words: (window.WORDS_KET || []) },
+    { id: 'pet',   name: 'B1–B2',  examName: 'PET',      system: 'cambridge', words: (window.WORDS_PET || []) },
+    { id: 'toeic', name: 'TOEIC',  examName: '新制多益',  system: 'toeic',     words: (window.WORDS_TOEIC || []) },
+  ];
+
+  const SYSTEMS = [
+    { id: 'cambridge', name: '劍橋分級系統', desc: 'YLE Starters/Movers/Flyers・KET・PET', levels: LEVELS.filter(l => l.system === 'cambridge') },
+    { id: 'toeic',     name: 'TOEIC 系統',   desc: '新制多益 3,037 字，14 個主題 Unit', levels: LEVELS.filter(l => l.system === 'toeic') },
   ];
 
   let view;
@@ -74,12 +80,41 @@ window.App = (function(){
     return totalStages > 1 ? `${unitNum}:s${stageIdx}` : `${unitNum}`;
   }
 
-  function renderLevelMenu(){
+  function renderSystemMenu(){
     const html = `
       <section class="level-menu">
+        <h2 class="section-title">選擇系統</h2>
+        <div class="level-list-rows">
+          ${SYSTEMS.map(sys => {
+            const total = sys.levels.reduce((a,l) => a + l.words.length, 0);
+            const done = sys.levels.reduce((a,l) => a + l.words.filter(w => w.ipa).length, 0);
+            const pct = total ? Math.round(done/total*100) : 0;
+            return `
+              <button class="level-row" data-system="${sys.id}">
+                <span class="level-row-main">
+                  <span class="level-row-name">${sys.name}</span>
+                  <span class="level-row-exam">${sys.desc}</span>
+                </span>
+                <span class="level-row-progress"><span class="bar" style="width:${pct}%"></span></span>
+                <span class="level-row-pct">${done}/${total} 字</span>
+              </button>`;
+          }).join('')}
+        </div>
+      </section>`;
+    view.innerHTML = html;
+    view.querySelectorAll('[data-system]').forEach(btn => {
+      btn.addEventListener('click', () => renderLevelMenu(btn.dataset.system));
+    });
+  }
+
+  function renderLevelMenu(systemId){
+    const sys = SYSTEMS.find(s => s.id === systemId) || SYSTEMS[0];
+    const html = `
+      <section class="level-menu">
+        <button class="back-btn" data-action="back-systems">← 回系統選單</button>
         <h2 class="section-title">選擇等級</h2>
         <div class="level-list-rows">
-          ${LEVELS.map(lv => {
+          ${sys.levels.map(lv => {
             const total = lv.words.length;
             const done = lv.words.filter(w => w.ipa).length;
             const pct = total ? Math.round(done/total*100) : 0;
@@ -96,6 +131,7 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
+    view.querySelector('[data-action="back-systems"]').addEventListener('click', renderSystemMenu);
     view.querySelectorAll('.level-row').forEach(btn => {
       btn.addEventListener('click', () => renderUnitList(btn.dataset.level));
     });
@@ -179,7 +215,7 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
-    view.querySelector('[data-action="back-levels"]').addEventListener('click', renderLevelMenu);
+    view.querySelector('[data-action="back-levels"]').addEventListener('click', () => renderLevelMenu(lv.system));
     view.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.preview)));
     });
@@ -289,7 +325,7 @@ window.App = (function(){
     init(){
       view = document.getElementById('view');
       if(!view) return;
-      renderLevelMenu();
+      renderSystemMenu();
     }
   };
 })();
