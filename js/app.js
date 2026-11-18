@@ -103,7 +103,15 @@ window.App = (function(){
       </section>`;
     view.innerHTML = html;
     view.querySelectorAll('[data-system]').forEach(btn => {
-      btn.addEventListener('click', () => renderLevelMenu(btn.dataset.system));
+      btn.addEventListener('click', () => {
+        const sys = SYSTEMS.find(s => s.id === btn.dataset.system);
+        if(sys && sys.levels.length === 1){
+          // 系統只有一個等級時，跳過選等級畫面，直接進Unit列表
+          renderUnitList(sys.levels[0].id);
+        }else{
+          renderLevelMenu(btn.dataset.system);
+        }
+      });
     });
   }
 
@@ -164,10 +172,12 @@ window.App = (function(){
 
   function renderUnitList(levelId){
     const lv = LEVELS.find(l => l.id === levelId);
+    const sys = SYSTEMS.find(s => s.id === lv.system);
+    const singleLevelSystem = sys && sys.levels.length === 1;
     const groups = groupByUnit(lv.words);
     const html = `
       <section class="unit-list">
-        <button class="back-btn" data-action="back-levels">← 回等級選單</button>
+        <button class="back-btn" data-action="back-levels">${singleLevelSystem ? '← 回系統選單' : '← 回等級選單'}</button>
         <h2 class="section-title">${lv.name}（${lv.examName}）— Unit 列表</h2>
         <div class="ulist">
           ${groups.map(g => {
@@ -215,7 +225,9 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
-    view.querySelector('[data-action="back-levels"]').addEventListener('click', () => renderLevelMenu(lv.system));
+    view.querySelector('[data-action="back-levels"]').addEventListener('click', () => {
+      if(singleLevelSystem) renderSystemMenu(); else renderLevelMenu(lv.system);
+    });
     view.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.preview)));
     });
