@@ -104,8 +104,9 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .word-exzh{font-size:14px;color:var(--muted)}
 
 /* ===== todo4 守城戰鬥畫面 ===== */
-.battle-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.battle-topbar-right{display:flex;align-items:center;gap:8px}
+.battle-topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 8px;margin-bottom:10px}
+.battle-topbar-left{display:flex;align-items:center;gap:8px}
+.battle-topbar-right{display:flex;align-items:center;gap:8px;margin-left:auto}
 .tbtn{padding:8px 14px;border-radius:8px;background:var(--panel2);color:var(--ink);font-weight:700;font-size:14px}
 .tbtn:active{transform:translateY(1px)}
 .battle-title{font-family:var(--display);font-size:16px}

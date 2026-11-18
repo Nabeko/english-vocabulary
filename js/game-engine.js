@@ -151,8 +151,10 @@ window.GameEngine = (function(){
 
     container.innerHTML = `
       <div class="battle-topbar">
-        <button class="tbtn" id="ge-back">← 撤退</button>
-        <b class="battle-title">${esc(title || '守城')}</b>
+        <div class="battle-topbar-left">
+          <button class="tbtn" id="ge-back">← 撤退</button>
+          <b class="battle-title">${esc(title || '守城')}</b>
+        </div>
         <div class="battle-topbar-right">
           <span class="battle-diff-tag">${esc(diff.label)}</span>
           <button class="tbtn" id="ge-pause">⏸ 暫停</button>
