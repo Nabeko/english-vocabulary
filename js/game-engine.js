@@ -347,7 +347,8 @@ window.GameEngine = (function(){
 
     function ensureQuestion(){
       if(G.cur && G.cur.stale && G.time < G.lock) return; // 等鎖定時間過了（讓答題回饋文字有時間被看到）才換下一題
-      // 若目前鎖定的敵人仍在場上、還沒分出勝負，就維持同一題，不要因為其他敵人超車而中途換題
+      // 題目來源敵人仍在場上、還沒分出勝負，就維持同一題，不要因為其他敵人超車而中途換題。
+      // 注意：題目只是出題來源，答對時攻擊的一律是「當下」離城堡最近的敵人，兩者脫鉤。
       if(G.cur && !G.cur.stale){
         const e = G.cur.enemy;
         if(e && G.enemies.includes(e) && e.state === 'walk' && !e.doomed) return;
@@ -395,7 +396,9 @@ window.GameEngine = (function(){
 
     function answer(j){
       if(!G.cur || G.over || G.paused || G.cur.answered || G.time < G.lock) return;
-      const { enemy: e, q } = G.cur, x = q.word;
+      const { q } = G.cur, x = q.word;
+      // 攻擊目標永遠是「當下」離城堡最近的敵人，可能跟出題來源敵人不同（被更快的敵人超車時）
+      const e = G.enemies.filter(en => en.state === 'walk' && !en.doomed).sort((a,b) => a.x - b.x)[0] || G.cur.enemy;
       G.cur.answered = true;
       const ok = q.opts[j].w === q.answer;
       const btns = container.querySelectorAll('#ge-qp .qp-opt');
