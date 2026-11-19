@@ -44,6 +44,16 @@ window.GameEngine = (function(){
   const headWord = w => String(w).split('/')[0].trim();
   const blankRe = w => { try{ return new RegExp('\\b' + headWord(w).replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b'); }catch(e){ return null; } };
   const canFill = x => !!(x.ex && blankRe(x.w) && blankRe(x.w).test(x.ex));
+  function boldZhWord(exZh, zh){
+    if(!exZh) return '';
+    if(!zh) return esc(exZh);
+    // zh 可能含多個以頓號/斜線分隔的釋義，取第一個當關鍵字比對
+    const head = String(zh).split(/[、，,\/；;]/)[0].trim();
+    if(!head) return esc(exZh);
+    const idx = exZh.indexOf(head);
+    if(idx === -1) return esc(exZh);
+    return esc(exZh.slice(0,idx)) + '<b>' + esc(exZh.slice(idx, idx+head.length)) + '</b>' + esc(exZh.slice(idx+head.length));
+  }
 
   let muted = (function(){ try{ return localStorage.getItem('ev_muted_v1') === '1'; }catch(e){ return false; } })();
   function setMuted(v){
@@ -351,7 +361,7 @@ window.GameEngine = (function(){
       }else{
         const re = blankRe(x.w); const m = x.ex.match(re);
         if(m){
-          promptHtml = `<div class="qp-sent">${esc(x.ex.slice(0,m.index))}<span class="qp-blank"></span>${esc(x.ex.slice(m.index + m[0].length))}</div><div class="qp-trans">${esc(x.exZh||'')}</div>`;
+          promptHtml = `<div class="qp-sent">${esc(x.ex.slice(0,m.index))}<span class="qp-blank"></span>${esc(x.ex.slice(m.index + m[0].length))}</div><div class="qp-trans">${boldZhWord(x.exZh, x.zh)}</div>`;
         }else{
           promptHtml = `<div class="qp-word">${esc(x.w)}</div>`;
         }
