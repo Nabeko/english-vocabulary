@@ -138,6 +138,7 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .qp-sent{font-family:var(--latin);font-weight:700;font-size:23px;line-height:1.45;margin-bottom:4px}
 .qp-blank{display:inline-block;width:64px;border-bottom:2px solid var(--muted);margin:0 2px}
 .qp-trans{font-size:15px;color:var(--muted);margin-bottom:8px}
+.qp-trans b{color:var(--ink);font-weight:900}
 .qp-say{margin-bottom:8px;padding:6px 12px;border-radius:8px;background:var(--panel2)}
 .qp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .qp-opt{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;background:var(--panel2);text-align:left;font-size:19px;font-weight:700;min-height:56px}
