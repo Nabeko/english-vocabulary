@@ -81,7 +81,7 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .ucard .row > .btn{flex:1 1 120px}
 
 /* ===== Unit 列表內的「每小關+難度+星級」一列式選單（對齊 lexilereadingrex 格式） ===== */
-.stage-rows{display:grid;grid-template-columns:minmax(76px,auto) 1fr minmax(46px,auto) minmax(60px,auto);gap:6px;margin:4px 0}
+.stage-rows{display:grid;grid-template-columns:minmax(76px,auto) 1fr minmax(46px,auto) minmax(60px,auto) minmax(60px,auto);gap:6px;margin:4px 0}
 .stage-row{display:contents}
 .stage-range{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;padding:8px 0 8px 10px;background:var(--panel2);border-radius:8px 0 0 8px}
 .stage-diff-group{display:flex;gap:4px;justify-content:center;padding:8px 0;background:var(--panel2)}
@@ -89,7 +89,9 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .stage-diff-btn.active{background:var(--ochre);color:#1c1608}
 .stage-diff-btn:active{transform:translateY(1px)}
 .stage-stars{font-size:13px;color:var(--ochreD);letter-spacing:1px;white-space:nowrap;text-align:center;padding:8px 0;background:var(--panel2)}
-.stage-row .btn.sm{justify-self:end;margin:4px 10px 4px 0;border-radius:0 8px 8px 0}
+.stage-row .btn.sm{justify-self:end;margin:4px 0;white-space:nowrap}
+.stage-row .btn.alt.sm{margin:4px 0 4px 10px;border-radius:0}
+.stage-row .btn.sm:last-child{margin:4px 10px 4px 0;border-radius:0 8px 8px 0}
 
 .word-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .word-item{background:var(--panel);color:var(--ink);border-radius:10px;padding:12px 14px;box-shadow:inset 0 -3px 0 var(--line)}
@@ -173,12 +175,14 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
   .ucard .row > .btn{flex:1 1 auto;padding:7px 6px;font-size:12px;min-height:36px}
 
   /* 守城小關列：窄螢幕改用更緊湊的欄寬，優先保持一行不換行 */
-  .stage-rows{grid-template-columns:minmax(56px,auto) 1fr minmax(34px,auto) minmax(44px,auto);gap:3px}
+  .stage-rows{grid-template-columns:minmax(56px,auto) 1fr minmax(34px,auto) minmax(44px,auto) minmax(44px,auto);gap:3px}
   .stage-range{font-size:11px;padding:6px 0 6px 6px}
   .stage-diff-group{gap:2px;padding:6px 0}
   .stage-diff-btn{padding:3px 6px;font-size:10px}
   .stage-stars{font-size:11px;padding:6px 0}
-  .stage-row .btn.sm{margin:3px 6px 3px 0;padding:5px 7px;font-size:11px}
+  .stage-row .btn.sm{margin:3px 0;padding:5px 5px;font-size:10px}
+  .stage-row .btn.alt.sm{margin:3px 0 3px 6px}
+  .stage-row .btn.sm:last-child{margin:3px 6px 3px 0}
 
   .qp-word{font-size:28px}
   .qp-zh{font-size:22px}

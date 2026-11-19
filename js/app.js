@@ -203,6 +203,7 @@ window.App = (function(){
                   <span class="stage-range">${rangeLabel}</span>
                   <div class="stage-diff-group">${diffButtons}</div>
                   <span class="stage-stars">${'★'.repeat(defaultStars)}${'☆'.repeat(3-defaultStars)}</span>
+                  <button class="btn alt sm" data-preview-stage>📖 預習</button>
                   <button class="btn sm" data-play-stage>⚔ 守城</button>
                 </div>`;
             }).join('') : '';
@@ -252,6 +253,14 @@ window.App = (function(){
         const totalStages = splitStages(g2.words).length;
         runBattle(levelId, unitNum, diff, stageIdx, totalStages);
       });
+      const previewStageBtn = row.querySelector('[data-preview-stage]');
+      if(previewStageBtn){
+        previewStageBtn.addEventListener('click', () => {
+          const g2 = groups.find(x => x.unit === unitNum);
+          const stagesNow = splitStages(g2.words);
+          renderPreview(levelId, unitNum, stageIdx, stagesNow.length);
+        });
+      }
     });
   }
 
@@ -300,16 +309,20 @@ window.App = (function(){
     window.speechSynthesis.speak(utter);
   }
 
-  function renderPreview(levelId, unitNum){
+  function renderPreview(levelId, unitNum, stageIdx, totalStages){
     const lv = LEVELS.find(l => l.id === levelId);
     const groups = groupByUnit(lv.words);
     const g = groups.find(x => x.unit === unitNum);
+    const stages = splitStages(g.words);
+    const hasStage = stageIdx != null && stages.length > 1;
+    const previewWords = hasStage ? (stages[stageIdx] || g.words) : g.words;
+    const titleSuffix = hasStage ? ` 第${stageIdx+1}關` : '';
     const html = `
       <section class="preview">
         <button class="back-btn" data-action="back-units">← 回 Unit 列表</button>
-        <h2 class="section-title">Unit ${g.unit}：${escapeHtml(g.unitName || '')}（預習模式）</h2>
+        <h2 class="section-title">Unit ${g.unit}：${escapeHtml(g.unitName || '')}${titleSuffix}（預習模式）</h2>
         <ul class="word-list">
-          ${g.words.map(w => `
+          ${previewWords.map(w => `
             <li class="word-item">
               <div class="word-head">
                 <button class="speak-btn" data-word="${escapeHtml(w.tts || w.w)}" title="朗讀">🔊</button>
@@ -330,7 +343,13 @@ window.App = (function(){
       btn.addEventListener('click', () => speak(btn.dataset.word));
     });
     const startBtn = view.querySelector('#ge-start-from-preview');
-    if(startBtn) startBtn.addEventListener('click', () => startBattle(levelId, unitNum));
+    if(startBtn) startBtn.addEventListener('click', () => {
+      if(hasStage){
+        runBattle(levelId, unitNum, getDifficulty(), stageIdx, totalStages || stages.length);
+      } else {
+        startBattle(levelId, unitNum);
+      }
+    });
   }
 
   return {
