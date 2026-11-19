@@ -2,14 +2,58 @@
    守城戰鬥畫面（canvas）與小考模擬、錯題本尚未實作，待 todo 4/6 展開。 */
 window.App = (function(){
 
+  // 單字資料改為按需動態載入（首頁一開不再灌入全部6個檔案，約1.8MB），
+  // LEVELS.words 一開始是空陣列，進入該等級前會先經過 ensureLevelLoaded() 動態載入對應 <script>
+  const LEVEL_SRC = {
+    preA1: 'data/words/pre-a1.js',
+    a1:    'data/words/a1.js',
+    a2:    'data/words/a2.js',
+    ket:   'data/words/ket.js',
+    pet:   'data/words/pet.js',
+    toeic: 'data/words/toeic.js',
+  };
+  const LEVEL_GLOBAL = {
+    preA1: 'WORDS_PRE_A1', a1: 'WORDS_A1', a2: 'WORDS_A2',
+    ket: 'WORDS_KET', pet: 'WORDS_PET', toeic: 'WORDS_TOEIC',
+  };
   const LEVELS = [
-    { id: 'preA1', name: 'pre-A1', examName: 'Starters', system: 'cambridge', words: (window.WORDS_PRE_A1 || []) },
-    { id: 'a1',    name: 'A1',     examName: 'Movers',   system: 'cambridge', words: (window.WORDS_A1 || []) },
-    { id: 'a2',    name: 'A2',     examName: 'Flyers',   system: 'cambridge', words: (window.WORDS_A2 || []) },
-    { id: 'ket',   name: 'A2–B1',  examName: 'KET',      system: 'cambridge', words: (window.WORDS_KET || []) },
-    { id: 'pet',   name: 'B1–B2',  examName: 'PET',      system: 'cambridge', words: (window.WORDS_PET || []) },
-    { id: 'toeic', name: 'TOEIC',  examName: '新制多益',  system: 'toeic',     words: (window.WORDS_TOEIC || []) },
+    { id: 'preA1', name: 'pre-A1', examName: 'Starters', system: 'cambridge', words: [] },
+    { id: 'a1',    name: 'A1',     examName: 'Movers',   system: 'cambridge', words: [] },
+    { id: 'a2',    name: 'A2',     examName: 'Flyers',   system: 'cambridge', words: [] },
+    { id: 'ket',   name: 'A2–B1',  examName: 'KET',      system: 'cambridge', words: [] },
+    { id: 'pet',   name: 'B1–B2',  examName: 'PET',      system: 'cambridge', words: [] },
+    { id: 'toeic', name: 'TOEIC',  examName: '新制多益',  system: 'toeic',     words: [] },
   ];
+
+  const loadedScripts = new Set();
+  function ensureLevelLoaded(levelId){
+    const lv = LEVELS.find(l => l.id === levelId);
+    if(!lv) return Promise.resolve();
+    const globalName = LEVEL_GLOBAL[levelId];
+    if(window[globalName]){ lv.words = window[globalName]; return Promise.resolve(); }
+    if(loadedScripts.has(levelId)){
+      // 已經在載入中或載入過，等全域變數出現
+      return new Promise(resolve => {
+        const check = () => {
+          if(window[globalName]){ lv.words = window[globalName]; resolve(); }
+          else setTimeout(check, 30);
+        };
+        check();
+      });
+    }
+    loadedScripts.add(levelId);
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = LEVEL_SRC[levelId];
+      s.onload = () => { lv.words = window[globalName] || []; resolve(); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+  // 顯示系統/等級選單時需要字數統計，背景預先載入全部（不阻塞畫面渲染）
+  function prefetchAllLevels(){
+    LEVELS.forEach(lv => ensureLevelLoaded(lv.id));
+  }
 
   const SYSTEMS = [
     { id: 'cambridge', name: '劍橋分級系統', desc: 'YLE Starters/Movers/Flyers・KET・PET', levels: LEVELS.filter(l => l.system === 'cambridge') },
@@ -85,20 +129,15 @@ window.App = (function(){
       <section class="level-menu">
         <h2 class="section-title">選擇系統</h2>
         <div class="level-list-rows">
-          ${SYSTEMS.map(sys => {
-            const total = sys.levels.reduce((a,l) => a + l.words.length, 0);
-            const done = sys.levels.reduce((a,l) => a + l.words.filter(w => w.ipa).length, 0);
-            const pct = total ? Math.round(done/total*100) : 0;
-            return `
+          ${SYSTEMS.map(sys => `
               <button class="level-row" data-system="${sys.id}">
                 <span class="level-row-main">
                   <span class="level-row-name">${sys.name}</span>
                   <span class="level-row-exam">${sys.desc}</span>
                 </span>
-                <span class="level-row-progress"><span class="bar" style="width:${pct}%"></span></span>
-                <span class="level-row-pct">${done}/${total} 字</span>
-              </button>`;
-          }).join('')}
+                <span class="level-row-progress" data-progress-for="${sys.id}"><span class="bar" style="width:0%"></span></span>
+                <span class="level-row-pct" data-pct-for="${sys.id}">載入中…</span>
+              </button>`).join('')}
         </div>
       </section>`;
     view.innerHTML = html;
@@ -114,6 +153,18 @@ window.App = (function(){
         }
       });
     });
+    // 進度統計需要單字資料，背景動態載入後再補上百分比，不阻塞畫面初次渲染
+    SYSTEMS.forEach(sys => {
+      Promise.all(sys.levels.map(lv => ensureLevelLoaded(lv.id))).then(() => {
+        const total = sys.levels.reduce((a,l) => a + l.words.length, 0);
+        const done = sys.levels.reduce((a,l) => a + l.words.filter(w => w.ipa).length, 0);
+        const pct = total ? Math.round(done/total*100) : 0;
+        const barEl = view.querySelector(`[data-progress-for="${sys.id}"] .bar`);
+        const pctEl = view.querySelector(`[data-pct-for="${sys.id}"]`);
+        if(barEl) barEl.style.width = pct + '%';
+        if(pctEl) pctEl.textContent = `${done}/${total} 字`;
+      });
+    });
   }
 
   function renderLevelMenu(systemId){
@@ -123,20 +174,15 @@ window.App = (function(){
         <button class="back-btn" data-action="back-systems">← 回系統選單</button>
         <h2 class="section-title">選擇等級</h2>
         <div class="level-list-rows">
-          ${sys.levels.map(lv => {
-            const total = lv.words.length;
-            const done = lv.words.filter(w => w.ipa).length;
-            const pct = total ? Math.round(done/total*100) : 0;
-            return `
+          ${sys.levels.map(lv => `
               <button class="level-row" data-level="${lv.id}">
                 <span class="level-row-main">
                   <span class="level-row-name">${lv.name}</span>
                   <span class="level-row-exam">${lv.examName}</span>
                 </span>
-                <span class="level-row-progress"><span class="bar" style="width:${pct}%"></span></span>
-                <span class="level-row-pct">${done}/${total} 字</span>
-              </button>`;
-          }).join('')}
+                <span class="level-row-progress" data-progress-for="${lv.id}"><span class="bar" style="width:0%"></span></span>
+                <span class="level-row-pct" data-pct-for="${lv.id}">載入中…</span>
+              </button>`).join('')}
         </div>
       </section>`;
     view.innerHTML = html;
@@ -144,6 +190,17 @@ window.App = (function(){
     view.querySelector('[data-action="back-systems"]').addEventListener('click', renderSystemMenu);
     view.querySelectorAll('.level-row').forEach(btn => {
       btn.addEventListener('click', () => renderUnitList(btn.dataset.level));
+    });
+    sys.levels.forEach(lv => {
+      ensureLevelLoaded(lv.id).then(() => {
+        const total = lv.words.length;
+        const done = lv.words.filter(w => w.ipa).length;
+        const pct = total ? Math.round(done/total*100) : 0;
+        const barEl = view.querySelector(`[data-progress-for="${lv.id}"] .bar`);
+        const pctEl = view.querySelector(`[data-pct-for="${lv.id}"]`);
+        if(barEl) barEl.style.width = pct + '%';
+        if(pctEl) pctEl.textContent = `${done}/${total} 字`;
+      });
     });
   }
 
@@ -173,6 +230,9 @@ window.App = (function(){
   }
 
   function renderUnitList(levelId){
+    ensureLevelLoaded(levelId).then(() => renderUnitListNow(levelId));
+  }
+  function renderUnitListNow(levelId){
     const lv = LEVELS.find(l => l.id === levelId);
     const sys = SYSTEMS.find(s => s.id === lv.system);
     const singleLevelSystem = sys && sys.levels.length === 1;
