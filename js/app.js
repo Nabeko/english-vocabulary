@@ -102,6 +102,7 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
+    window.scrollTo(0, 0);
     view.querySelectorAll('[data-system]').forEach(btn => {
       btn.addEventListener('click', () => {
         const sys = SYSTEMS.find(s => s.id === btn.dataset.system);
@@ -139,6 +140,7 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
+    window.scrollTo(0, 0);
     view.querySelector('[data-action="back-systems"]').addEventListener('click', renderSystemMenu);
     view.querySelectorAll('.level-row').forEach(btn => {
       btn.addEventListener('click', () => renderUnitList(btn.dataset.level));
@@ -203,7 +205,7 @@ window.App = (function(){
                   <span class="stage-range">${rangeLabel}</span>
                   <div class="stage-diff-group">${diffButtons}</div>
                   <span class="stage-stars">${'★'.repeat(defaultStars)}${'☆'.repeat(3-defaultStars)}</span>
-                  <button class="btn alt sm" data-preview-stage>📖 預習</button>
+                  ${stages.length > 1 ? `<button class="btn alt sm" data-preview-stage>📖 預習</button>` : ''}
                   <button class="btn sm" data-play-stage>⚔ 守城</button>
                 </div>`;
             }).join('') : '';
@@ -226,6 +228,7 @@ window.App = (function(){
         </div>
       </section>`;
     view.innerHTML = html;
+    window.scrollTo(0, 0);
     view.querySelector('[data-action="back-levels"]').addEventListener('click', () => {
       if(singleLevelSystem) renderSystemMenu(); else renderLevelMenu(lv.system);
     });
@@ -338,6 +341,7 @@ window.App = (function(){
         <button class="btn full" id="ge-start-from-preview">⚔ 從這裡開始守城</button>
       </section>`;
     view.innerHTML = html;
+    window.scrollTo(0, 0);
     view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
     view.querySelectorAll('.speak-btn').forEach(btn => {
       btn.addEventListener('click', () => speak(btn.dataset.word));
