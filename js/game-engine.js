@@ -47,12 +47,25 @@ window.GameEngine = (function(){
   function boldZhWord(exZh, zh){
     if(!exZh) return '';
     if(!zh) return esc(exZh);
-    // zh 可能含多個以頓號/斜線分隔的釋義，取第一個當關鍵字比對
-    const head = String(zh).split(/[、，,\/；;]/)[0].trim();
-    if(!head) return esc(exZh);
-    const idx = exZh.indexOf(head);
-    if(idx === -1) return esc(exZh);
-    return esc(exZh.slice(0,idx)) + '<b>' + esc(exZh.slice(idx, idx+head.length)) + '</b>' + esc(exZh.slice(idx+head.length));
+    // zh 可能含多個以頓號/斜線/分號分隔的釋義，並夾雜（）附註，例如「表（堂）兄弟姊妹」
+    const firstSense = String(zh).split(/[、，,\/；;]/)[0].trim();
+    const noBrackets = firstSense.replace(/[（(][^）)]*[）)]/g, '');
+    const candidates = [firstSense, noBrackets].filter(Boolean);
+    let best = null;
+    for(const cand of candidates){
+      // 從完整候選字串開始，逐步縮短前綴，找出能在例句翻譯裡命中的最長片段
+      for(let len = cand.length; len >= 1; len--){
+        const piece = cand.slice(0, len);
+        const idx = exZh.indexOf(piece);
+        if(idx !== -1){
+          if(!best || piece.length > best.piece.length) best = { idx, piece };
+          break;
+        }
+      }
+    }
+    if(!best) return esc(exZh);
+    const { idx, piece } = best;
+    return esc(exZh.slice(0,idx)) + '<b>' + esc(exZh.slice(idx, idx+piece.length)) + '</b>' + esc(exZh.slice(idx+piece.length));
   }
 
   let muted = (function(){ try{ return localStorage.getItem('ev_muted_v1') === '1'; }catch(e){ return false; } })();
