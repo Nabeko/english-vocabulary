@@ -44,28 +44,58 @@ window.GameEngine = (function(){
   const headWord = w => String(w).split('/')[0].trim();
   const blankRe = w => { try{ return new RegExp('\\b' + headWord(w).replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b'); }catch(e){ return null; } };
   const canFill = x => !!(x.ex && blankRe(x.w) && blankRe(x.w).test(x.ex));
-  function boldZhWord(exZh, zh){
+  function boldZhWord(exZh, zh, w){
     if(!exZh) return '';
     if(!zh) return esc(exZh);
     // zh 可能含多個以頓號/斜線/分號分隔的釋義，並夾雜（）附註，例如「表（堂）兄弟姊妹」
-    const firstSense = String(zh).split(/[、，,\/；;]/)[0].trim();
-    const noBrackets = firstSense.replace(/[（(][^）)]*[）)]/g, '');
-    const candidates = [firstSense, noBrackets].filter(Boolean);
-    let best = null;
-    for(const cand of candidates){
-      // 從完整候選字串開始，逐步縮短前綴，找出能在例句翻譯裡命中的最長片段
-      for(let len = cand.length; len >= 1; len--){
-        const piece = cand.slice(0, len);
-        const idx = exZh.indexOf(piece);
-        if(idx !== -1){
-          if(!best || piece.length > best.piece.length) best = { idx, piece };
-          break;
+    // 參考 lexilereadingrex.github.io 的 zhMark 做法：除了切分釋義本身，
+    // 還額外產生「去掉的/地結尾」「去掉感到/令人/有開頭」的變體，
+    // 因為AI生成的例句翻譯常把zh釋義換句話說（語序調整、加減語助詞）
+    const candidates = [];
+    String(zh).split(/[、，,\/；;]/).forEach(part => {
+      let c = part.trim().replace(/[（(][^）)]*[）)]/g, '').trim();
+      if(!c) return;
+      candidates.push(c);
+      candidates.push(c.replace(/[的地]$/, ''));
+      candidates.push(c.replace(/^(感到|令人|有)/, '').replace(/[的地]$/, ''));
+    });
+    let best = '';
+    // 第一輪：候選字串整段原封不動出現在例句翻譯裡，取最長命中
+    candidates.forEach(c => { if(c && exZh.includes(c) && c.length > best.length) best = c; });
+    // 第二輪 fallback：候選字串內任意位置的最長公共子字串（優先至少2字），
+    // 不要求從候選字串開頭算起，才能抓到語序被打散/插入語助詞後仍共通的詞
+    if(!best){
+      candidates.forEach(c => {
+        for(let i = 0; i < c.length; i++){
+          for(let j = c.length; j >= i + 2; j--){
+            const sub = c.slice(i, j);
+            if(sub.length > best.length && exZh.includes(sub)) best = sub;
+          }
         }
-      }
+      });
+    }
+    // 第三輪 fallback：候選字串本身只有1個中文字（如「桌子」裁掉助詞後剩「桌」這種基礎詞），
+    // 放寬到允許1字命中，避免比舊版（允許前綴短至1字）倒退
+    if(!best){
+      candidates.forEach(c => {
+        for(let i = 0; i < c.length; i++){
+          for(let j = c.length; j >= i + 1; j--){
+            const sub = c.slice(i, j);
+            if(sub.length > best.length && exZh.includes(sub)) best = sub;
+          }
+        }
+      });
+    }
+    // 第四輪 fallback：以上字串比對全部失敗，通常是因為例句翻譯用了跟 zh 不同的
+    // 同義詞（如 grandmother zh='祖母' exZh 寫'奶奶'，兩者沒有共同子字串），
+    // 查人工對照表 window.BOLD_ZH_OVERRIDES（data/bold-overrides.js）當最後手段
+    if(!best && typeof window !== 'undefined' && window.BOLD_ZH_OVERRIDES && w){
+      const override = window.BOLD_ZH_OVERRIDES[w + '|||' + exZh];
+      if(override && exZh.includes(override)) best = override;
     }
     if(!best) return esc(exZh);
-    const { idx, piece } = best;
-    return esc(exZh.slice(0,idx)) + '<b>' + esc(exZh.slice(idx, idx+piece.length)) + '</b>' + esc(exZh.slice(idx+piece.length));
+    const idx = exZh.indexOf(best);
+    return esc(exZh.slice(0,idx)) + '<b>' + esc(exZh.slice(idx, idx+best.length)) + '</b>' + esc(exZh.slice(idx+best.length));
   }
 
   let muted = (function(){ try{ return localStorage.getItem('ev_muted_v1') === '1'; }catch(e){ return false; } })();
@@ -380,7 +410,7 @@ window.GameEngine = (function(){
       }else{
         const re = blankRe(x.w); const m = x.ex.match(re);
         if(m){
-          promptHtml = `<div class="qp-sent">${esc(x.ex.slice(0,m.index))}<span class="qp-blank"></span>${esc(x.ex.slice(m.index + m[0].length))}</div><div class="qp-trans">${boldZhWord(x.exZh, x.zh)}</div>`;
+          promptHtml = `<div class="qp-sent">${esc(x.ex.slice(0,m.index))}<span class="qp-blank"></span>${esc(x.ex.slice(m.index + m[0].length))}</div><div class="qp-trans">${boldZhWord(x.exZh, x.zh, x.w)}</div>`;
         }else{
           promptHtml = `<div class="qp-word">${esc(x.w)}</div>`;
         }
