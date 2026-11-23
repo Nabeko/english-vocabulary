@@ -90,6 +90,43 @@ window.App = (function(){
     try{ localStorage.setItem(PROGRESS_KEY, JSON.stringify(p)); }catch(e){}
   }
 
+  // 錯題本：每個Unit各自一份，key為「levelId:unitNum」，value為 {單字: 錯誤次數}
+  // 規則參考 lexilereadingrex.github.io：答錯+1次，答對-1次，次數歸0就移出錯題本
+  const WRONG_KEY = 'ev_wrong_v1';
+  function getAllWrong(){
+    try{ return JSON.parse(localStorage.getItem(WRONG_KEY) || '{}'); }catch(e){ return {}; }
+  }
+  function saveAllWrong(all){
+    try{ localStorage.setItem(WRONG_KEY, JSON.stringify(all)); }catch(e){}
+  }
+  function wrongBookKey(levelId, unitNum){
+    return `${levelId}:${unitNum}`;
+  }
+  function getWrongBook(levelId, unitNum){
+    const all = getAllWrong();
+    return all[wrongBookKey(levelId, unitNum)] || {};
+  }
+  function getWrongCount(levelId, unitNum){
+    return Object.keys(getWrongBook(levelId, unitNum)).length;
+  }
+  // 某個Unit戰鬥時答題，記錄到該Unit的錯題本（不是錯題特訓關卡本身，避免練錯題又把同一個字記錄進去造成混淆）
+  function recordAnswer(levelId, unitNum, word, correct){
+    const all = getAllWrong();
+    const k = wrongBookKey(levelId, unitNum);
+    const book = all[k] || {};
+    if(correct){
+      if(book[word]){
+        book[word]--;
+        if(book[word] <= 0) delete book[word];
+      }
+    }else{
+      book[word] = (book[word] || 0) + 1;
+    }
+    all[k] = book;
+    saveAllWrong(all);
+  }
+
+
 
   function escapeHtml(s){
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -308,6 +345,7 @@ window.App = (function(){
                 ${ready ? `<div class="stage-rows">${stageRowsHtml}</div>` : ''}
                 <div class="row">
                   <button class="btn alt sm" data-preview="${g.unit}">📖 預習單字</button>
+                  ${ready && getWrongCount(levelId, g.unit) > 0 ? `<button class="btn alt sm" data-wrongbook="${g.unit}">📕 錯題本（${getWrongCount(levelId, g.unit)}）</button>` : ''}
                 </div>
               </article>`;
           }).join('')}
@@ -320,6 +358,9 @@ window.App = (function(){
     });
     view.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => renderPreview(levelId, Number(btn.dataset.preview)));
+    });
+    view.querySelectorAll('[data-wrongbook]').forEach(btn => {
+      btn.addEventListener('click', () => renderWrongBook(levelId, Number(btn.dataset.wrongbook)));
     });
     view.querySelectorAll('.stage-row').forEach(row => {
       const unitNum = Number(row.dataset.unit);
@@ -373,8 +414,65 @@ window.App = (function(){
       title: `${lv.name} Unit ${unitNum} 守城${titleSuffix}`,
       difficulty,
       onFinish: (stars) => saveStars(levelId, stageKey, difficulty, stars),
+      onAnswer: (word, correct) => recordAnswer(levelId, unitNum, word, correct),
       onExit: () => renderUnitList(levelId),
     });
+  }
+
+  // 錯題特訓：抓該Unit錯題本裡的字（最多10個，比照原站做法）開一場戰鬥，純練習不計入該Unit星星進度
+  function startWrongDrill(levelId, unitNum){
+    const lv = LEVELS.find(l => l.id === levelId);
+    const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
+    const book = getWrongBook(levelId, unitNum);
+    const entries = Object.entries(book).sort((a,b) => b[1]-a[1]).slice(0, 10);
+    const words = entries.map(([w]) => g.words.find(x => x.w === w)).filter(Boolean);
+    if(!words.length) return;
+    window.GameEngine.start(view, {
+      words,
+      title: `${lv.name} Unit ${unitNum} 錯題特訓`,
+      difficulty: getDifficulty(),
+      onAnswer: (word, correct) => recordAnswer(levelId, unitNum, word, correct),
+      onExit: () => renderUnitList(levelId),
+      // 不帶 onFinish：錯題特訓結果不影響該Unit正式星星進度
+    });
+  }
+
+  function renderWrongBook(levelId, unitNum){
+    const lv = LEVELS.find(l => l.id === levelId);
+    const g = groupByUnit(lv.words).find(x => x.unit === unitNum);
+    const book = getWrongBook(levelId, unitNum);
+    const entries = Object.entries(book).sort((a,b) => b[1]-a[1])
+      .map(([w,n]) => [g.words.find(x => x.w === w), n]).filter(([x]) => x);
+    const html = `
+      <section class="wrong-book">
+        <button class="back-btn" data-action="back-units">← 回 Unit 列表</button>
+        <h2 class="section-title">Unit ${g.unit}：${escapeHtml(g.unitName || '')}（錯題本）</h2>
+        ${entries.length
+          ? `<p class="lead">答錯的字會記在這裡；之後在這個Unit答對一次，次數就減1，減到0就會移出錯題本。</p>
+             <ul class="word-list">
+               ${entries.map(([w,n]) => `
+                 <li class="word-item">
+                   <div class="word-head">
+                     <button class="speak-btn" data-word="${escapeHtml(w.tts || w.w)}" title="朗讀">🔊</button>
+                     <span class="word-en">${escapeHtml(w.w)}</span>
+                     <span class="word-ipa">${escapeHtml(w.ipa || '')}</span>
+                     <span class="word-pos">${escapeHtml(w.pos || '')}</span>
+                     <span class="wrong-cnt">錯 ${n} 次</span>
+                   </div>
+                   <div class="word-zh">${escapeHtml(w.zh || '')}</div>
+                 </li>`).join('')}
+             </ul>
+             <button class="btn full" id="wrong-drill">⚔ 用錯題守城（${Math.min(entries.length,10)} 字）</button>`
+          : `<div class="sheet" style="padding:24px 16px;text-align:center">這個Unit目前沒有錯題。</div>`}
+      </section>`;
+    view.innerHTML = html;
+    window.scrollTo(0, 0);
+    view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
+    view.querySelectorAll('.speak-btn').forEach(btn => {
+      btn.addEventListener('click', () => speak(btn.dataset.word));
+    });
+    const drillBtn = view.querySelector('#wrong-drill');
+    if(drillBtn) drillBtn.addEventListener('click', () => startWrongDrill(levelId, unitNum));
   }
 
   function highlightWord(ex, w){

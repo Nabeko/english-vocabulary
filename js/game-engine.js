@@ -191,7 +191,7 @@ window.GameEngine = (function(){
     return { word:x, type, opts, answer:x.w, labels: opts.map(o => type === 'en2zh' ? (o.zh||o.w) : o.w) };
   }
 
-  function start(container, { words, title, onExit, difficulty, onFinish }){
+  function start(container, { words, title, onExit, difficulty, onFinish, onAnswer }){
     const pool = words;
     const diffKey = DIFFICULTY[difficulty] ? difficulty : DEFAULT_DIFFICULTY;
     const diff = DIFFICULTY[diffKey];
@@ -431,6 +431,7 @@ window.GameEngine = (function(){
       const e = G.enemies.filter(en => en.state === 'walk' && !en.doomed).sort((a,b) => a.x - b.x)[0] || G.cur.enemy;
       G.cur.answered = true;
       const ok = q.opts[j].w === q.answer;
+      if(onAnswer) onAnswer(x.w, ok);
       const btns = container.querySelectorAll('#ge-qp .qp-opt');
       btns.forEach((b,n) => { b.disabled = true; if(q.opts[n].w === q.answer) b.classList.add('ok'); });
       const fb = container.querySelector('#ge-fb');

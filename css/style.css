@@ -102,6 +102,9 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .word-ipa{font-size:14px;color:var(--muted)}
 .word-pos{font-size:13px;color:var(--ochreD);font-weight:700}
 .word-zh{margin-top:2px;font-size:16px;font-weight:700}
+
+.lead{font-size:14px;color:var(--muted);margin:0 0 12px}
+.wrong-cnt{margin-left:auto;font-size:13px;color:var(--ochreD);font-weight:700;white-space:nowrap}
 .word-ex{margin-top:6px;font-size:16px;color:var(--muted);font-style:italic}
 .word-exzh{font-size:14px;color:var(--muted)}
 
