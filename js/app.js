@@ -95,13 +95,39 @@ window.App = (function(){
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
+  // 決定性亂數：用整數種子產生0~1浮點數序列，同種子每次呼叫結果完全相同
+  function seededRandom(seed){
+    let s = seed % 2147483647;
+    if(s <= 0) s += 2147483646;
+    return function(){
+      s = (s * 16807) % 2147483647;
+      return (s - 1) / 2147483646;
+    };
+  }
+
+  // 決定性洗牌：同一個unit編號每次洗出的順序都一樣，不會因為重整頁面/預習與實戰畫面不同而對不上
+  function seededShuffle(arr, seed){
+    const rand = seededRandom(seed);
+    const out = arr.slice();
+    for(let i = out.length - 1; i > 0; i--){
+      const j = Math.floor(rand() * (i + 1));
+      [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+  }
+
   function groupByUnit(words){
     const map = new Map();
     for(const w of words){
       if(!map.has(w.unit)) map.set(w.unit, { unit: w.unit, unitName: w.unitName, words: [] });
       map.get(w.unit).words.push(w);
     }
-    return [...map.values()].sort((a,b) => a.unit - b.unit);
+    // 原始資料檔常按字母序排列（尤其TOEIC），若直接切關卡會導致「第1關全a開頭…」。
+    // 用unit編號當種子做決定性洗牌，讓每關混到不同字首/詞性，但同一unit每次結果固定，
+    // 確保預習畫面與實際戰鬥畫面看到的小關字集永遠一致。
+    return [...map.values()]
+      .map(g => ({ ...g, words: seededShuffle(g.words, g.unit) }))
+      .sort((a,b) => a.unit - b.unit);
   }
 
   // 把一個Unit的單字陣列切成多個小關（每關最多 STAGE_SIZE 個字）
