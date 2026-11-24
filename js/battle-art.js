@@ -209,7 +209,7 @@ window.BattleArt = (function(){
     g.restore();
   }
   function topperShell(g,T,r,base){
-    [[59,56,16],[124,38,20]].forEach(([cx,cy,rad]) => {
+    [[59,56,16],[124,117,14]].forEach(([cx,cy,rad]) => {
       g.beginPath(); g.moveTo(cx-rad*.5,cy+rad); g.quadraticCurveTo(cx-rad*.6,cy-rad*.3,cx,cy-rad); g.quadraticCurveTo(cx+rad*.6,cy-rad*.3,cx+rad*.5,cy+rad); g.closePath();
       g.fillStyle = T.stoneL; g.fill(); g.lineWidth = 1.8; g.strokeStyle = T.ink; g.stroke();
       g.strokeStyle = T.stoneD; g.lineWidth = 1.2;
@@ -225,7 +225,7 @@ window.BattleArt = (function(){
     g.restore();
   }
   function topperHaunted(g,T,r,base){
-    [[59,56,16],[124,38,14]].forEach(([cx,cy,h]) => {
+    [[59,56,16],[124,117,11]].forEach(([cx,cy,h]) => {
       g.beginPath(); g.moveTo(cx-10,cy); g.lineTo(cx-2,cy-h); g.lineTo(cx+10,cy); g.closePath();
       g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
     });
@@ -243,7 +243,7 @@ window.BattleArt = (function(){
     g.restore();
   }
   function topperCrystal(g,T,r,base){
-    [[49,56],[69,50],[114,40],[134,36]].forEach(([cx,cy],i) => {
+    [[49,56],[69,56],[114,117],[134,117]].forEach(([cx,cy],i) => {
       const h = 14 + (i%2)*10;
       g.beginPath(); g.moveTo(cx-6,cy); g.lineTo(cx,cy-h); g.lineTo(cx+6,cy); g.closePath();
       g.fillStyle = i%2 ? T.stoneL : T.stone; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
