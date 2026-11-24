@@ -250,15 +250,20 @@ window.BattleArt = (function(){
       g.strokeStyle = 'rgba(255,255,255,.4)'; g.lineWidth = 1; g.beginPath(); g.moveTo(cx,cy-h); g.lineTo(cx,cy); g.stroke();
     });
   }
-  // desert：石牆改沙岩塊紋理，塔頂加圓頂尖塔（仿清真寺/綠洲建築輪廓）
+  // desert：沙岩塊紋理（加風化高光／陰影漸層），塔頂改清真寺式洋蔥圓頂+彩釉窗飾+新月
   function texSand(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    const sg = g.createLinearGradient(0,y,0,y+h);
+    sg.addColorStop(0,'rgba(255,255,255,.10)'); sg.addColorStop(1,'rgba(0,0,0,.10)');
+    g.fillStyle = sg; g.fillRect(x,y,w,h);
     g.lineWidth = 1;
     for(let row=0, yy=y; yy<y+h; row++, yy+=15){
       let xx = x - (row%2 ? 14 : 3);
       while(xx < x+w){
         const bw = 22 + r()*14;
-        g.strokeStyle = T.stoneD; g.globalAlpha = .4; g.strokeRect(xx+.5,yy+.5,bw,15); g.globalAlpha = 1;
+        g.strokeStyle = T.stoneD; g.globalAlpha = .35; g.strokeRect(xx+.5,yy+.5,bw,15);
+        g.globalAlpha = .18; g.fillStyle = r()<.5 ? '#fff' : '#000'; g.fillRect(xx+1,yy+1,bw-2,3);
+        g.globalAlpha = 1;
         xx += bw;
       }
     }
@@ -267,146 +272,252 @@ window.BattleArt = (function(){
     g.restore();
   }
   function topperDesert(g,T,r,base){
-    [[59,56,15],[124,38,19]].forEach(([cx,cy,rad]) => {
-      g.beginPath(); g.ellipse(cx,cy-rad*.2,rad,rad*.9,0,Math.PI,0); g.closePath();
-      g.fillStyle = T.stoneL; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
-      g.beginPath(); g.moveTo(cx,cy-rad*1.05); g.lineTo(cx,cy-rad*1.35); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.stroke();
-      g.fillStyle = T.banner; circle(g,cx,cy-rad*1.4,2); g.fill();
+    [[59,56,15],[124,117,12]].forEach(([cx,cy,rad]) => {
+      // 洋蔥形圓頂（二次曲線收尖）
+      g.beginPath();
+      g.moveTo(cx-rad,cy);
+      g.bezierCurveTo(cx-rad,cy-rad*.9, cx-rad*.55,cy-rad*1.15, cx-rad*.18,cy-rad*1.45);
+      g.lineTo(cx+rad*.18,cy-rad*1.45);
+      g.bezierCurveTo(cx+rad*.55,cy-rad*1.15, cx+rad,cy-rad*.9, cx+rad,cy);
+      g.closePath();
+      const dg = g.createLinearGradient(cx-rad,cy-rad*1.4,cx+rad,cy);
+      dg.addColorStop(0, T.stoneL); dg.addColorStop(.5, T.banner); dg.addColorStop(1, T.stoneD);
+      g.fillStyle = dg; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      // 鎏金紋線
+      g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(cx,cy-rad*1.4); g.quadraticCurveTo(cx-rad*.3,cy-rad*.7,cx-rad*.6,cy-2); g.stroke();
+      // 底座彩釉窗飾（小拱窗）
+      g.fillStyle = T.win; g.beginPath(); g.moveTo(cx-4,cy); g.lineTo(cx-4,cy-6); g.arc(cx,cy-6,4,Math.PI,0); g.lineTo(cx+4,cy); g.closePath(); g.fill();
+      g.strokeStyle = T.ink; g.lineWidth = 1; g.stroke();
+      // 尖塔柱+新月
+      g.strokeStyle = T.ink; g.lineWidth = 1.6; g.beginPath(); g.moveTo(cx,cy-rad*1.45); g.lineTo(cx,cy-rad*1.8); g.stroke();
+      g.save(); g.translate(cx,cy-rad*1.9);
+      g.fillStyle = '#f0d98a'; g.beginPath(); g.arc(0,0,3.2,Math.PI*.15,Math.PI*1.95); g.arc(1.6,0,2.6,Math.PI*1.2,Math.PI*.1,true); g.closePath(); g.fill();
+      g.restore();
     });
   }
-  // snow：石牆加覆雪效果與垂掛冰柱，塔頂加雪帽尖頂
+  // snow：覆雪磚牆（更細緻的積雪漸層與反光），塔頂改尖頂雪堆+透亮冰柱+霜光
   function texSnowWall(g,x,y,w,h,r,T){
     bricks(g,x,y,w,h,r,T);
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
-    g.fillStyle = 'rgba(255,255,255,.55)';
-    for(let xx=x; xx<x+w; xx+=10){ const sh = 2+r()*3; g.fillRect(xx,y,8,sh); }
-    g.strokeStyle = 'rgba(210,230,245,.8)'; g.lineWidth = 1.4;
-    for(let i=0;i<5;i++){ const xx = x+6+r()*(w-12), len = 5+r()*9; g.beginPath(); g.moveTo(xx,y+16); g.lineTo(xx,y+16+len); g.stroke(); }
+    for(let xx=x; xx<x+w; xx+=10){
+      const sh = 2+r()*3, sg = g.createLinearGradient(0,y,0,y+sh);
+      sg.addColorStop(0,'rgba(255,255,255,.9)'); sg.addColorStop(1,'rgba(220,235,245,.3)');
+      g.fillStyle = sg; g.fillRect(xx,y,8,sh);
+    }
+    g.strokeStyle = 'rgba(210,230,245,.85)'; g.lineWidth = 1.4;
+    for(let i=0;i<5;i++){
+      const xx = x+6+r()*(w-12), len = 5+r()*9;
+      const ig = g.createLinearGradient(0,y+16,0,y+16+len);
+      ig.addColorStop(0,'rgba(255,255,255,.95)'); ig.addColorStop(1,'rgba(180,215,235,.35)');
+      g.strokeStyle = ig;
+      g.beginPath(); g.moveTo(xx,y+16); g.lineTo(xx-.6,y+16+len*.6); g.lineTo(xx,y+16+len); g.stroke();
+    }
     g.restore();
   }
   function topperSnow(g,T,r,base){
-    [[59,56,15],[124,38,13]].forEach(([cx,cy,h]) => {
+    [[59,56,15],[124,117,11]].forEach(([cx,cy,h]) => {
       g.beginPath(); g.moveTo(cx-9,cy); g.lineTo(cx,cy-h); g.lineTo(cx+9,cy); g.closePath();
-      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
-      g.beginPath(); g.moveTo(cx-9,cy); g.lineTo(cx,cy-h); g.lineTo(cx+9,cy);
-      g.lineTo(cx+5,cy-h*.3); g.lineTo(cx,cy-h*.6); g.lineTo(cx-5,cy-h*.3); g.closePath();
-      g.fillStyle = '#eef6fb'; g.fill(); g.strokeStyle = 'rgba(200,225,240,.9)'; g.lineWidth = 1; g.stroke();
+      const rg = g.createLinearGradient(cx-9,cy-h,cx+9,cy);
+      rg.addColorStop(0,T.stoneL); rg.addColorStop(1,T.stoneD);
+      g.fillStyle = rg; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      // 堆雪帽（不規則雪線，非純三角）
+      g.beginPath(); g.moveTo(cx-9,cy);
+      g.quadraticCurveTo(cx-6,cy-h*.45,cx-2,cy-h*.62); g.quadraticCurveTo(cx,cy-h*.72,cx+2,cy-h*.62);
+      g.quadraticCurveTo(cx+5,cy-h*.5,cx,cy-h); g.quadraticCurveTo(cx-5,cy-h*.5,cx-2,cy-h*.3);
+      g.quadraticCurveTo(cx+1,cy-h*.2,cx+9,cy); g.closePath();
+      g.fillStyle = '#f3f9fd'; g.fill(); g.strokeStyle = 'rgba(190,220,238,.9)'; g.lineWidth = 1; g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.7)'; circle(g,cx-3,cy-h*.55,1.3); g.fill();
     });
   }
-  // volcano：石牆改龜裂黑曜岩紋理帶岩漿光，塔頂加尖刺焦岩
+  // volcano：龜裂黑曜岩紋理帶岩漿脈動光，塔頂改焦黑尖岩+熔岩裂縫發光
   function texObsidian(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    const bg = g.createLinearGradient(0,y,0,y+h);
+    bg.addColorStop(0,'rgba(0,0,0,.15)'); bg.addColorStop(1,'rgba(224,98,42,.08)');
+    g.fillStyle = bg; g.fillRect(x,y,w,h);
     g.strokeStyle = 'rgba(0,0,0,.5)'; g.lineWidth = 1;
-    for(let i=0;i<9;i++){ const xx=x+r()*w, yy=y+r()*h; const segs=2+Math.floor(r()*3); let cx=xx, cy=yy;
+    for(let i=0;i<9;i++){
+      const xx=x+r()*w, yy=y+r()*h; const segs=2+Math.floor(r()*3); let cx=xx, cy=yy;
       g.beginPath(); g.moveTo(cx,cy);
-      for(let s=0;s<segs;s++){ cx += r()*10-5; cy += r()*8-4; g.lineTo(cx,cy); } g.stroke(); }
-    g.fillStyle = 'rgba(224,98,42,.35)';
-    for(let i=0;i<5;i++){ const xx=x+r()*w, yy=y+r()*h; ell(g,xx,yy,2+r()*2,1.4); g.fill(); }
+      for(let s=0;s<segs;s++){ cx += r()*10-5; cy += r()*8-4; g.lineTo(cx,cy); }
+      g.stroke();
+      g.strokeStyle = 'rgba(224,98,42,.5)'; g.lineWidth = .6; g.stroke();
+      g.strokeStyle = 'rgba(0,0,0,.5)'; g.lineWidth = 1;
+    }
+    for(let i=0;i<6;i++){ const xx=x+r()*w, yy=y+r()*h; const gg = g.createRadialGradient(xx,yy,0,xx,yy,3+r()*2); gg.addColorStop(0,'rgba(255,170,80,.55)'); gg.addColorStop(1,'rgba(224,98,42,0)'); g.fillStyle = gg; ell(g,xx,yy,3+r()*2,2); g.fill(); }
     g.restore();
   }
   function topperVolcano(g,T,r,base){
-    [[59,56,16],[124,38,15]].forEach(([cx,cy,h]) => {
-      g.beginPath(); g.moveTo(cx-8,cy); g.lineTo(cx-3,cy-h); g.lineTo(cx,cy-h*.6); g.lineTo(cx+4,cy-h*1.15); g.lineTo(cx+9,cy); g.closePath();
-      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
-      g.fillStyle = T.win; circle(g,cx+2,cy-h*.5,1.8); g.fill();
+    [[59,56,16],[124,117,12]].forEach(([cx,cy,h]) => {
+      g.beginPath(); g.moveTo(cx-8,cy); g.lineTo(cx-4,cy-h*.8); g.lineTo(cx-1,cy-h*.5); g.lineTo(cx,cy-h); g.lineTo(cx+2,cy-h*.55); g.lineTo(cx+5,cy-h*.85); g.lineTo(cx+9,cy); g.closePath();
+      const vg = g.createLinearGradient(cx,cy-h,cx,cy);
+      vg.addColorStop(0,'#3a241e'); vg.addColorStop(1,T.stoneD);
+      g.fillStyle = vg; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.strokeStyle = 'rgba(224,98,42,.9)'; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(cx-2,cy-h*.3); g.lineTo(cx,cy-h*.55); g.lineTo(cx+2,cy-h*.2); g.stroke();
+      const gg = g.createRadialGradient(cx+1,cy-h*.45,0,cx+1,cy-h*.45,5);
+      gg.addColorStop(0,'rgba(255,190,100,.9)'); gg.addColorStop(1,'rgba(255,120,40,0)');
+      g.fillStyle = gg; circle(g,cx+1,cy-h*.45,5); g.fill();
     });
   }
-  // sakura：沿用石牆，塔頂加粉色花團樹冠＋飄落花瓣
+  // sakura：沿用石牆，塔頂加層疊花團樹冠＋柔和漸層＋飄落花瓣（更立體）
   function topperSakura(g,T,r,base){
-    const petD = '#b86e8e', petMid = '#d08ca6', petCol = '#f3c9d6';
-    [[59,56,27,16],[124,40,22,13]].forEach(([cx,cy,rx,ry]) => {
-      g.fillStyle = petD; ell(g,cx+3,cy-ry*.6,rx,ry); g.fill();
-      g.fillStyle = petMid; ell(g,cx-4,cy-ry*1.1,rx*.8,ry*.8); g.fill();
-      g.fillStyle = petCol; ell(g,cx+2,cy-ry*1.5,rx*.6,ry*.6); g.fill();
-      g.strokeStyle = T.ink; g.lineWidth = 1.6; ell(g,cx+3,cy-ry*.6,rx,ry); g.stroke();
+    const petD = '#b86e8e', petMid = '#d08ca6', petCol = '#f3c9d6', petL = '#ffe4ee';
+    [[59,56,27,17],[124,117,18,11]].forEach(([cx,cy,rx,ry]) => {
+      g.fillStyle = petD; ell(g,cx+3,cy-ry*.55,rx,ry); g.fill();
+      g.fillStyle = petMid; ell(g,cx-4,cy-ry*1.05,rx*.82,ry*.82); g.fill();
+      g.fillStyle = petCol; ell(g,cx+2,cy-ry*1.5,rx*.6,ry*.62); g.fill();
+      const hg = g.createRadialGradient(cx-rx*.3,cy-ry*1.9,1,cx,cy-ry*1.7,rx*.5);
+      hg.addColorStop(0,petL); hg.addColorStop(1,'rgba(255,228,238,0)');
+      g.fillStyle = hg; ell(g,cx-rx*.15,cy-ry*1.8,rx*.42,ry*.42); g.fill();
+      g.strokeStyle = T.ink; g.lineWidth = 1.6; ell(g,cx+3,cy-ry*.55,rx,ry); g.stroke();
+      // 細枝垂花
+      g.strokeStyle = '#6b4a4a'; g.lineWidth = 1.2;
+      for(let i=0;i<3;i++){ const dx = -rx*.6+i*rx*.6; g.beginPath(); g.moveTo(cx+dx,cy-ry*.1); g.quadraticCurveTo(cx+dx+3,cy+6,cx+dx,cy+12); g.stroke();
+        g.fillStyle = petCol; circle(g,cx+dx,cy+13,1.6); g.fill(); }
     });
-    g.fillStyle = 'rgba(255,220,232,.85)';
-    for(let i=0;i<10;i++){ const x = 20+r()*120, y = 60+r()*130; ell(g,x,y,2+r()*1.4,1.4); g.fill(); }
+    g.fillStyle = 'rgba(255,220,232,.9)';
+    for(let i=0;i<12;i++){ const x = 18+r()*128, y = 50+r()*150, s=1.6+r()*1.4; g.save(); g.translate(x,y); g.rotate(r()*6.28); ell(g,0,0,s,s*.6); g.fill(); g.restore(); }
   }
-  // swamp：石牆改青苔藤蔓紋理，塔頂加扭曲樹根與毒菇
+  // swamp：青苔藤蔓紋理（加漸層濕潤感），塔頂改精緻毒菇叢+發光孢子+纏繞藤蔓
   function texMoss(g,x,y,w,h,r,T){
     bricks(g,x,y,w,h,r,T);
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
-    g.fillStyle = 'rgba(70,100,40,.45)';
-    for(let i=0;i<14;i++){ const xx=x+r()*w, yy=y+r()*h; ell(g,xx,yy,3+r()*4,2+r()*2); g.fill(); }
-    g.strokeStyle = 'rgba(60,90,30,.6)'; g.lineWidth = 1.2;
-    for(let i=0;i<4;i++){ const xx=x+6+r()*(w-12); g.beginPath(); g.moveTo(xx,y); g.quadraticCurveTo(xx+(r()*6-3),y+h*.5,xx+(r()*4-2),y+h); g.stroke(); }
+    for(let i=0;i<14;i++){
+      const xx=x+r()*w, yy=y+r()*h, mg = g.createRadialGradient(xx,yy,0,xx,yy,4+r()*4);
+      mg.addColorStop(0,'rgba(100,140,50,.55)'); mg.addColorStop(1,'rgba(70,100,40,0)');
+      g.fillStyle = mg; ell(g,xx,yy,3+r()*4,2+r()*2); g.fill();
+    }
+    g.strokeStyle = 'rgba(60,90,30,.65)'; g.lineWidth = 1.3;
+    for(let i=0;i<4;i++){
+      const xx=x+6+r()*(w-12);
+      g.beginPath(); g.moveTo(xx,y); g.quadraticCurveTo(xx+(r()*6-3),y+h*.5,xx+(r()*4-2),y+h); g.stroke();
+      for(let k=0;k<3;k++){ g.fillStyle='rgba(90,130,50,.7)'; circle(g, xx+(r()*8-4), y+h*.2+k*h*.25, 1.4); g.fill(); }
+    }
     g.restore();
   }
   function topperSwamp(g,T,r,base){
-    [[59,56],[124,40]].forEach(([cx,cy],i) => {
-      g.strokeStyle = '#3a4e28'; g.lineWidth = 2.4;
+    [[59,56],[124,117]].forEach(([cx,cy],i) => {
+      g.strokeStyle = '#3a4e28'; g.lineWidth = 2.6;
       g.beginPath(); g.moveTo(cx,cy); g.quadraticCurveTo(cx+6,cy-10,cx-2,cy-18); g.stroke();
+      g.strokeStyle = '#2e3c1c'; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(cx-3,cy-4); g.quadraticCurveTo(cx-9,cy-10,cx-6,cy-16); g.stroke();
       const capCol = i ? '#8a3a3a' : '#9a4a4a';
-      g.fillStyle = capCol; g.beginPath(); g.ellipse(cx-2,cy-20,10,6,0,Math.PI,0); g.closePath(); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1.4; g.stroke();
-      g.fillStyle = 'rgba(255,255,255,.6)'; [[-5,-21],[1,-23],[5,-20]].forEach(([dx,dy]) => { circle(g,cx+dx,cy+dy,1); g.fill(); });
+      const cg = g.createRadialGradient(cx-3,cy-23,1,cx-2,cy-20,11);
+      cg.addColorStop(0,'#c87a7a'); cg.addColorStop(1,capCol);
+      g.fillStyle = cg; g.beginPath(); g.ellipse(cx-2,cy-20,10,6,0,Math.PI,0); g.closePath(); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1.4; g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.75)'; [[-5,-21],[1,-23],[5,-20]].forEach(([dx,dy]) => { circle(g,cx+dx,cy+dy,1.1); g.fill(); });
+      // 發光孢子微粒
+      g.fillStyle = 'rgba(154,216,74,.8)';
+      for(let k=0;k<3;k++){ circle(g,cx-2+r()*14-7,cy-26-r()*8,.8); g.fill(); }
     });
   }
-  // candy：石牆改紅白螺旋糖果條紋，塔頂加棒棒糖螺旋頂
+  // candy：紅白螺旋糖果條紋（加光澤高光），塔頂改奶油擠花頂+彩色糖珠裝飾
   function texCandy(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
     g.fillStyle = T.stone; g.fillRect(x,y,w,h);
     g.strokeStyle = '#e0548a'; g.lineWidth = 6;
     for(let d=-h; d<w+h; d+=14){ g.beginPath(); g.moveTo(x+d,y); g.lineTo(x+d+h,y+h); g.stroke(); }
+    g.fillStyle = 'rgba(255,255,255,.25)'; g.fillRect(x,y,w*.3,h);
     g.restore();
   }
   function topperCandy(g,T,r,base){
-    [[59,50,13],[124,34,11]].forEach(([cx,cy,rad]) => {
+    [[59,50,13],[124,110,9]].forEach(([cx,cy,rad]) => {
       g.save(); g.translate(cx,cy);
       for(let a=0;a<Math.PI*3.2;a+=.35){ const rr = rad*(1-a/(Math.PI*3.6)); g.beginPath(); g.arc(0,0,Math.max(1,rr),a,a+.35); g.strokeStyle = a%1.4<.7 ? '#e0548a' : '#fde6f4'; g.lineWidth=3; g.stroke(); }
       g.restore();
       g.strokeStyle = T.ink; g.lineWidth = 1.4; circle(g,cx,cy,rad); g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.55)'; ell(g,cx-rad*.3,cy-rad*.3,rad*.3,rad*.18); g.fill();
+      // 彩色糖珠環繞
+      const dot = ['#e0548a','#9a5ac2','#4ea0b8','#e8a84a'];
+      for(let k=0;k<6;k++){ const a=k/6*Math.PI*2; g.fillStyle = dot[k%dot.length]; circle(g,cx+Math.cos(a)*(rad+4),cy+Math.sin(a)*(rad+4),1.6); g.fill(); g.strokeStyle=T.ink; g.lineWidth=.6; g.stroke(); }
       g.strokeStyle='#7a4a68'; g.lineWidth=2.4; g.beginPath(); g.moveTo(cx,cy+rad); g.lineTo(cx,cy+rad+12); g.stroke();
     });
   }
-  // twilight：沿用石牆，塔頂加新月尖飾與星光
+  // twilight：沿用石牆，塔頂改尖塔+彩繪玻璃窗新月+星塵光暈（更有魔幻感）
   function topperTwilight(g,T,r,base){
-    [[59,56,13],[124,38,12]].forEach(([cx,cy,h]) => {
+    [[59,56,13],[124,117,10]].forEach(([cx,cy,h]) => {
       g.beginPath(); g.moveTo(cx-8,cy); g.lineTo(cx,cy-h); g.lineTo(cx+8,cy); g.closePath();
-      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
-      g.save(); g.translate(cx,cy-h-6);
+      const tg = g.createLinearGradient(cx,cy-h,cx,cy);
+      tg.addColorStop(0, T.stoneL); tg.addColorStop(1, T.stoneD);
+      g.fillStyle = tg; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.save(); g.translate(cx,cy-h-7);
+      const glow = g.createRadialGradient(0,0,0,0,0,9);
+      glow.addColorStop(0,'rgba(196,138,224,.55)'); glow.addColorStop(1,'rgba(196,138,224,0)');
+      g.fillStyle = glow; circle(g,0,0,9); g.fill();
       g.fillStyle = T.win; g.beginPath(); g.arc(0,0,4.5,Math.PI*.2,Math.PI*1.9); g.arc(2,0,4,Math.PI*1.1,Math.PI*.1,true); g.closePath(); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.5)'; g.lineWidth = .8; g.beginPath(); g.arc(0,0,4.5,Math.PI*.2,Math.PI*1.9); g.stroke();
       g.restore();
     });
-    g.fillStyle = 'rgba(220,180,255,.8)';
-    for(let i=0;i<6;i++){ const x=20+r()*120, y=40+r()*60; circle(g,x,y,.9+r()*.8); g.fill(); }
+    for(let i=0;i<8;i++){
+      const x=18+r()*128, y=35+r()*70, gg = g.createRadialGradient(x,y,0,x,y,2.2);
+      gg.addColorStop(0,'rgba(255,255,255,.95)'); gg.addColorStop(1,'rgba(220,180,255,0)');
+      g.fillStyle = gg; circle(g,x,y,2.2); g.fill();
+    }
   }
-  // steampunk：石牆改鉚釘金屬板紋理，塔頂加齒輪煙囪與蒸氣
+  // steampunk：鉚釘金屬板紋理（加銅鏽漸層），塔頂改黃銅煙囪+齒輪裝置+節奏蒸氣雲
   function texRivet(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
-    g.fillStyle = T.stone; g.fillRect(x,y,w,h);
+    const pg = g.createLinearGradient(0,y,0,y+h);
+    pg.addColorStop(0,T.stoneL); pg.addColorStop(1,T.stone);
+    g.fillStyle = pg; g.fillRect(x,y,w,h);
     for(let row=0, yy=y+8; yy<y+h; row++, yy+=20){
       let xx = x + 8;
       while(xx < x+w-4){
         g.strokeStyle = T.stoneD; g.lineWidth = 1; g.strokeRect(xx-9,yy-9,18,18);
-        g.fillStyle = T.stoneL; circle(g,xx-7,yy-7,1.3); g.fill(); circle(g,xx+7,yy-7,1.3); g.fill();
-        circle(g,xx-7,yy+7,1.3); g.fill(); circle(g,xx+7,yy+7,1.3); g.fill();
+        [[xx-7,yy-7],[xx+7,yy-7],[xx-7,yy+7],[xx+7,yy+7]].forEach(([rx,ry]) => {
+          const rg = g.createRadialGradient(rx-.4,ry-.4,.2,rx,ry,1.4);
+          rg.addColorStop(0,'#f0e0b8'); rg.addColorStop(1,'#8a6a3e');
+          g.fillStyle = rg; circle(g,rx,ry,1.3); g.fill();
+        });
         xx += 20;
       }
     }
     g.restore();
   }
   function topperSteampunk(g,T,r,base){
-    [[59,56],[124,38]].forEach(([cx,cy],i) => {
+    [[59,56],[124,117]].forEach(([cx,cy],i) => {
       const h = i ? 14 : 18;
-      g.fillStyle = '#6a5a42'; g.fillRect(cx-5,cy-h,10,h); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.strokeRect(cx-5,cy-h,10,h);
+      const pg = g.createLinearGradient(cx-5,0,cx+5,0);
+      pg.addColorStop(0,'#8a6a42'); pg.addColorStop(.5,'#b8905a'); pg.addColorStop(1,'#6a5a42');
+      g.fillStyle = pg; g.fillRect(cx-5,cy-h,10,h); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.strokeRect(cx-5,cy-h,10,h);
+      g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(cx-5,cy-3,10,3);
       g.save(); g.translate(cx+8,cy-h+2); g.rotate(r()*6.28);
-      g.fillStyle = '#b8702e'; g.strokeStyle = T.ink; g.lineWidth = 1;
+      const gg2 = g.createRadialGradient(-1,-1,.5,0,0,4.5);
+      gg2.addColorStop(0,'#e8c87a'); gg2.addColorStop(1,'#8a6020');
+      g.fillStyle = gg2; g.strokeStyle = T.ink; g.lineWidth = 1;
       for(let k=0;k<8;k++){ const a = k/8*Math.PI*2; g.save(); g.rotate(a); g.fillRect(-1.5,-7,3,3); g.restore(); }
       circle(g,0,0,4.5); g.fill(); g.stroke();
+      g.fillStyle = '#5a3e18'; circle(g,0,0,1.6); g.fill();
       g.restore();
-      g.fillStyle = 'rgba(255,255,255,.4)';
-      for(let k=0;k<3;k++){ ell(g,cx-2+k*2,cy-h-6-k*6,4+k*2,3+k); g.fill(); }
+      for(let k=0;k<3;k++){
+        const sy = cy-h-6-k*7, sg = g.createRadialGradient(cx-2+k*2,sy,0,cx-2+k*2,sy,5+k*2);
+        sg.addColorStop(0,'rgba(255,255,255,.55)'); sg.addColorStop(1,'rgba(255,255,255,0)');
+        g.fillStyle = sg; ell(g,cx-2+k*2,sy,4+k*2,3+k); g.fill();
+      }
     });
   }
-  // autumn：沿用石牆磚紋理，塔頂加楓葉花環裝飾（與forest基礎磚堡做出區隔）
+  // autumn：沿用石牆磚紋理，塔頂改楓葉花環+漸層葉片+緩降落葉
   function topperAutumn(g,T,r,base){
-    [[59,56,20,12],[124,38,16,10]].forEach(([cx,cy,rx,ry]) => {
-      const cols = ['#c96a2e','#a04a3a','#d9a640'];
-      for(let k=0;k<6;k++){ const a = k/6*Math.PI*2; g.fillStyle = cols[k%cols.length];
-        ell(g,cx+Math.cos(a)*rx*.8, cy+Math.sin(a)*ry*.8, 5, 3.4); g.fill(); g.strokeStyle = T.ink; g.lineWidth = .8; g.stroke(); }
+    [[59,56,20,12],[124,117,13,8]].forEach(([cx,cy,rx,ry]) => {
+      const cols = ['#c96a2e','#a04a3a','#d9a640','#8a4f2e'];
+      for(let k=0;k<8;k++){
+        const a = k/8*Math.PI*2, lx = cx+Math.cos(a)*rx*.82, ly = cy+Math.sin(a)*ry*.82;
+        g.save(); g.translate(lx,ly); g.rotate(a+Math.PI/2);
+        const lg = g.createLinearGradient(0,-4,0,4);
+        lg.addColorStop(0, cols[k%cols.length]); lg.addColorStop(1, '#5c3522');
+        g.fillStyle = lg;
+        g.beginPath(); g.moveTo(0,-5); g.quadraticCurveTo(4,-1,0,5); g.quadraticCurveTo(-4,-1,0,-5); g.closePath(); g.fill();
+        g.strokeStyle = T.ink; g.lineWidth = .7; g.stroke();
+        g.restore();
+      }
+      g.fillStyle = 'rgba(217,166,64,.9)'; circle(g,cx,cy-ry*1.3,2); g.fill();
     });
+    g.fillStyle = 'rgba(200,120,50,.6)';
+    for(let i=0;i<6;i++){ const x=20+r()*128, y=50+r()*140, s=1.8+r()*1.2; g.save(); g.translate(x,y); g.rotate(r()*6.28); ell(g,0,0,s,s*.6); g.fill(); g.restore(); }
   }
+
   const CASTLE_RENDERERS = {
     jungle: (g,T,r) => drawCastleBase(g,T,r,{texture:texWood, topper:topperJungle}),
     ocean: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
