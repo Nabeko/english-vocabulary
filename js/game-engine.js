@@ -29,11 +29,13 @@ window.GameEngine = (function(){
   const DEFAULT_DIFFICULTY = 'normal';
 
   // 怪物種類：hp＝要答對幾次、spd＝速度倍率（runner/boss 實際值於 spawn 時依難度檔位覆寫）、dmg＝攻城扣幾點耐久、scale＝原站體型比例
+  // 怪物顏色改依場景主題T.enemy[]調色盤動態指定（見spawn()），此處colorIdx只決定該種類取第幾色，
+  // 不再用固定寫死色票，才能讓怪物配色隨17個場景變化而不同。
   const KINDS = {
-    grunt:  { name:'小兵',   hp:1, spd:1,    dmg:1, color:'#5a4a6e', scale:[.9,1.12] },
-    runner: { name:'快跑鬼', hp:1, spd:1.6,  dmg:1, color:'#4f6f86', scale:[.76,.84] },
-    shield: { name:'盾牌兵', hp:2, spd:0.75, dmg:1, color:'#9c6f1c', scale:[1.08,1.16] },
-    boss:   { name:'魔王',   hp:1, spd:0.5,  dmg:2, color:'#4a2f45', scale:[1.62,1.62] },
+    grunt:  { name:'小兵',   hp:1, spd:1,    dmg:1, colorIdx:0, scale:[.9,1.12] },
+    runner: { name:'快跑鬼', hp:1, spd:1.6,  dmg:1, colorIdx:1, scale:[.76,.84] },
+    shield: { name:'盾牌兵', hp:2, spd:0.75, dmg:1, colorIdx:2, scale:[1.08,1.16] },
+    boss:   { name:'魔王',   hp:1, spd:0.5,  dmg:2, colorIdx:1, scale:[1.62,1.62] },
   };
 
   const TYPES = ['en2zh','zh2en','fill'];
@@ -250,8 +252,8 @@ window.GameEngine = (function(){
       if(item.kind === 'runner') spd = G.diff.runnerSpd;
       else if(item.kind === 'boss') spd = K.spd * G.diff.bossSpdMul;
       G.enemies.push({
-        kind: item.kind, words: item.words, idx: 0, w: item.words[0],
-        hp: K.hp, maxHp: K.hp, spd, dmg: K.dmg, color: K.color,
+        kind: item.kind, words: item.words, idx: 0, w: item.words[0], theme,
+        hp: K.hp, maxHp: K.hp, spd, dmg: K.dmg, color: T.enemy[K.colorIdx],
         x: item.kind === 'boss' ? W - 60 : W + 20, state: 'walk', dt: 0, t: Math.random()*3, stun: 0, flash: 0,
         scale, horn: item.kind === 'boss' ? 0 : item.kind === 'runner' ? 1 : Math.floor(Math.random()*3),
         doomed: false, lastType: null, charge: 0,
