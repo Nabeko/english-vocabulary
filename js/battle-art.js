@@ -250,6 +250,163 @@ window.BattleArt = (function(){
       g.strokeStyle = 'rgba(255,255,255,.4)'; g.lineWidth = 1; g.beginPath(); g.moveTo(cx,cy-h); g.lineTo(cx,cy); g.stroke();
     });
   }
+  // desert：石牆改沙岩塊紋理，塔頂加圓頂尖塔（仿清真寺/綠洲建築輪廓）
+  function texSand(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.lineWidth = 1;
+    for(let row=0, yy=y; yy<y+h; row++, yy+=15){
+      let xx = x - (row%2 ? 14 : 3);
+      while(xx < x+w){
+        const bw = 22 + r()*14;
+        g.strokeStyle = T.stoneD; g.globalAlpha = .4; g.strokeRect(xx+.5,yy+.5,bw,15); g.globalAlpha = 1;
+        xx += bw;
+      }
+    }
+    g.strokeStyle = 'rgba(0,0,0,.12)'; g.lineWidth = 1;
+    for(let i=0;i<8;i++){ const xx=x+r()*w, yy=y+r()*h; g.beginPath(); g.moveTo(xx,yy); g.lineTo(xx+r()*6-3,yy+r()*6-3); g.stroke(); }
+    g.restore();
+  }
+  function topperDesert(g,T,r,base){
+    [[59,56,15],[124,38,19]].forEach(([cx,cy,rad]) => {
+      g.beginPath(); g.ellipse(cx,cy-rad*.2,rad,rad*.9,0,Math.PI,0); g.closePath();
+      g.fillStyle = T.stoneL; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.beginPath(); g.moveTo(cx,cy-rad*1.05); g.lineTo(cx,cy-rad*1.35); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.stroke();
+      g.fillStyle = T.banner; circle(g,cx,cy-rad*1.4,2); g.fill();
+    });
+  }
+  // snow：石牆加覆雪效果與垂掛冰柱，塔頂加雪帽尖頂
+  function texSnowWall(g,x,y,w,h,r,T){
+    bricks(g,x,y,w,h,r,T);
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.fillStyle = 'rgba(255,255,255,.55)';
+    for(let xx=x; xx<x+w; xx+=10){ const sh = 2+r()*3; g.fillRect(xx,y,8,sh); }
+    g.strokeStyle = 'rgba(210,230,245,.8)'; g.lineWidth = 1.4;
+    for(let i=0;i<5;i++){ const xx = x+6+r()*(w-12), len = 5+r()*9; g.beginPath(); g.moveTo(xx,y+16); g.lineTo(xx,y+16+len); g.stroke(); }
+    g.restore();
+  }
+  function topperSnow(g,T,r,base){
+    [[59,56,15],[124,38,13]].forEach(([cx,cy,h]) => {
+      g.beginPath(); g.moveTo(cx-9,cy); g.lineTo(cx,cy-h); g.lineTo(cx+9,cy); g.closePath();
+      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.beginPath(); g.moveTo(cx-9,cy); g.lineTo(cx,cy-h); g.lineTo(cx+9,cy);
+      g.lineTo(cx+5,cy-h*.3); g.lineTo(cx,cy-h*.6); g.lineTo(cx-5,cy-h*.3); g.closePath();
+      g.fillStyle = '#eef6fb'; g.fill(); g.strokeStyle = 'rgba(200,225,240,.9)'; g.lineWidth = 1; g.stroke();
+    });
+  }
+  // volcano：石牆改龜裂黑曜岩紋理帶岩漿光，塔頂加尖刺焦岩
+  function texObsidian(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.strokeStyle = 'rgba(0,0,0,.5)'; g.lineWidth = 1;
+    for(let i=0;i<9;i++){ const xx=x+r()*w, yy=y+r()*h; const segs=2+Math.floor(r()*3); let cx=xx, cy=yy;
+      g.beginPath(); g.moveTo(cx,cy);
+      for(let s=0;s<segs;s++){ cx += r()*10-5; cy += r()*8-4; g.lineTo(cx,cy); } g.stroke(); }
+    g.fillStyle = 'rgba(224,98,42,.35)';
+    for(let i=0;i<5;i++){ const xx=x+r()*w, yy=y+r()*h; ell(g,xx,yy,2+r()*2,1.4); g.fill(); }
+    g.restore();
+  }
+  function topperVolcano(g,T,r,base){
+    [[59,56,16],[124,38,15]].forEach(([cx,cy,h]) => {
+      g.beginPath(); g.moveTo(cx-8,cy); g.lineTo(cx-3,cy-h); g.lineTo(cx,cy-h*.6); g.lineTo(cx+4,cy-h*1.15); g.lineTo(cx+9,cy); g.closePath();
+      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.fillStyle = T.win; circle(g,cx+2,cy-h*.5,1.8); g.fill();
+    });
+  }
+  // sakura：沿用石牆，塔頂加粉色花團樹冠＋飄落花瓣
+  function topperSakura(g,T,r,base){
+    const petD = '#b86e8e', petMid = '#d08ca6', petCol = '#f3c9d6';
+    [[59,56,27,16],[124,40,22,13]].forEach(([cx,cy,rx,ry]) => {
+      g.fillStyle = petD; ell(g,cx+3,cy-ry*.6,rx,ry); g.fill();
+      g.fillStyle = petMid; ell(g,cx-4,cy-ry*1.1,rx*.8,ry*.8); g.fill();
+      g.fillStyle = petCol; ell(g,cx+2,cy-ry*1.5,rx*.6,ry*.6); g.fill();
+      g.strokeStyle = T.ink; g.lineWidth = 1.6; ell(g,cx+3,cy-ry*.6,rx,ry); g.stroke();
+    });
+    g.fillStyle = 'rgba(255,220,232,.85)';
+    for(let i=0;i<10;i++){ const x = 20+r()*120, y = 60+r()*130; ell(g,x,y,2+r()*1.4,1.4); g.fill(); }
+  }
+  // swamp：石牆改青苔藤蔓紋理，塔頂加扭曲樹根與毒菇
+  function texMoss(g,x,y,w,h,r,T){
+    bricks(g,x,y,w,h,r,T);
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.fillStyle = 'rgba(70,100,40,.45)';
+    for(let i=0;i<14;i++){ const xx=x+r()*w, yy=y+r()*h; ell(g,xx,yy,3+r()*4,2+r()*2); g.fill(); }
+    g.strokeStyle = 'rgba(60,90,30,.6)'; g.lineWidth = 1.2;
+    for(let i=0;i<4;i++){ const xx=x+6+r()*(w-12); g.beginPath(); g.moveTo(xx,y); g.quadraticCurveTo(xx+(r()*6-3),y+h*.5,xx+(r()*4-2),y+h); g.stroke(); }
+    g.restore();
+  }
+  function topperSwamp(g,T,r,base){
+    [[59,56],[124,40]].forEach(([cx,cy],i) => {
+      g.strokeStyle = '#3a4e28'; g.lineWidth = 2.4;
+      g.beginPath(); g.moveTo(cx,cy); g.quadraticCurveTo(cx+6,cy-10,cx-2,cy-18); g.stroke();
+      const capCol = i ? '#8a3a3a' : '#9a4a4a';
+      g.fillStyle = capCol; g.beginPath(); g.ellipse(cx-2,cy-20,10,6,0,Math.PI,0); g.closePath(); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1.4; g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.6)'; [[-5,-21],[1,-23],[5,-20]].forEach(([dx,dy]) => { circle(g,cx+dx,cy+dy,1); g.fill(); });
+    });
+  }
+  // candy：石牆改紅白螺旋糖果條紋，塔頂加棒棒糖螺旋頂
+  function texCandy(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.fillStyle = T.stone; g.fillRect(x,y,w,h);
+    g.strokeStyle = '#e0548a'; g.lineWidth = 6;
+    for(let d=-h; d<w+h; d+=14){ g.beginPath(); g.moveTo(x+d,y); g.lineTo(x+d+h,y+h); g.stroke(); }
+    g.restore();
+  }
+  function topperCandy(g,T,r,base){
+    [[59,50,13],[124,34,11]].forEach(([cx,cy,rad]) => {
+      g.save(); g.translate(cx,cy);
+      for(let a=0;a<Math.PI*3.2;a+=.35){ const rr = rad*(1-a/(Math.PI*3.6)); g.beginPath(); g.arc(0,0,Math.max(1,rr),a,a+.35); g.strokeStyle = a%1.4<.7 ? '#e0548a' : '#fde6f4'; g.lineWidth=3; g.stroke(); }
+      g.restore();
+      g.strokeStyle = T.ink; g.lineWidth = 1.4; circle(g,cx,cy,rad); g.stroke();
+      g.strokeStyle='#7a4a68'; g.lineWidth=2.4; g.beginPath(); g.moveTo(cx,cy+rad); g.lineTo(cx,cy+rad+12); g.stroke();
+    });
+  }
+  // twilight：沿用石牆，塔頂加新月尖飾與星光
+  function topperTwilight(g,T,r,base){
+    [[59,56,13],[124,38,12]].forEach(([cx,cy,h]) => {
+      g.beginPath(); g.moveTo(cx-8,cy); g.lineTo(cx,cy-h); g.lineTo(cx+8,cy); g.closePath();
+      g.fillStyle = T.stoneD; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+      g.save(); g.translate(cx,cy-h-6);
+      g.fillStyle = T.win; g.beginPath(); g.arc(0,0,4.5,Math.PI*.2,Math.PI*1.9); g.arc(2,0,4,Math.PI*1.1,Math.PI*.1,true); g.closePath(); g.fill();
+      g.restore();
+    });
+    g.fillStyle = 'rgba(220,180,255,.8)';
+    for(let i=0;i<6;i++){ const x=20+r()*120, y=40+r()*60; circle(g,x,y,.9+r()*.8); g.fill(); }
+  }
+  // steampunk：石牆改鉚釘金屬板紋理，塔頂加齒輪煙囪與蒸氣
+  function texRivet(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.fillStyle = T.stone; g.fillRect(x,y,w,h);
+    for(let row=0, yy=y+8; yy<y+h; row++, yy+=20){
+      let xx = x + 8;
+      while(xx < x+w-4){
+        g.strokeStyle = T.stoneD; g.lineWidth = 1; g.strokeRect(xx-9,yy-9,18,18);
+        g.fillStyle = T.stoneL; circle(g,xx-7,yy-7,1.3); g.fill(); circle(g,xx+7,yy-7,1.3); g.fill();
+        circle(g,xx-7,yy+7,1.3); g.fill(); circle(g,xx+7,yy+7,1.3); g.fill();
+        xx += 20;
+      }
+    }
+    g.restore();
+  }
+  function topperSteampunk(g,T,r,base){
+    [[59,56],[124,38]].forEach(([cx,cy],i) => {
+      const h = i ? 14 : 18;
+      g.fillStyle = '#6a5a42'; g.fillRect(cx-5,cy-h,10,h); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.strokeRect(cx-5,cy-h,10,h);
+      g.save(); g.translate(cx+8,cy-h+2); g.rotate(r()*6.28);
+      g.fillStyle = '#b8702e'; g.strokeStyle = T.ink; g.lineWidth = 1;
+      for(let k=0;k<8;k++){ const a = k/8*Math.PI*2; g.save(); g.rotate(a); g.fillRect(-1.5,-7,3,3); g.restore(); }
+      circle(g,0,0,4.5); g.fill(); g.stroke();
+      g.restore();
+      g.fillStyle = 'rgba(255,255,255,.4)';
+      for(let k=0;k<3;k++){ ell(g,cx-2+k*2,cy-h-6-k*6,4+k*2,3+k); g.fill(); }
+    });
+  }
+  // autumn：沿用石牆磚紋理，塔頂加楓葉花環裝飾（與forest基礎磚堡做出區隔）
+  function topperAutumn(g,T,r,base){
+    [[59,56,20,12],[124,38,16,10]].forEach(([cx,cy,rx,ry]) => {
+      const cols = ['#c96a2e','#a04a3a','#d9a640'];
+      for(let k=0;k<6;k++){ const a = k/6*Math.PI*2; g.fillStyle = cols[k%cols.length];
+        ell(g,cx+Math.cos(a)*rx*.8, cy+Math.sin(a)*ry*.8, 5, 3.4); g.fill(); g.strokeStyle = T.ink; g.lineWidth = .8; g.stroke(); }
+    });
+  }
   const CASTLE_RENDERERS = {
     jungle: (g,T,r) => drawCastleBase(g,T,r,{texture:texWood, topper:topperJungle}),
     ocean: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
@@ -257,6 +414,15 @@ window.BattleArt = (function(){
     haunted: (g,T,r) => drawCastleBase(g,T,r,{texture:texHaunted, topper:topperHaunted}),
     'ice-cave': (g,T,r) => drawCastleBase(g,T,r,{texture:texCrystal, topper:topperCrystal}),
     crystal: (g,T,r) => drawCastleBase(g,T,r,{texture:texCrystal, topper:topperCrystal}),
+    desert: (g,T,r) => drawCastleBase(g,T,r,{texture:texSand, topper:topperDesert}),
+    snow: (g,T,r) => drawCastleBase(g,T,r,{texture:texSnowWall, topper:topperSnow}),
+    volcano: (g,T,r) => drawCastleBase(g,T,r,{texture:texObsidian, topper:topperVolcano}),
+    sakura: (g,T,r) => drawCastleBase(g,T,r,{texture:bricks, topper:topperSakura}),
+    swamp: (g,T,r) => drawCastleBase(g,T,r,{texture:texMoss, topper:topperSwamp}),
+    candy: (g,T,r) => drawCastleBase(g,T,r,{texture:texCandy, topper:topperCandy}),
+    twilight: (g,T,r) => drawCastleBase(g,T,r,{texture:bricks, topper:topperTwilight}),
+    steampunk: (g,T,r) => drawCastleBase(g,T,r,{texture:texRivet, topper:topperSteampunk}),
+    autumn: (g,T,r) => drawCastleBase(g,T,r,{texture:bricks, topper:topperAutumn}),
   };
   const bgCache = {};
   function makeBg(theme){
