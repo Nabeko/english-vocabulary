@@ -496,13 +496,13 @@ window.App = (function(){
     window.speechSynthesis.speak(utter);
   }
 
-  // 例句發音：完整句子朗讀，不切斜線（例句不會有單字發音標記的斜線語法），語速維持正常速度較自然
+  // 例句發音：完整句子朗讀，不切斜線（例句不會有單字發音標記的斜線語法），語速放慢方便聽清楚
   function speakSentence(text){
     if(!('speechSynthesis' in window) || !text) return;
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text.trim());
     utter.lang = 'en-US';
-    utter.rate = 1;
+    utter.rate = 0.75;
     window.speechSynthesis.speak(utter);
   }
 
