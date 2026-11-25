@@ -138,7 +138,7 @@ const WORDS_TOEIC = [
   { w: 'permanent', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˈpɜːrmənənt/', pos: 'a', zh: '永恆的；永遠的', ex: 'After the trial period, she got a permanent contract.', exZh: '試用期過後,她獲得了一份永久合約。' },
   { w: 'personnel', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˌpɜːrsəˈnɛl/', pos: 'n', zh: '人員；員工', ex: 'All personnel must wear safety helmets on site.', exZh: '所有人員在現場都必須戴安全帽。' },
   { w: 'Ph.D.', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˌpiː eɪtʃ ˈdiː/', pos: 'n', zh: '博士學位(=DoctorofPhilosophy)', ex: 'She earned her Ph.D. in economics last spring.', exZh: '她去年春天取得了經濟學博士學位。' },
-  { w: 'placement', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˈpleɪsmənt/', pos: 'n', zh: '布置', ex: 'The agency helped with his job placement after graduation.', exZh: '該機構協助他畢業後的職位安置。' },
+  { w: 'placement', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˈpleɪsmənt/', pos: 'n', zh: '安置；職位安排', ex: 'The agency helped with his job placement after graduation.', exZh: '該機構協助他畢業後的職位安置。' },
   { w: 'position', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/pəˈzɪʃən/', pos: 'n', zh: '位置；姿態', ex: 'She applied for a senior position in the company.', exZh: '她應徵了公司裡的一個高階職位。' },
   { w: 'post', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/poʊst/', pos: 'n', zh: '崗位；哨所', ex: 'He was assigned to a new post overseas.', exZh: '他被派駐到海外的新崗位。' },
   { w: 'posting', unit: 1, unitName: 'Human Resources & Workplace', ipa: '/ˈpoʊstɪŋ/', pos: 'n', zh: '任命；委任職位', ex: 'He accepted a posting in the Tokyo office.', exZh: '他接受了東京辦事處的職位委任。' },
