@@ -496,6 +496,16 @@ window.App = (function(){
     window.speechSynthesis.speak(utter);
   }
 
+  // 例句發音：完整句子朗讀，不切斜線（例句不會有單字發音標記的斜線語法），語速維持正常速度較自然
+  function speakSentence(text){
+    if(!('speechSynthesis' in window) || !text) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text.trim());
+    utter.lang = 'en-US';
+    utter.rate = 1;
+    window.speechSynthesis.speak(utter);
+  }
+
   function renderPreview(levelId, unitNum, stageIdx, totalStages){
     const lv = LEVELS.find(l => l.id === levelId);
     const groups = groupByUnit(lv.words);
@@ -518,7 +528,7 @@ window.App = (function(){
                 <span class="word-pos">${escapeHtml(w.pos || '')}</span>
               </div>
               <div class="word-zh">${escapeHtml(w.zh || '（待補）')}</div>
-              ${w.ex ? `<div class="word-ex">${highlightWord(w.ex, w.w)}</div>` : ''}
+              ${w.ex ? `<div class="word-ex"><button class="speak-btn ex-speak-btn" data-ex="${escapeHtml(w.ex)}" title="朗讀例句">🔊</button>${highlightWord(w.ex, w.w)}</div>` : ''}
               ${w.exZh ? `<div class="word-exzh">${escapeHtml(w.exZh)}</div>` : ''}
             </li>`).join('')}
         </ul>
@@ -528,7 +538,11 @@ window.App = (function(){
     window.scrollTo(0, 0);
     view.querySelector('[data-action="back-units"]').addEventListener('click', () => renderUnitList(levelId));
     view.querySelectorAll('.speak-btn').forEach(btn => {
-      btn.addEventListener('click', () => speak(btn.dataset.word));
+      btn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        if(btn.dataset.ex) speakSentence(btn.dataset.ex);
+        else speak(btn.dataset.word);
+      });
     });
     const startBtn = view.querySelector('#ge-start-from-preview');
     if(startBtn) startBtn.addEventListener('click', () => {
