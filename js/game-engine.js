@@ -178,6 +178,30 @@ window.GameEngine = (function(){
     return q;
   }
 
+  // 同義詞群組：這些字彼此是美式/英式用語差異或正式體/口語體差異，中文釋義寫法不同
+  // （如grandfather zh='祖父/外公' vs grandpa zh='爺爺/外公（口語）'），自動去重邏輯比對不到，
+  // 若同時出現在選擇題選項裡會造成語意模糊、無法判斷何者為「正確答案」。
+  // 出題時：若干擾候選字跟正確答案同屬一組，直接排除，不當作干擾選項。
+  const SYNONYM_GROUPS = [
+    ['grandfather','grandpa'], ['grandmother','grandma'],
+    ['mother','mum','mom'], ['father','dad'],
+    ['flat','apartment'], ['trousers','pants'],
+    ['phone','telephone'], ['television','tv','TV'],
+    ['film','movie'], ['holiday','vacation'],
+    ['autumn','fall'], ['fridge','refrigerator'],
+    ['advert','advertisement'], ['OK','okay'], ['ok','okay'],
+    ['sofa','couch'], ['cinema','movie theater'],
+  ];
+  const SYNONYM_OF = (() => {
+    const map = new Map();
+    SYNONYM_GROUPS.forEach(group => group.forEach(w => map.set(w.toLowerCase(), group)));
+    return w => map.get(String(w).toLowerCase()) || null;
+  })();
+  const isSynonymPair = (a, b) => {
+    const g = SYNONYM_OF(a);
+    return !!(g && g.some(w => w.toLowerCase() === String(b).toLowerCase()));
+  };
+
   function makeQuestion(x, pool, avoidType){
     let types = TYPES.filter(t => t !== avoidType && (t !== 'fill' || canFill(x)));
     if(!types.length) types = ['en2zh'];
@@ -186,12 +210,14 @@ window.GameEngine = (function(){
     for(const y of shuffle(pool.length >= 4 ? pool : pool)){
       if(others.length === 3) break;
       if(seenW.has(y.w) || seenZ.has(y.zh)) continue;
+      if(isSynonymPair(x.w, y.w)) continue; // 跳過跟正確答案同義（口語/正式體差異）的候選字，避免選項模擬兩可
       seenW.add(y.w); seenZ.add(y.zh); others.push(y);
     }
     while(others.length < 3 && pool.length) others.push(pool[Math.floor(Math.random()*pool.length)]); // 字數不足時允許重複湊滿選項
     const opts = shuffle([x, ...others]);
     return { word:x, type, opts, answer:x.w, labels: opts.map(o => type === 'en2zh' ? (o.zh||o.w) : o.w) };
   }
+
 
   function start(container, { words, title, onExit, difficulty, onFinish, onAnswer }){
     const pool = words;
