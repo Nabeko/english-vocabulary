@@ -200,7 +200,7 @@ window.GameEngine = (function(){
     const G = {
       diff, queue: buildQueue(words, diff), enemies: [], hp: MAX_HP, streak: 0, right: 0, killed: 0, breached: 0,
       total: 0, time: 0, spawnT: 0.6, lock: 0, cur: null, over: false, won: false, paused: false, raf: null, dead: false,
-      banner: null, shake: 0, parts: [], ult: null, freezeUntil: 0,
+      banner: null, shake: 0, parts: [], ult: null, freezeUntil: 0, shot: null,
     };
     G.total = G.queue.length;
 
@@ -327,6 +327,7 @@ window.GameEngine = (function(){
         }
       }
       G.parts = Art.stepParticles(G.parts, dt, GROUND+20);
+      if(G.shot){ G.shot.t += dt; if(G.shot.t >= G.shot.dur) G.shot = null; }
       if(G.banner) hud();
       if(!G.over){
         if(G.hp <= 0) finish(false);
@@ -346,11 +347,13 @@ window.GameEngine = (function(){
       Art.drawFlag(g,T,G.time);
       const crack = Math.min(1, (MAX_HP - G.hp) / (MAX_HP - 1));
       if(crack > 0) Art.drawCrack(g, T, crack);
-      Art.drawArcher(g,T,0);
+      // 攻擊瞬間：pull 從大到小插值，製造「射出去」的回彈感；平時維持0
+      const shotPull = G.shot ? Math.max(0, .9 * (1 - Math.min(1, G.shot.t / G.shot.dur))) : 0;
+      Art.drawArcher(g,T,shotPull,theme);
       // 集氣演出：畫面變暗＋光環收縮＋放射光芒
       if(G.ult && G.ult.phase === 'charge'){
         Art.drawUltCharge(g, ARCHER_X, ARCHER_Y, G.ult.t);
-        Art.drawArcher(g,T,0);
+        Art.drawArcher(g,T,shotPull,theme);
       }
       const bossE = G.enemies.find(z => z.kind === 'boss' && z.state === 'walk');
       if(bossE && bossE.charge > 0){
@@ -359,6 +362,13 @@ window.GameEngine = (function(){
       }
       const tgt = G.cur && G.cur.enemy;
       [...G.enemies].sort((a,b) => b.x - a.x).forEach(e => Art.drawEnemy(g,e,T,e === tgt && e.state === 'walk'));
+      if(G.shot){
+        const p = Math.min(1, G.shot.t / G.shot.dur);
+        const px = G.shot.x0 + (G.shot.x1 - G.shot.x0)*p, py = G.shot.y0 + (G.shot.y1 - G.shot.y0)*p;
+        const ang = Math.atan2(G.shot.y1 - G.shot.y0, G.shot.x1 - G.shot.x0);
+        if(G.shot.theme === 'ocean') Art.drawTridentProjectile(g, px, py, ang, T);
+        else Art.drawArrow(g, px, py, ang, T);
+      }
       Art.drawParticles(g, G.parts);
       if(G.banner){
         g.fillStyle = 'rgba(28,36,40,.8)'; g.fillRect(W/2-150,14,300,32);
@@ -440,6 +450,7 @@ window.GameEngine = (function(){
       if(ok){
         G.right++; G.streak++;
         sfx.correct();
+        G.shot = { x0: ARCHER_X, y0: ARCHER_Y, x1: e.x, y1: GROUND - 22*e.scale, t: 0, dur: 0.25, theme };
         if(e.kind === 'boss'){
           e.charge++;
           const left = BOSS_WORDS - e.charge;

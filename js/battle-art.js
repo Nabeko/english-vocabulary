@@ -100,9 +100,71 @@ window.BattleArt = (function(){
       if(shade){ g.fillStyle = shade; g.beginPath(); g.moveTo(x, yy - h*.5); g.lineTo(x+ww, yy); g.lineTo(x, yy); g.closePath(); g.fill(); g.fillStyle = col; }
     }
   }
+  // ocean 專屬中景：搖曳海草/海帶＋珊瑚礁剪影＋上升氣泡群＋魚群剪影，取代陸地松樹
+  function drawOceanMidground(g,T,r){
+    // 珊瑚礁剪影叢（矮胖分枝狀，貼近地面)
+    for(let i=0;i<14;i++){
+      const x = 40 + r()*(W-80), y = 196 + r()*10, s = 10+r()*14;
+      g.fillStyle = r()<.5 ? T.mid : T.near;
+      for(let b=0;b<3;b++){
+        const bx = x + (b-1)*s*.4, bh = s*(0.7+r()*.6);
+        g.beginPath(); g.moveTo(bx-s*.18,y); g.quadraticCurveTo(bx-s*.3,y-bh*.6,bx,y-bh); g.quadraticCurveTo(bx+s*.3,y-bh*.6,bx+s*.18,y); g.closePath(); g.fill();
+      }
+    }
+    // 搖曳海草/海帶（細長波浪剪影）
+    g.strokeStyle = T.mid; g.lineCap = 'round';
+    for(let i=0;i<22;i++){
+      const x = r()*W, baseY = 200 + r()*12, h = 24 + r()*30, ph = r()*6.28;
+      g.lineWidth = 2 + r()*2;
+      g.beginPath(); g.moveTo(x, baseY);
+      for(let s=1;s<=5;s++){
+        const k = s/5, yy = baseY - h*k;
+        g.lineTo(x + Math.sin(k*3 + ph)*6*k, yy);
+      }
+      g.stroke();
+    }
+    // 魚群剪影（遠景小魚）
+    g.fillStyle = T.far;
+    for(let i=0;i<10;i++){
+      const x = r()*W, y = 110 + r()*70, s = 3+r()*3, dir = r()<.5?1:-1;
+      g.save(); g.translate(x,y); g.scale(dir,1);
+      g.beginPath(); g.moveTo(-s*2,0); g.quadraticCurveTo(-s*.4,-s*.9,s*1.6,0); g.quadraticCurveTo(-s*.4,s*.9,-s*2,0); g.closePath(); g.fill();
+      g.beginPath(); g.moveTo(-s*2,0); g.lineTo(-s*2.8,-s*.7); g.lineTo(-s*2.8,s*.7); g.closePath(); g.fill();
+      g.restore();
+    }
+    // 上升氣泡群
+    g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 1;
+    for(let i=0;i<30;i++){
+      const x = r()*W, y = 40 + r()*180, rad = 1+r()*2.6;
+      g.beginPath(); g.arc(x,y,rad,0,Math.PI*2); g.stroke();
+    }
+    // 透光水波紋理（橫向光帶）
+    g.strokeStyle = 'rgba(255,255,255,.14)'; g.lineWidth = 3;
+    for(let i=0;i<5;i++){
+      const y = 60 + r()*140, amp = 6+r()*8, ph = r()*6.28;
+      g.beginPath();
+      for(let x=0;x<=W;x+=16){ const yy = y + Math.sin(x*.02+ph)*amp; x===0 ? g.moveTo(x,yy) : g.lineTo(x,yy); }
+      g.stroke();
+    }
+  }
   function cloud(g,x,y,s){
     g.fillStyle = 'rgba(255,255,255,.5)';
     [[0,0,26,9],[18,-6,18,10],[-16,-3,16,8],[34,2,16,6]].forEach(([dx,dy,rx,ry]) => { ell(g,x+dx*s,y+dy*s,rx*s,ry*s); g.fill(); });
+  }
+  // ocean 專屬：取代雲朵的遠景魚群（淡色剪影，3條一組呈隊形游動），畫在原本雲朵的座標與尺度上
+  function fishFlock(g,x,y,s){
+    const dir = Math.sin(x*.17) < 0 ? -1 : 1;
+    g.save(); g.translate(x,y); g.scale(dir*s, s);
+    const one = (dx,dy,sc) => {
+      g.save(); g.translate(dx,dy); g.scale(sc,sc);
+      g.fillStyle = 'rgba(255,255,255,.52)';
+      g.beginPath(); g.moveTo(-14,0); g.quadraticCurveTo(-2,-7,12,0); g.quadraticCurveTo(-2,7,-14,0); g.closePath(); g.fill();
+      g.beginPath(); g.moveTo(-14,0); g.lineTo(-21,-6); g.lineTo(-21,6); g.closePath(); g.fill();
+      g.fillStyle = 'rgba(255,255,255,.7)'; circle(g,7,-1.5,1.3); g.fill();
+      g.restore();
+    };
+    one(0,0,1); one(-20,7,.7); one(18,10,.62);
+    g.restore();
   }
   function bricks(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
@@ -200,7 +262,115 @@ window.BattleArt = (function(){
     g.strokeStyle = leafD; g.lineWidth = 1.4;
     for(let i=0;i<4;i++){ const x = 24 + r()*70, y0 = 70; const len = 10+r()*16; g.beginPath(); g.moveTo(x,y0); g.quadraticCurveTo(x+(r()*4-2),y0+len*.6,x+(r()*3-1.5),y0+len); g.stroke(); }
   }
-  // ocean/coral：石牆改貝殼螺旋紋理，塔頂加螺旋尖頂
+  // ocean：石牆改巨大海螺紋理（粉色螺旋溝紋），塔頂改真·海螺造型（螺旋尖塔+珍珠光澤）
+  function texConch(g,x,y,w,h,r,T){
+    g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
+    g.fillStyle = T.stone; g.fillRect(x,y,w,h);
+    g.strokeStyle = T.stoneD; g.lineWidth = 1.2;
+    const cx = x+w/2;
+    for(let k=0;k<8;k++){ g.beginPath(); g.arc(cx, y+h-6-k*16, 6+k*5, Math.PI*.1, Math.PI*1.3); g.stroke(); }
+    g.strokeStyle = 'rgba(224,122,158,.5)'; g.lineWidth = 2;
+    for(let k=0;k<8;k++){ g.beginPath(); g.arc(cx, y+h-10-k*16, 5+k*5, Math.PI*.15, Math.PI*1.0); g.stroke(); }
+    g.restore();
+  }
+  function topperConch(g,T,r,base){
+    [[59,56,22],[124,117,15]].forEach(([cx,cy,rad]) => {
+      g.beginPath(); g.moveTo(cx-rad*.6,cy+rad*.6); g.quadraticCurveTo(cx-rad*.7,cy-rad*.4,cx,cy-rad); g.quadraticCurveTo(cx+rad*.7,cy-rad*.4,cx+rad*.6,cy+rad*.6); g.closePath();
+      const cg = g.createLinearGradient(cx,cy-rad,cx,cy+rad);
+      cg.addColorStop(0, '#f0c8d8'); cg.addColorStop(1, T.stoneL);
+      g.fillStyle = cg; g.fill(); g.lineWidth = 1.8; g.strokeStyle = T.ink; g.stroke();
+      g.strokeStyle = 'rgba(224,122,158,.6)'; g.lineWidth = 1.2;
+      for(let k=1;k<=3;k++){ g.beginPath(); g.ellipse(cx,cy-rad*.2*k, rad*(1-k*.22), rad*.22, 0,0,Math.PI*2); g.stroke(); }
+      let rr; g.beginPath(); g.moveTo(cx,cy-rad*.2);
+      for(let a=0;a<Math.PI*4.2;a+=.25){ rr = (1 - a/(Math.PI*4.6))*rad*.55; g.lineTo(cx+Math.cos(a)*rr, cy-rad*.2+Math.sin(a)*rr*.6); }
+      g.strokeStyle = T.ink; g.lineWidth = 1; g.stroke();
+      g.fillStyle = '#fff6ea'; circle(g,cx,cy-rad,2.2); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1; g.stroke();
+    });
+  }
+  // ocean：經典歐式石造城堡剪影（圓塔+錐形藍灰屋頂+城垛+拱門），改用海底石材配色，
+  // 牆面以珊瑚礁與海草取代地面雜草，呈現「沉沒在海底的古堡」氛圍，而非海螺造型。
+  function drawOceanCastle(g,T,r){
+    const base = GROUND + 8;
+    g.lineJoin = 'round'; g.strokeStyle = T.ink;
+    function roundTower(cx, topY, botY, rw){
+      // 塔身（圓柱剪影，左右兩道弧線收邊）
+      g.beginPath();
+      g.moveTo(cx-rw, botY); g.lineTo(cx-rw, topY+6);
+      g.quadraticCurveTo(cx-rw, topY-2, cx, topY-2);
+      g.quadraticCurveTo(cx+rw, topY-2, cx+rw, topY+6);
+      g.lineTo(cx+rw, botY); g.closePath();
+      const tg = g.createLinearGradient(cx-rw,0,cx+rw,0);
+      tg.addColorStop(0, T.stoneD); tg.addColorStop(.5, T.stoneL); tg.addColorStop(1, T.stone);
+      g.fillStyle = tg; g.fill(); g.lineWidth = 2; g.stroke();
+      // 塔身水平砌石紋
+      g.save(); g.clip();
+      g.strokeStyle = T.stoneD; g.globalAlpha = .4; g.lineWidth = 1;
+      for(let yy=topY+10; yy<botY; yy+=11){ g.beginPath(); g.moveTo(cx-rw,yy); g.lineTo(cx+rw,yy); g.stroke(); }
+      g.globalAlpha = 1; g.restore();
+      // 錐形屋頂
+      const roofH = rw*2.3;
+      g.beginPath(); g.moveTo(cx-rw-3, topY+4); g.lineTo(cx, topY-roofH); g.lineTo(cx+rw+3, topY+4); g.closePath();
+      const rg = g.createLinearGradient(cx-rw,topY-roofH,cx+rw,topY+4);
+      rg.addColorStop(0,'#2f5a68'); rg.addColorStop(.5,'#3e7688'); rg.addColorStop(1,'#1f3f4a');
+      g.fillStyle = rg; g.fill(); g.lineWidth = 1.8; g.strokeStyle = T.ink; g.stroke();
+      g.fillStyle = '#e8c87a'; circle(g,cx,topY-roofH-1.5,2); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1; g.stroke();
+      return roofH;
+    }
+    function crenellation(x0, y, w, n){
+      const cw = w/n;
+      g.fillStyle = T.stone; g.strokeStyle = T.ink; g.lineWidth = 1.4;
+      for(let i=0;i<n;i++){ if(i%2===0){ g.fillRect(x0+i*cw, y-7, cw, 7); g.strokeRect(x0+i*cw, y-7, cw, 7); } }
+    }
+    // --- 左側主塔（較高、旗幟塔）：貼齊畫面左緣，不留空隙 ---
+    const lCx = 40, lTop = 56, lBot = base, lRad = 40;
+    roundTower(lCx, lTop, lBot, lRad);
+    crenellation(lCx-lRad-1, lTop+5, lRad*2+2, 9);
+    [[lCx-16,92],[lCx+13,92],[lCx-16,130],[lCx+13,130],[lCx-16,168],[lCx+13,168]].forEach(([wx,wy]) => {
+      g.beginPath(); g.moveTo(wx-4.5,wy+13); g.lineTo(wx-4.5,wy+2); g.arc(wx,wy+2,4.5,Math.PI,0); g.lineTo(wx+4.5,wy+13); g.closePath();
+      g.fillStyle = T.win; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+    });
+    // --- 右側主塔（含大門） ---
+    const rCx = 136, rTop = 128, rBot = base, rRad = 34;
+    roundTower(rCx, rTop, rBot, rRad);
+    crenellation(rCx-rRad-1, rTop+5, rRad*2+2, 8);
+    [[rCx-13,165],[rCx+12,165],[rCx-8,196],[rCx+9,196]].forEach(([wx,wy]) => {
+      g.beginPath(); g.moveTo(wx-4.5,wy+13); g.lineTo(wx-4.5,wy+2); g.arc(wx,wy+2,4.5,Math.PI,0); g.lineTo(wx+4.5,wy+13); g.closePath();
+      g.fillStyle = T.win; g.fill(); g.lineWidth = 1.6; g.strokeStyle = T.ink; g.stroke();
+    });
+    // 拱門（城門）
+    g.beginPath(); g.moveTo(rCx-24, base); g.lineTo(rCx-24, base-44); g.arc(rCx, base-44, 24, Math.PI, 0); g.lineTo(rCx+24, base); g.closePath();
+    g.fillStyle = T.gate; g.fill(); g.lineWidth = 2; g.strokeStyle = T.ink; g.stroke();
+    g.save(); g.clip();
+    g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 1;
+    for(let x=rCx-22; x<rCx+24; x+=6){ g.beginPath(); g.moveTo(x,base-32); g.lineTo(x,base); g.stroke(); }
+    g.strokeStyle = '#2a2a2a'; g.lineWidth = 2.2;
+    [base-16,base-30].forEach(y => { g.beginPath(); g.moveTo(rCx-22,y); g.lineTo(rCx+22,y); g.stroke(); });
+    g.restore();
+    g.fillStyle = '#c9b48a'; circle(g,rCx+13,base-21,2.2); g.fill();
+    // --- 連接城牆（矮牆段，連接左右塔） ---
+    const wallTop = base - 56, wallBot = base, wallX0 = lCx+lRad;
+    g.fillStyle = T.stone; g.fillRect(wallX0, wallTop, rCx-rRad-wallX0, wallBot-wallTop);
+    g.strokeStyle = T.ink; g.lineWidth = 1.6; g.strokeRect(wallX0, wallTop, rCx-rRad-wallX0, wallBot-wallTop);
+    g.save(); g.beginPath(); g.rect(wallX0, wallTop, rCx-rRad-wallX0, wallBot-wallTop); g.clip();
+    g.strokeStyle = T.stoneD; g.globalAlpha = .4; g.lineWidth = 1;
+    for(let yy=wallTop+8; yy<wallBot; yy+=10){ g.beginPath(); g.moveTo(wallX0,yy); g.lineTo(rCx-rRad,yy); g.stroke(); }
+    g.globalAlpha = 1; g.restore();
+    crenellation(wallX0, wallTop+5, rCx-rRad-wallX0, 6);
+    // --- 珊瑚礁＋海草點綴（取代原本陸地城堡的青苔/藤蔓，保留海底氛圍） ---
+    g.fillStyle = '#e07a9e'; g.strokeStyle = T.ink; g.lineWidth = .8;
+    [[36,base-2,8],[rCx+rRad+6,base-4,7],[rCx-6,base-2,6]].forEach(([cx2,cy2,s]) => {
+      for(let b=0;b<3;b++){ const bx=cx2+(b-1)*s*.5, bh=s*(0.7+r()*.5);
+        g.beginPath(); g.moveTo(bx-s*.2,cy2); g.quadraticCurveTo(bx-s*.3,cy2-bh*.6,bx,cy2-bh); g.quadraticCurveTo(bx+s*.3,cy2-bh*.6,bx+s*.2,cy2); g.closePath(); g.fill(); g.stroke(); }
+    });
+    g.strokeStyle = T.mid; g.lineWidth = 1.6; g.lineCap = 'round';
+    for(let i=0;i<6;i++){ const x = 20 + r()*((rCx+rRad+20)-20), h = 14+r()*14;
+      g.beginPath(); g.moveTo(x,base); g.quadraticCurveTo(x+Math.sin(r()*6)*5, base-h*.6, x+Math.sin(r()*6)*3, base-h); g.stroke(); }
+    // --- 海底砂地暗影銜接 ---
+    if(!T.night){
+      g.fillStyle = 'rgba(0,0,0,.14)'; ell(g, (lCx+rCx)/2, base+3, (rCx+rRad-lCx+lRad)/2+10, 6); g.fill();
+    }
+  }
+  // coral：石牆改貝殼螺旋紋理，塔頂加螺旋尖頂
   function texShell(g,x,y,w,h,r,T){
     g.save(); g.beginPath(); g.rect(x,y,w,h); g.clip();
     g.strokeStyle = T.stoneD; g.lineWidth = 1.2;
@@ -520,7 +690,7 @@ window.BattleArt = (function(){
 
   const CASTLE_RENDERERS = {
     jungle: (g,T,r) => drawCastleBase(g,T,r,{texture:texWood, topper:topperJungle}),
-    ocean: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
+    ocean: (g,T,r) => drawOceanCastle(g,T,r),
     coral: (g,T,r) => drawCastleBase(g,T,r,{texture:texShell, topper:topperShell}),
     haunted: (g,T,r) => drawCastleBase(g,T,r,{texture:texHaunted, topper:topperHaunted}),
     'ice-cave': (g,T,r) => drawCastleBase(g,T,r,{texture:texCrystal, topper:topperCrystal}),
@@ -546,10 +716,14 @@ window.BattleArt = (function(){
     g.fillStyle = gr; g.fillRect(0,0,W,H);
     const gl = g.createRadialGradient(W*.75,170,10,W*.75,170,280); gl.addColorStop(0,T.glow); gl.addColorStop(1,'rgba(255,255,255,0)');
     g.fillStyle = gl; g.fillRect(0,0,W,H);
-    for(let i=0;i<4;i++) cloud(g, 230 + i*(W-260)/4 + r()*50, 32 + r()*60, .7 + r()*.6);
+    for(let i=0;i<4;i++){
+      const cx = 230 + i*(W-260)/4 + r()*50, cy = 32 + r()*60, cs = .7 + r()*.6;
+      if(theme === 'ocean') fishFlock(g, cx, cy, cs); else cloud(g, cx, cy, cs);
+    }
     g.fillStyle = T.far; ridge(g,r,148,18,.008);
     g.fillStyle = T.mid; ridge(g,r,184,11,.014);
-    for(let i=0;i<40;i++) pine(g, 170 + r()*560, 186 + r()*14, 18 + r()*18, T.mid, 'rgba(0,0,0,.12)');
+    if(theme === 'ocean') drawOceanMidground(g,T,r);
+    else for(let i=0;i<40;i++) pine(g, 170 + r()*560, 186 + r()*14, 18 + r()*18, T.mid, 'rgba(0,0,0,.12)');
     g.fillStyle = T.near; ridge(g,r,212,6,.02);
     g.fillStyle = T.ground; g.fillRect(0,GROUND-14,W,H);
     g.fillStyle = T.groundD; g.fillRect(0,GROUND+24,W,H);
@@ -559,9 +733,21 @@ window.BattleArt = (function(){
     g.closePath(); g.fillStyle = T.path; g.fill();
     g.strokeStyle = T.pathD; g.lineWidth = 1.5; g.globalAlpha = .6; g.stroke(); g.globalAlpha = 1;
     for(let i=0;i<70;i++){ g.fillStyle = r()<.5 ? T.pathD : 'rgba(255,255,255,.18)'; ell(g, r()*W, GROUND-2 + r()*17, 1.5+r()*2.5, 1+r()*1.2); g.fill(); }
-    g.strokeStyle = T.groundD; g.lineWidth = 1.2;
-    for(let i=0;i<120;i++){ const x = r()*W, y = GROUND + 22 + r()*(H-GROUND-22), h = 3 + r()*5; g.beginPath(); g.moveTo(x-2,y-h); g.lineTo(x,y); g.lineTo(x+2,y-h*.8); g.stroke(); }
-    for(let i=0;i<26;i++){ g.fillStyle = r()<.5 ? '#e8d27a' : '#efe9dc'; circle(g, r()*W, GROUND+28 + r()*40, 1.6); g.fill(); }
+    if(theme === 'ocean'){
+      // 珊瑚碎屑＋貝殼代替陸地裂痕紋路
+      g.strokeStyle = T.groundD; g.lineWidth = 1.2;
+      for(let i=0;i<60;i++){ const x = r()*W, y = GROUND + 22 + r()*(H-GROUND-22), s = 2+r()*3;
+        g.beginPath(); g.moveTo(x-s,y); g.quadraticCurveTo(x,y-s*1.4,x+s,y); g.quadraticCurveTo(x,y-s*.4,x-s,y); g.stroke(); }
+      g.fillStyle = '#f0e6d2'; g.strokeStyle = T.groundD; g.lineWidth = .8;
+      for(let i=0;i<22;i++){ const x = r()*W, y = GROUND+26+r()*38, s=2+r()*1.6;
+        g.beginPath(); g.arc(x,y,s,Math.PI,0); g.lineTo(x-s,y); g.closePath(); g.fill(); g.stroke(); }
+      // 水泡光點代替反光點
+      for(let i=0;i<26;i++){ g.fillStyle = 'rgba(224,245,255,.55)'; circle(g, r()*W, GROUND+28 + r()*40, 1.3+r()*1); g.fill(); }
+    }else{
+      g.strokeStyle = T.groundD; g.lineWidth = 1.2;
+      for(let i=0;i<120;i++){ const x = r()*W, y = GROUND + 22 + r()*(H-GROUND-22), h = 3 + r()*5; g.beginPath(); g.moveTo(x-2,y-h); g.lineTo(x,y); g.lineTo(x+2,y-h*.8); g.stroke(); }
+      for(let i=0;i<26;i++){ g.fillStyle = r()<.5 ? '#e8d27a' : '#efe9dc'; circle(g, r()*W, GROUND+28 + r()*40, 1.6); g.fill(); }
+    }
     (CASTLE_RENDERERS[theme] || drawCastle)(g,T,r);
     for(let i=0;i<3200;i++){ g.fillStyle = r()<.5 ? 'rgba(0,0,0,.05)' : 'rgba(255,255,255,.05)'; g.fillRect(r()*W, r()*H, 1.3, 1.3); }
     const vg = g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,W*.62); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.22)');
@@ -581,7 +767,8 @@ window.BattleArt = (function(){
     g.beginPath(); g.moveTo(cx,cy-4); g.lineTo(cx-8,cy-6); g.lineTo(cx-8,cy+4); g.lineTo(cx,cy+6); g.closePath(); g.fill(); g.stroke();
     g.beginPath(); g.moveTo(cx,cy-4); g.lineTo(cx+8,cy-6); g.lineTo(cx+8,cy+4); g.lineTo(cx,cy+6); g.closePath(); g.fill(); g.stroke();
   }
-  function drawArcher(g,T,pull){
+  function drawArcher(g,T,pull,theme){
+    if(theme === 'ocean'){ drawMerKing(g,T,pull); return; }
     const x = 132, y = 117;
     g.lineJoin = 'round'; g.strokeStyle = T.ink; g.lineWidth = 1.6;
     g.fillStyle = '#3b3530'; g.fillRect(x-5,y-9,3.5,9); g.fillRect(x+1.5,y-9,3.5,9);
@@ -601,6 +788,65 @@ window.BattleArt = (function(){
     g.strokeStyle = T.ink; g.lineWidth = 1.8; g.beginPath(); g.moveTo(x+3,y-21); g.lineTo(bx+R-1,by); g.stroke();
     if(pull > .05){ g.strokeStyle = '#5b4026'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(mx,by); g.lineTo(bx+R+8,by); g.stroke(); }
   }
+  // ocean 專屬：人魚國王（側身姿勢，魚尾下身+貝殼胸甲+王冠），手持三叉戟面向右側（怪物來向）
+  function drawMerKing(g,T,pull){
+    const x = 132, y = 117;
+    g.save(); g.translate(x,y); g.scale(1.3,1.3); g.translate(-x,-y);
+    g.lineJoin = 'round'; g.strokeStyle = T.ink; g.lineWidth = 1.6;
+    // 魚尾（側身：尾身從腰部向左後方彎曲拖曳，尾鰭朝左下擺動）
+    const tg = g.createLinearGradient(x-16,y-8,x,y+16);
+    tg.addColorStop(0,'#3e86a0'); tg.addColorStop(1,'#245a6e');
+    g.fillStyle = tg;
+    g.beginPath();
+    g.moveTo(x-2,y-9);
+    g.quadraticCurveTo(x-10,y-2,x-9,y+7);
+    g.quadraticCurveTo(x-8,y+11,x-15,y+10);
+    g.quadraticCurveTo(x-10,y+15,x-6,y+13);
+    g.quadraticCurveTo(x-11,y+19,x-18,y+18);
+    g.quadraticCurveTo(x-8,y+22,x-2,y+15);
+    g.quadraticCurveTo(x+3,y+8,x+2,y-7);
+    g.closePath(); g.fill(); g.stroke();
+    g.strokeStyle = 'rgba(255,255,255,.4)'; g.lineWidth = 1;
+    for(let k=0;k<3;k++){ g.beginPath(); g.moveTo(x-3-k*2,y-4+k*5); g.quadraticCurveTo(x-8-k*2,y+k*5,x-6-k*2,y+6+k*5); g.stroke(); }
+    // 貝殼胸甲（側身：軀幹略向前傾，寬度收窄呈現側面厚度）
+    g.fillStyle = T.tunic; g.beginPath(); g.moveTo(x-5,y-7); g.lineTo(x+6,y-8); g.lineTo(x+5,y-25); g.lineTo(x-3,y-24); g.closePath(); g.fill(); g.strokeStyle = T.ink; g.lineWidth = 1.6; g.stroke();
+    g.fillStyle = '#f0c8d8'; g.strokeStyle = T.ink; g.lineWidth = 1;
+    [[x-1,y-15],[x+3,y-16]].forEach(([cx,cy]) => { g.beginPath(); g.moveTo(cx,cy+5); g.quadraticCurveTo(cx-3,cy-3,cx,cy-7); g.quadraticCurveTo(cx+3,cy-3,cx,cy+5); g.closePath(); g.fill(); g.stroke(); });
+    // 側身手臂：後方肩線（不再額外畫出第二隻手，避免身體上出現多餘手臂）
+    // 頭部（側臉，面向右側=怪物來向，鼻子輪廓明顯）
+    g.strokeStyle = T.ink; g.lineWidth = 1.6;
+    g.fillStyle = '#e6c3a0';
+    g.beginPath(); g.moveTo(x-3,y-34); g.quadraticCurveTo(x-5,y-30,x-3,y-26); g.quadraticCurveTo(x+1,y-24,x+4,y-26);
+    g.quadraticCurveTo(x+7,y-27,x+8,y-29); g.quadraticCurveTo(x+6.5,y-29.5,x+6,y-31);
+    g.quadraticCurveTo(x+7,y-33,x+5,y-35); g.quadraticCurveTo(x+1,y-37,x-3,y-34); g.closePath(); g.fill(); g.stroke();
+    g.fillStyle = T.ink; circle(g,x+3.6,y-31,.9); g.fill();
+    // 王冠（側身，齒狀尖點沿頭頂弧線排列）
+    g.fillStyle = '#e8c87a'; g.strokeStyle = T.ink; g.lineWidth = 1.2;
+    g.beginPath(); g.moveTo(x-4,y-33); g.lineTo(x-5,y-38); g.lineTo(x-2,y-36); g.lineTo(x,y-40); g.lineTo(x+3,y-36); g.lineTo(x+5,y-38); g.lineTo(x+6,y-32); g.closePath(); g.fill(); g.stroke();
+    g.fillStyle = '#4e9ab0'; circle(g,x,y-38,1.1); g.fill();
+    // 三叉戟：持於身前右手，隨pull向前刺出（面向右＝怪物來向）
+    const bx = x+6, by = y-17;
+    const thrust = Math.max(0, Math.min(1, pull / .9));
+    const len = 20 + thrust*18;
+    const ang = -.25 + thrust*.3;
+    const hx = bx + Math.cos(ang)*len, hy = by + Math.sin(ang)*len;
+    // 握持三叉戟的手臂（前手，向前伸展握住戟柄）
+    g.strokeStyle = T.ink; g.lineWidth = 1.6; g.fillStyle = '#e6c3a0';
+    const gx = bx + Math.cos(ang)*8, gy = by + Math.sin(ang)*8;
+    g.beginPath(); g.moveTo(x+3,y-20); g.quadraticCurveTo((x+3+gx)/2, (y-20+gy)/2 - 3, gx,gy); g.lineTo(gx+2,gy+2); g.quadraticCurveTo((x+5+gx)/2,(y-18+gy)/2-3,x+5,y-18); g.closePath(); g.fill(); g.stroke();
+    g.strokeStyle = '#4a86a0'; g.lineWidth = 2.2; g.beginPath(); g.moveTo(bx,by); g.lineTo(hx,hy); g.stroke();
+    g.save(); g.translate(hx,hy); g.rotate(ang+Math.PI/2);
+    g.strokeStyle = '#cfe8ea'; g.lineWidth = 1.6; g.fillStyle = '#cfe8ea';
+    [-4,0,4].forEach(dx => { g.beginPath(); g.moveTo(dx,0); g.lineTo(dx,-7); g.lineTo(dx+1.3*Math.sign(dx||1),-4); g.stroke(); });
+    g.beginPath(); g.moveTo(-5,1); g.lineTo(5,1); g.stroke();
+    g.restore();
+    if(thrust > .3){
+      // 刺出瞬間的水流線效果
+      g.strokeStyle = `rgba(207,232,234,${.5*thrust})`; g.lineWidth = 1.5;
+      for(let k=0;k<3;k++){ const off = k*3; g.beginPath(); g.moveTo(bx+Math.cos(ang)*(4+off), by+Math.sin(ang)*(4+off)); g.lineTo(bx+Math.cos(ang)*(14+off), by+Math.sin(ang)*(14+off)); g.stroke(); }
+    }
+    g.restore();
+  }
   // 怪物身體裝飾：依場景主題在身軀表面疊加小圖案，讓17個場景的怪物有專屬辨識度。
   // 呼叫時機在body fill/高光之後、頭飾(horn)之前，座標系已被translate到軀幹原點(0,0=腳踝附近)。
   // w=軀幹半寬、h=軀幹高度(像素，已含scale)、t=怪物自身計時器(用於細微動畫，如氣泡/火光閃爍)。
@@ -608,8 +854,12 @@ window.BattleArt = (function(){
   // 避開臉部區域，否則會被誤判成「飄浮雜訊」蓋在嘴巴/眼睛上。
   function drawEnemyDeco(g,theme,T,w,h,t){
     switch(theme){
-      case 'ocean': case 'coral':
-        g.fillStyle = theme === 'coral' ? '#f0c8a0' : '#cfe8ea'; g.strokeStyle = T.ink; g.lineWidth = 1;
+      case 'ocean':
+        g.strokeStyle = 'rgba(207,232,234,.6)'; g.lineWidth = .9;
+        for(let row=0;row<2;row++){ for(let k=-2;k<=2;k++){ const dx = k*w*.32 + (row%2?w*.16:0), dy = -h*(.06+row*.1); g.beginPath(); g.arc(dx,dy,w*.17,Math.PI*.1,Math.PI*.9); g.stroke(); } }
+        break;
+      case 'coral':
+        g.fillStyle = '#f0c8a0'; g.strokeStyle = T.ink; g.lineWidth = 1;
         [[-.55,.06],[.0,.16],[.5,.08]].forEach(([dx,dy]) => { ell(g, dx*w, -h*(.1+dy), w*.17, w*.14); g.fill(); g.stroke(); });
         g.fillStyle = 'rgba(255,255,255,.5)'; circle(g, w*.3, -h*(.3+Math.sin(t*3)*.02), 1.8); g.fill();
         break;
@@ -687,8 +937,14 @@ window.BattleArt = (function(){
     const wk = moving ? e.t*(kind === 'runner' ? 14 : kind === 'boss' ? 6 : 9) : 0;
     g.fillStyle = T.ink;
     const fs = Math.max(1, s*.9);
-    ell(g, (-5 + Math.sin(wk)*3)*fs, 0, 4.6*fs, 2.6*fs); g.fill();
-    ell(g, ( 5 - Math.sin(wk)*3)*fs, 0, 4.6*fs, 2.6*fs); g.fill();
+    const isMerman = e.theme === 'ocean';
+    if(isMerman){
+      g.beginPath(); g.moveTo(-6*fs,-1); g.quadraticCurveTo(0,3*fs,6*fs,-1); g.quadraticCurveTo(0,6*fs,-6*fs,-1); g.closePath(); g.fill();
+      g.beginPath(); g.moveTo(5*fs,-1); g.lineTo(9*fs+Math.sin(wk)*2,-4*fs); g.lineTo(9*fs+Math.sin(wk)*2,2*fs); g.closePath(); g.fill();
+    }else{
+      ell(g, (-5 + Math.sin(wk)*3)*fs, 0, 4.6*fs, 2.6*fs); g.fill();
+      ell(g, ( 5 - Math.sin(wk)*3)*fs, 0, 4.6*fs, 2.6*fs); g.fill();
+    }
     g.translate(0, -Math.abs(Math.sin(wk))*2 - 1);
     if(kind === 'runner' && moving) g.rotate(-.13);
     const h = 30*s, w = 13*s;
@@ -784,6 +1040,17 @@ window.BattleArt = (function(){
     g.fillStyle = '#e9e1cc'; g.beginPath(); g.moveTo(-15,0); g.lineTo(-19,-3.5); g.lineTo(-12,0); g.lineTo(-19,3.5); g.closePath(); g.fill();
     g.restore();
   }
+  // ocean 專屬攻擊投射物：飛行中的三叉戟（取代箭矢），用於答對題目時的「刺出去」演出
+  function drawTridentProjectile(g,x,y,ang,T,big){
+    g.save(); g.translate(x,y); g.rotate(ang);
+    if(big) g.scale(2.4,2.4);
+    g.fillStyle = 'rgba(207,232,234,.35)'; g.beginPath(); g.moveTo(9,0); g.lineTo(-30,-4); g.lineTo(-30,4); g.closePath(); g.fill();
+    g.strokeStyle = '#4a86a0'; g.lineWidth = 2; g.beginPath(); g.moveTo(-16,0); g.lineTo(5,0); g.stroke();
+    g.strokeStyle = '#cfe8ea'; g.lineWidth = 1.6; g.fillStyle = '#cfe8ea';
+    [-4,0,4].forEach(dx => { g.beginPath(); g.moveTo(5+dx*.3,dx); g.lineTo(13,dx*1.6); g.lineTo(9,dx*.5); g.stroke(); });
+    g.fillStyle = '#e9e1cc'; g.beginPath(); g.moveTo(-16,0); g.lineTo(-20,-3.5); g.lineTo(-13,0); g.lineTo(-20,3.5); g.closePath(); g.fill();
+    g.restore();
+  }
 
   // ---- 粒子特效（魔王蓄力／必殺一擊演出用，純幾何繪製，無外部素材）----
   // 產生 n 顆噴散粒子推進 parts 陣列：confetti=true 時畫旋轉小方塊（彩帶），否則畫淡出圓點（墨花/火花）
@@ -842,6 +1109,6 @@ window.BattleArt = (function(){
     g.fillStyle = gl; circle(g,x,y,r*2.4); g.fill();
   }
 
-  return { W, H, GROUND, WALL_X, STOP_X, DPR, T, THEMES, makeBg, drawFlag, drawArcher, drawEnemy, drawArrow, drawCrack, circle, ell,
+  return { W, H, GROUND, WALL_X, STOP_X, DPR, T, THEMES, makeBg, drawFlag, drawArcher, drawEnemy, drawArrow, drawTridentProjectile, drawCrack, circle, ell,
     spark, confettiBurst, stepParticles, drawParticles, drawUltCharge, drawBossGlow };
 })();
