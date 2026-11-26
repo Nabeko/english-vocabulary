@@ -31,6 +31,17 @@ button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
 .btn.full{width:100%}
 
 .foot{margin-top:18px;font-size:13px;color:var(--onDarkMuted);text-align:center}
+.foot a{color:var(--ochre)}
+
+.intro-static{margin-top:28px;padding-top:18px;border-top:1px solid #ffffff1f;font-size:14px;color:var(--onDarkMuted);line-height:1.8}
+.intro-static .intro-details{margin-bottom:10px;border:1px solid #ffffff1f;border-radius:10px;padding:4px 16px}
+.intro-static .intro-details summary{cursor:pointer;font-family:var(--display);font-size:18px;font-weight:900;color:var(--onDark);padding:12px 0;list-style:none}
+.intro-static .intro-details summary::-webkit-details-marker{display:none}
+.intro-static .intro-details summary::before{content:'▸ ';color:var(--ochre)}
+.intro-static .intro-details[open] summary::before{content:'▾ '}
+.intro-static .intro-details h3{font-size:15px;color:var(--onDark);margin:16px 0 8px}
+.intro-static .intro-details p{margin:0 0 12px}
+.intro-static .intro-details a{color:var(--ochre);text-decoration:underline}
 
 /* ===== todo5 主頁UI：等級選單 / Unit列表 / 預習模式 ===== */
 .section-title{font-family:var(--display);font-size:20px;font-weight:900;margin:0 0 14px;letter-spacing:.04em}
